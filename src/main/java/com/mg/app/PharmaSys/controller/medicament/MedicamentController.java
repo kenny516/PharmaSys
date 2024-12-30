@@ -32,7 +32,7 @@ public class MedicamentController {
     }
 
     @GetMapping("/medicament/edit")
-    public String editMedicament(@RequestParam("id") Integer id, Model model) {
+    public String editMedicament(@RequestParam(value = "id",required = false) Integer id, Model model) {
         Medicament medicament;
         List<Laboratoire> laboratoires = laboratoireService.readLaboratoire();
         model.addAttribute("laboratoires", laboratoires);
