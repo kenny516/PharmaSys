@@ -29,6 +29,6 @@ public class Stock {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament idMedicament;
+    private Medicament Medicament;
 
 }
