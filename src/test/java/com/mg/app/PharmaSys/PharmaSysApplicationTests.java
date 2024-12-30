@@ -18,7 +18,7 @@ class PharmaSysApplicationTests {
 		Role role = new Role();
 		role.setNom("ADMIN");
 		role.setDescription("Administrateur");
-		roleService.createRole(role);
+		//roleService.createRole(role);
 
 		List<Role> roles = roleService.readRole();
 		for (Role r : roles) {

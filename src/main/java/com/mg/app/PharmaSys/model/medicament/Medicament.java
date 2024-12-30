@@ -31,6 +31,6 @@ public class Medicament {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_laboratoire")
-    private Laboratoire idLaboratoire;
+    private Laboratoire Laboratoire;
 
 }

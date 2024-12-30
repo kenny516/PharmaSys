@@ -19,7 +19,7 @@ public class LaboratoireService {
     public Laboratoire createLaboratoire(Laboratoire laboratoire){
         return laboratoireRepository.save(laboratoire);
     }
-    public List<Laboratoire> readLaboratoire(Integer id){
+    public List<Laboratoire> readLaboratoire(){
         return laboratoireRepository.findAll();
     }
     public Laboratoire updateLaboratoire(Laboratoire laboratoire){
