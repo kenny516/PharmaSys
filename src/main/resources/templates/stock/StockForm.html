@@ -38,7 +38,8 @@
                                                 <label for="date-last-movement-icon">Date Dernier Mouvement</label>
                                                 <div class="position-relative">
                                                     <input type="datetime-local" class="form-control"
-                                                           th:field="*{dateDernierMouvement}"  id="date-last-movement-icon">
+                                                           th:field="*{dateDernierMouvement}" id="date-last-movement-icon"
+                                                    >
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-calendar-event"></i>
                                                     </div>
@@ -50,7 +51,7 @@
                                                 <label for="expiration-date-icon">Date de Péremption</label>
                                                 <div class="position-relative">
                                                     <input type="date" class="form-control"
-                                                           th:field="*{datePeremption}" id="expiration-date-icon">
+                                                           th:field="*{datePeremption}" th:value="*{datePeremption}" id="expiration-date-icon">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-calendar-x"></i>
                                                     </div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -34,11 +35,25 @@ public class StockController {
         List<Medicament> medicaments = medicamentService.readMedicaments();
         if (id == null) {
             stock = new Stock();
-            model.addAttribute("stock", stock);
-            model.addAttribute("medicaments", medicaments);
-            return "stock/StockForm";
+        } else {
+            stock = stockService.getStockById(id);
         }
-        stock = stockService.getStockById(id);
+
+        // Formatage de la datePeremption (LocalDate) au format yyyy-MM-dd
+        if (stock.getDatePeremption() != null) {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDatePeremption = stock.getDatePeremption().format(dateFormatter);
+            model.addAttribute("formattedDatePeremption", formattedDatePeremption);
+        }
+
+        // Formatage de la dateDernierMouvement (LocalDateTime) au format yyyy-MM-dd'T'HH:mm
+        if (stock.getDateDernierMouvement() != null) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            String formattedDateDernierMouvement = stock.getDateDernierMouvement().format(dateTimeFormatter);
+
+            model.addAttribute("formattedDateDernierMouvement", formattedDateDernierMouvement);
+        }
+
         model.addAttribute("stock", stock);
         model.addAttribute("medicaments", medicaments);
         return "stock/StockForm";
@@ -46,7 +61,9 @@ public class StockController {
 
     @PostMapping("/stock/save")
     public String saveStock(Stock stock) {
-        stockService.createStock(stock);
+        System.out.println(stock.getDatePeremption());
+        System.out.println(stock.getDateDernierMouvement());
+        //stockService.createStock(stock);
         return "redirect:/stock";
     }
 
