@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/stock/save}" th:object="${stock}" method="post">
+                            <form class="form form-vertical" th:action="@{/stock/save}" th:object="${stock}" method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
                                 <div class="form-body">
                                     <div class="row">
@@ -26,7 +26,8 @@
                                                 <label for="quantity-icon">Quantité Disponible</label>
                                                 <div class="position-relative">
                                                     <input type="number" class="form-control" placeholder="Quantité Disponible"
-                                                           th:field="*{quantiteDisponible}" id="quantity-icon">
+                                                           th:field="*{quantiteDisponible}" id="quantity-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-box"></i>
                                                     </div>
@@ -39,6 +40,7 @@
                                                 <div class="position-relative">
                                                     <input type="datetime-local" class="form-control"
                                                            th:field="*{dateDernierMouvement}" id="date-last-movement-icon"
+                                                           data-parsley-required="true"
                                                     >
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-calendar-event"></i>
@@ -51,7 +53,9 @@
                                                 <label for="expiration-date-icon">Date de Péremption</label>
                                                 <div class="position-relative">
                                                     <input type="date" class="form-control"
-                                                           th:field="*{datePeremption}" th:value="*{datePeremption}" id="expiration-date-icon">
+                                                           th:field="*{datePeremption}" id="expiration-date-icon"
+                                                           data-parsley-required="true"
+                                                    >
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-calendar-x"></i>
                                                     </div>
@@ -61,7 +65,8 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="medicament-id">Médicament</label>
-                                                <select class="form-control" th:field="*{medicament.id}" id="medicament-id">
+                                                <select class="form-control" th:field="*{medicament.id}" id="medicament-id"
+                                                        data-parsley-required="true">
                                                     <option value="" selected disabled>Choisir...</option>
                                                     <option th:each="medicament : ${medicaments}"
                                                             th:value="${medicament.id}"

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -38,22 +40,6 @@ public class StockController {
         } else {
             stock = stockService.getStockById(id);
         }
-
-        // Formatage de la datePeremption (LocalDate) au format yyyy-MM-dd
-        if (stock.getDatePeremption() != null) {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String formattedDatePeremption = stock.getDatePeremption().format(dateFormatter);
-            model.addAttribute("formattedDatePeremption", formattedDatePeremption);
-        }
-
-        // Formatage de la dateDernierMouvement (LocalDateTime) au format yyyy-MM-dd'T'HH:mm
-        if (stock.getDateDernierMouvement() != null) {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            String formattedDateDernierMouvement = stock.getDateDernierMouvement().format(dateTimeFormatter);
-
-            model.addAttribute("formattedDateDernierMouvement", formattedDateDernierMouvement);
-        }
-
         model.addAttribute("stock", stock);
         model.addAttribute("medicaments", medicaments);
         return "stock/StockForm";

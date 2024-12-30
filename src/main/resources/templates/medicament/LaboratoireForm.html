@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/laboratoire/save}" th:object="${laboratoire}" method="post">
+                            <form class="form form-vertical" th:action="@{/laboratoire/save}" th:object="${laboratoire}" method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
                                 <div class="form-body">
                                     <div class="row">
@@ -26,7 +26,8 @@
                                                 <label for="name-icon">Nom</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Nom"
-                                                           th:field="*{nom}" id="name-icon">
+                                                           th:field="*{nom}" id="name-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-building"></i>
                                                     </div>
@@ -38,7 +39,8 @@
                                                 <label for="phone-icon">Téléphone</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Téléphone"
-                                                           th:field="*{telephone}" id="phone-icon">
+                                                           th:field="*{telephone}" id="phone-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-phone"></i>
                                                     </div>
@@ -50,7 +52,8 @@
                                                 <label for="address-icon">Adresse</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Adresse"
-                                                           th:field="*{adresse}" id="address-icon">
+                                                           th:field="*{adresse}" id="address-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-geo-alt"></i>
                                                     </div>

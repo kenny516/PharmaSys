@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,9 +26,11 @@ public class Stock {
     @Column(name = "quantite_disponible")
     private Double quantiteDisponible;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "date_dernier_mouvement")
     private LocalDateTime dateDernierMouvement;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_peremption")
     private LocalDate datePeremption;
 
