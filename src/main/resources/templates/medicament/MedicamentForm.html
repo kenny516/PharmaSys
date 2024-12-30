@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/medicament/save}" th:object="${medicament}" method="post">
+                            <form class="form form-vertical" th:action="@{/medicament/save}" th:object="${medicament}" method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
                                 <div class="form-body">
                                     <div class="row">
@@ -26,7 +26,8 @@
                                                 <label for="first-name-icon">Nom</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Nom"
-                                                           th:field="*{nom}" id="first-name-icon">
+                                                           th:field="*{nom}" id="first-name-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-capsule"></i>
                                                     </div>
@@ -38,7 +39,8 @@
                                                 <label for="email-id-icon">Description</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Description"
-                                                           th:field="*{description}" id="email-id-icon">
+                                                           th:field="*{description}" id="email-id-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-file-earmark-text"></i>
                                                     </div>
@@ -50,7 +52,8 @@
                                                 <label for="mobile-id-icon">Prix</label>
                                                 <div class="position-relative">
                                                     <input type="number" class="form-control" placeholder="Prix"
-                                                           th:field="*{prix}" id="mobile-id-icon">
+                                                           th:field="*{prix}" id="mobile-id-icon"
+                                                           data-parsley-required="true">
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-currency-dollar"></i>
                                                     </div>
@@ -62,7 +65,8 @@
                                                 <label class="input-group-text"
                                                        for="inputGroupSelect01">Laboratoire</label>
                                                 <select class="form-select" th:field="*{laboratoire}"
-                                                        id="inputGroupSelect01">
+                                                        id="inputGroupSelect01"
+                                                        data-parsley-required="true">
                                                     <option value="" selected disabled>Choisir...</option>
                                                     <!-- Liste dynamique des laboratoires -->
                                                     <option th:each="laboratoire : ${laboratoires}"

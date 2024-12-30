@@ -3,8 +3,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>LABORATOIRE FORMULAIRE</h3>
-                <p class="text-subtitle text-muted">Laboratoire formulaire</p>
+                <h3>STOCK FORMULAIRE</h3>
+                <p class="text-subtitle text-muted">Stock formulaire</p>
             </div>
         </div>
     </div>
@@ -17,47 +17,64 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/laboratoire/save}" th:object="${laboratoire}" method="post" data-parsley-validate>
+                            <form class="form form-vertical" th:action="@{/stock/save}" th:object="${stock}" method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="name-icon">Nom</label>
+                                                <label for="quantity-icon">Quantité Disponible</label>
                                                 <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Nom"
-                                                           th:field="*{nom}" id="name-icon"
+                                                    <input type="number" class="form-control" placeholder="Quantité Disponible"
+                                                           th:field="*{quantiteDisponible}" id="quantity-icon"
                                                            data-parsley-required="true">
                                                     <div class="form-control-icon">
-                                                        <i class="bi bi-building"></i>
+                                                        <i class="bi bi-box"></i>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="phone-icon">Téléphone</label>
+                                                <label for="date-last-movement-icon">Date Dernier Mouvement</label>
                                                 <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Téléphone"
-                                                           th:field="*{telephone}" id="phone-icon"
-                                                           data-parsley-required="true">
+                                                    <input type="datetime-local" class="form-control"
+                                                           th:field="*{dateDernierMouvement}" id="date-last-movement-icon"
+                                                           data-parsley-required="true"
+                                                    >
                                                     <div class="form-control-icon">
-                                                        <i class="bi bi-phone"></i>
+                                                        <i class="bi bi-calendar-event"></i>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="address-icon">Adresse</label>
+                                                <label for="expiration-date-icon">Date de Péremption</label>
                                                 <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Adresse"
-                                                           th:field="*{adresse}" id="address-icon"
-                                                           data-parsley-required="true">
+                                                    <input type="date" class="form-control"
+                                                           th:field="*{datePeremption}" id="expiration-date-icon"
+                                                           data-parsley-required="true"
+                                                    >
                                                     <div class="form-control-icon">
-                                                        <i class="bi bi-geo-alt"></i>
+                                                        <i class="bi bi-calendar-x"></i>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="medicament-id">Médicament</label>
+                                                <select class="form-control" th:field="*{medicament.id}" id="medicament-id"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="medicament : ${medicaments}"
+                                                            th:value="${medicament.id}"
+                                                            th:text="${medicament.nom}"
+                                                            th:selected="|${medicament.id} == ${stock.medicament?.id}|">
+                                                        Médicament
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">

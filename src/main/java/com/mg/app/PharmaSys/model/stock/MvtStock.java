@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,7 @@ public class MvtStock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "date_mvt")
     private LocalDateTime dateMvt;
 
@@ -32,10 +34,10 @@ public class MvtStock {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_type_mvt", nullable = false)
-    private TypeMvtStock idTypeMvt;
+    private TypeMvtStock typeMvt;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament idMedicament;
+    private Medicament medicament;
 
 }
