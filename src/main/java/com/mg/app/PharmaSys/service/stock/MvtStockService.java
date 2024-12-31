@@ -20,7 +20,7 @@ public class MvtStockService {
         return mvtStockRepository.save(mvtStock);
     }
 
-    public List<MvtStock> readMvtStock(Integer id) {
+    public List<MvtStock> readMvtStock() {
         return mvtStockRepository.findAll();
     }
 
