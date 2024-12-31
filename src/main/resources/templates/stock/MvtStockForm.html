@@ -1,0 +1,105 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>MOUVEMENT DE STOCK</h3>
+                <p class="text-subtitle text-muted">Formulaire pour ajouter ou modifier un mouvement de stock</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts">
+        <div class="row match-height">
+            <div class="col-md-6 col-12 flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Détails du Mouvement</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/mvtstock/save}" th:object="${mvtStock}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="date-mvt-icon">Date du Mouvement</label>
+                                                <div class="position-relative">
+                                                    <input type="datetime-local" class="form-control" placeholder="Date du Mouvement"
+                                                           th:field="*{dateMvt}" id="date-mvt-icon" data-parsley-required="true">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-calendar-event"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="quantity-icon">Quantité</label>
+                                                <div class="position-relative">
+                                                    <input type="number" class="form-control" placeholder="Quantité"
+                                                           th:field="*{quantite}" id="quantity-icon" data-parsley-required="true">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-box"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="description-icon">Description</label>
+                                                <div class="position-relative">
+                                                    <textarea class="form-control" placeholder="Description"
+                                                              th:field="*{description}" id="description-icon"
+                                                              data-parsley-required="true"></textarea>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-card-text"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="type-mvt-id">Type de Mouvement</label>
+                                                <select class="form-control" th:field="*{typeMvt.id}" id="type-mvt-id"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="type : ${typesMvt}"
+                                                            th:value="${type.id}"
+                                                            th:text="${type.nom}"
+                                                            th:selected="|${type.id} == ${mvtStock.typeMvt?.id}|">
+                                                        Type Mouvement
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="medicament-id">Médicament</label>
+                                                <select class="form-control" th:field="*{medicament.id}" id="medicament-id"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="medicament : ${medicaments}"
+                                                            th:value="${medicament.id}"
+                                                            th:text="${medicament.nom}"
+                                                            th:selected="|${medicament.id} == ${mvtStock.medicament?.id}|">
+                                                        Médicament
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Enregistrer</button>
+                                            <a th:href="@{/mvtstock}" class="btn btn-light-secondary me-1 mb-1">Annuler</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
