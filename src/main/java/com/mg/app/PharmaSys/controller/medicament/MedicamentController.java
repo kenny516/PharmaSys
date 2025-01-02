@@ -8,15 +8,13 @@ import com.mg.app.PharmaSys.service.medicament.MedicamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 // a contructor for the entity medicament
 @Controller
+@RequestMapping("/medicament")
 public class MedicamentController {
     @Autowired
     private MedicamentService medicamentService;
@@ -24,14 +22,14 @@ public class MedicamentController {
     private LaboratoireService laboratoireService;
 
 
-    @GetMapping("/medicament")
-    public String readMedicament(Model model) {
+    @GetMapping
+    public String listMedicament(Model model) {
         List<Medicament> medicaments = medicamentService.readMedicaments();
         model.addAttribute("medicaments", medicaments);
         return "medicament/MedicamentListe";
     }
 
-    @GetMapping("/medicament/edit")
+    @GetMapping("/edit")
     public String editMedicament(@RequestParam(value = "id",required = false) Integer id, Model model) {
         Medicament medicament;
         List<Laboratoire> laboratoires = laboratoireService.readLaboratoire();
@@ -46,14 +44,14 @@ public class MedicamentController {
         return "medicament/MedicamentForm";
     }
 
-    @PostMapping("/medicament/save")
+    @PostMapping("/save")
     public String saveMedicament(Medicament medicament) {
         medicamentService.createMedicament(medicament);
         return "redirect:/medicament";
     }
 
 
-    @GetMapping("/medicament/delete")
+    @GetMapping("/delete")
     public String deleteMedicament(@RequestParam("id") Integer id) {
         medicamentService.deleteMedicament(id);
         return "redirect:/medicament";

@@ -9,14 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
+@RequestMapping("/stock")
 public class StockController {
 
     @Autowired
@@ -24,14 +22,14 @@ public class StockController {
     @Autowired
     private MedicamentService medicamentService;
 
-    @GetMapping("/stock")
-    public String readStock(Model model) {
+    @GetMapping
+    public String listStock(Model model) {
         List<Stock> stocks = stockService.readStock();
         model.addAttribute("stocks", stocks);
         return "stock/StockListe";
     }
 
-    @GetMapping("/stock/edit")
+    @GetMapping("/edit")
     public String editStock(@RequestParam(value = "id",required = false) Integer id, Model model) {
         Stock stock;
         List<Medicament> medicaments = medicamentService.readMedicaments();
@@ -45,7 +43,7 @@ public class StockController {
         return "stock/StockForm";
     }
 
-    @PostMapping("/stock/save")
+    @PostMapping("/save")
     public String saveStock(Stock stock) {
         System.out.println(stock.getDatePeremption());
         System.out.println(stock.getDateDernierMouvement());
@@ -53,7 +51,7 @@ public class StockController {
         return "redirect:/stock";
     }
 
-    @GetMapping("/stock/delete")
+    @GetMapping("/delete")
     public String deleteStock(@RequestParam("id") Integer id) {
         stockService.deleteStock(id);
         return "redirect:/stock";
