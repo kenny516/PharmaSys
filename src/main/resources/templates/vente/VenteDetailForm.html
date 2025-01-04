@@ -1,0 +1,83 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>VenteDetail FORMULAIRE</h3>
+                <p class="text-subtitle text-muted">VenteDetail formulaire</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts">
+        <div class="row match-height">
+            <div class="col-md-6 col-12 flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"></h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/vente/detail/save}" th:object="${venteDetail}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="*{vente.id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="qu-icon">Quantite</label>
+                                                <div class="position-relative">
+                                                    <input type="number" class="form-control" placeholder="Quantite"
+                                                           th:field="*{quantite}" id="qu-icon"
+                                                           data-parsley-required="true">
+                                                    <div class="form-control-icon">
+                                                        <!-- Icône mise à jour pour Montant -->
+                                                        <i class="bi bi-backpack3"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="montant-icon">Prix unitaire</label>
+                                                <div class="position-relative">
+                                                    <input type="number" class="form-control" placeholder="Montant"
+                                                           th:field="*{prixUnitaire}" id="montant-icon"
+                                                           data-parsley-required="true">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-cash"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label class="input-group-text"
+                                                       for="inputGroupSelect01">Medicament</label>
+                                                <select class="form-select" th:field="*{medicament.id}"
+                                                        id="inputGroupSelect01"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="medicamentUnit : ${medicaments}"
+                                                            th:value="${medicamentUnit.getId()}"
+                                                            th:text="${medicamentUnit.getNom()}"
+                                                            th:selected="|${medicamentUnit.getId()} == ${venteDetail.medicament?.getId()}|">
+                                                        Medicament
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

@@ -3,6 +3,7 @@ package com.mg.app.PharmaSys.model.vente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -19,12 +20,14 @@ public class Vente {
     private Integer id;
 
     @Column(name = "date_vente")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateVente;
 
     @Column(name = "montant_total")
     private Double montantTotal;
 
-    @OneToMany(mappedBy = "idVente")
+    @OneToMany(mappedBy = "vente")
     private Set<VenteDetail> ventedetails = new LinkedHashSet<>();
+
 
 }
