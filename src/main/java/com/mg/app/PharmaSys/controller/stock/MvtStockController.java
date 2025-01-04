@@ -6,25 +6,21 @@ import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
 import com.mg.app.PharmaSys.service.stock.MvtStockService;
 import com.mg.app.PharmaSys.service.stock.TypeMvtStockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/mvtstock")
 public class MvtStockController {
 
-    @Autowired
-    private MvtStockService mvtStockService;
-
-    @Autowired
-    private MedicamentService medicamentService;
-
-    @Autowired
-    private TypeMvtStockService typeMvtStockService;
+    private final MvtStockService mvtStockService;
+    private final MedicamentService medicamentService;
+    private final TypeMvtStockService typeMvtStockService;
 
     @GetMapping
     public String listMvtStock(Model model) {
