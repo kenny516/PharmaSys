@@ -1,27 +1,23 @@
 package com.mg.app.PharmaSys.controller.vente;
-
-import com.mg.app.PharmaSys.model.medicament.Laboratoire;
 import com.mg.app.PharmaSys.model.medicament.Medicament;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import com.mg.app.PharmaSys.service.vente.VenteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/vente")
 public class VenteController {
-    @Autowired
     private VenteService venteService;
-    @Autowired
     private VenteDetailService venteDetailService;
-    @Autowired
     private MedicamentService medicamentService;
 
     @GetMapping

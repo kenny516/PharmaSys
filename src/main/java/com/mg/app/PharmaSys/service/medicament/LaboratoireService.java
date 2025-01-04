@@ -2,19 +2,16 @@ package com.mg.app.PharmaSys.service.medicament;
 
 import com.mg.app.PharmaSys.model.medicament.Laboratoire;
 import com.mg.app.PharmaSys.repository.medicament.LaboratoireRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class LaboratoireService {
     private final LaboratoireRepository laboratoireRepository;
-
-    @Autowired
-    public LaboratoireService(LaboratoireRepository laboratoireRepository) {
-        this.laboratoireRepository = laboratoireRepository;
-    }
 
     public Laboratoire createLaboratoire(Laboratoire laboratoire){
         return laboratoireRepository.save(laboratoire);

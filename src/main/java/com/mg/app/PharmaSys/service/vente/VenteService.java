@@ -4,21 +4,17 @@ import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.repository.vente.VenteDetailRepository;
 import com.mg.app.PharmaSys.repository.vente.VenteRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class VenteService {
     private final VenteRepository venteRepository;
     private final VenteDetailService venteDetailService;
-
-    @Autowired
-    public VenteService(VenteRepository venteRepository, VenteDetailService venteDetailService) {
-        this.venteRepository = venteRepository;
-        this.venteDetailService = venteDetailService;
-    }
 
     public Vente createVente(Vente vente) {
         return venteRepository.save(vente);

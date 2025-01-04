@@ -2,19 +2,16 @@ package com.mg.app.PharmaSys.service.stock;
 
 import com.mg.app.PharmaSys.model.stock.MvtStock;
 import com.mg.app.PharmaSys.repository.stock.MvtStockRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class MvtStockService {
     private final MvtStockRepository mvtStockRepository;
-
-    @Autowired
-    public MvtStockService(MvtStockRepository mvtStockRepository) {
-        this.mvtStockRepository = mvtStockRepository;
-    }
 
     public MvtStock createMvtStock(MvtStock mvtStock) {
         return mvtStockRepository.save(mvtStock);

@@ -5,7 +5,7 @@ import com.mg.app.PharmaSys.model.medicament.Laboratoire;
 import com.mg.app.PharmaSys.model.medicament.Medicament;
 import com.mg.app.PharmaSys.service.medicament.LaboratoireService;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 // a contructor for the entity medicament
+@AllArgsConstructor
 @Controller
 @RequestMapping("/medicament")
 public class MedicamentController {
-    @Autowired
-    private MedicamentService medicamentService;
-    @Autowired
-    private LaboratoireService laboratoireService;
+    private final MedicamentService medicamentService;
+    private final LaboratoireService laboratoireService;
 
 
     @GetMapping
