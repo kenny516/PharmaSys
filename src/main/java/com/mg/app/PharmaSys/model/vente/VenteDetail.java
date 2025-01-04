@@ -23,10 +23,10 @@ public class VenteDetail {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament idMedicament;
+    private Medicament medicament;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_vente", nullable = false)
-    private Vente idVente;
+    private Vente vente;
 
 }
