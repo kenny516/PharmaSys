@@ -17,7 +17,7 @@ public class MedicamentsPublicCibleService {
     private final MedicamentsPublicCibleRepository medicamentsPublicCibleRepository;
 
 
-    public MedicamentsPublicCible CreMedicamentsPublicCible(MedicamentsPublicCible medicamentsPublicCible) {
+    public MedicamentsPublicCible CreateMedicamentsPublicCible(MedicamentsPublicCible medicamentsPublicCible) {
         return medicamentsPublicCibleRepository.save(medicamentsPublicCible);
     }
 
