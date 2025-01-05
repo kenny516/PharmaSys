@@ -49,7 +49,7 @@ public class StockService {
         }
         return quantite;
     }
-
+// a voir pour la gestion de retour en stock
     public List<MvtStock> updateStockForSale(VenteDetail venteDetail) {
         if (getCurrentStockByMedicamentId(venteDetail.getMedicament().getId()) < venteDetail.getQuantite()){
             throw new IllegalArgumentException("Stock insuffisant pour effectuer la vente.");
