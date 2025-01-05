@@ -3,6 +3,7 @@ import com.mg.app.PharmaSys.model.medicament.Medicament;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
+import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import com.mg.app.PharmaSys.service.vente.VenteService;
 import lombok.AllArgsConstructor;
@@ -16,9 +17,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/vente")
 public class VenteController {
-    private VenteService venteService;
-    private VenteDetailService venteDetailService;
-    private MedicamentService medicamentService;
+    private final VenteService venteService;
+    private final VenteDetailService venteDetailService;
+    private final MedicamentService medicamentService;
+    private final StockService stockService;
 
     @GetMapping
     public String listVente(Model model) {
@@ -87,6 +89,11 @@ public class VenteController {
             Medicament medicament = medicamentService.getMedicamentById(venteDetail.getMedicament().getId());
             venteDetail.setPrixUnitaire(medicament.getPrix());
         }
+        try {
+            stockService.getUpdateStockForSale(venteDetail);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/vente/"+venteDetail.getVente().getId()+"/detail";
+        }
         venteDetailService.createVenteDetail(venteDetail);
         venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/"+venteDetail.getVente().getId()+"/detail";
@@ -95,7 +102,9 @@ public class VenteController {
     @GetMapping("/detail/delete")
     public String deleteVenteDetail(@RequestParam(value = "idVenteDetail") Integer id) {
         VenteDetail venteDetail = venteDetailService.getVenteDetailById(id);
+        venteDetail.setQuantite(venteDetail.getQuantite()*-1);
         venteDetailService.deleteVenteDetail(id);
+        stockService.getUpdateStockForSale(venteDetail);
         venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/"+venteDetail.getVente().getId()+"/detail";
     }

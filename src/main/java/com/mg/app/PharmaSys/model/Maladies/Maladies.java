@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Maladies")
+@Table(name = "Maladie")
 public class Maladies {
     @Id
     @Column(name = "id")
@@ -28,8 +28,7 @@ public class Maladies {
     @NotNull(message = "Le nom est obligatoire")
     private String nom;
 
-    @Column(name = "description", length = 50)
+    @Column(name = "description")
     private String description;
-
 
 }

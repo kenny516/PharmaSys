@@ -64,7 +64,7 @@ CREATE TABLE Medicament
 CREATE TABLE VenteDetail
 (
     id            SERIAL,
-    quantite      INTEGER,
+    quantite      NUMERIC(15, 2),
     prix_unitaire NUMERIC(15, 2),
     id_medicament INTEGER NOT NULL,
     id_vente      INTEGER NOT NULL,
@@ -88,10 +88,11 @@ CREATE TABLE MvtStock
 (
     id            SERIAL,
     date_mvt      TIMESTAMP,
-    quantite      INTEGER,
+    quantite      NUMERIC(15, 2),
     description   TEXT,
     id_type_mvt   INTEGER NOT NULL,
     id_medicament INTEGER NOT NULL,
+    date_peremption        DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_type_mvt) REFERENCES Type_mvt_stock (id),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
