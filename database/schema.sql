@@ -110,7 +110,7 @@ CREATE TABLE Utilisateur
     FOREIGN KEY (id_role) REFERENCES Role (id)
 );
 
-CREATE TABLE Medicaments_maladies
+CREATE TABLE Medicaments_maladie
 (
     id_medicament INTEGER,
     id_maladie    INTEGER,

@@ -58,7 +58,7 @@ public class MedicamentPublicCibleController {
     public String saveMedicamentPublicCible(MedicamentsPublicCible medicamentsPublicCible) {
         MedicamentsPublicCibleId id = new MedicamentsPublicCibleId(medicamentsPublicCible.getMedicament().getId(), medicamentsPublicCible.getPublicCible().getId());
         medicamentsPublicCible.setId(id);
-        medicamentsPublicCibleService.CreMedicamentsPublicCible(medicamentsPublicCible);
+        medicamentsPublicCibleService.CreateMedicamentsPublicCible(medicamentsPublicCible);
         return "redirect:/medicament-public-cible?idMedicament="+medicamentsPublicCible.getMedicament().getId();
     }
 
