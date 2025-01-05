@@ -1,0 +1,49 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Public Cible</h3>
+                <p class="text-subtitle text-muted">Liste des public cibles</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="table1">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Categorie</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="publicCible : ${publicCibles}">
+                            <td th:text="${publicCible.getId()}"></td>
+                            <td th:text="${publicCible.getCategorie()}"></td>
+                            <td>
+                                <a th:href="@{/public-cible/edit(id=${publicCible.getId()})}" class="btn icon btn-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/public-cible/delete(id=${publicCible.getId()})}" class="btn icon btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/public-cible/edit}" class="btn icon btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

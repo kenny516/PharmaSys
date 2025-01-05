@@ -1,0 +1,51 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>PUBLIC CIBLE FORMULAIRE</h3>
+                <p class="text-subtitle text-muted">Formulaire de public cible</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts">
+        <div class="row match-height">
+            <div class="col-md-6 col-12 flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"></h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/public-cible/save}" th:object="${publicCible}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="categorie-icon">Catégorie</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Catégorie"
+                                                           th:field="*{categorie}" id="categorie-icon"
+                                                           data-parsley-required="true">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-tag"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Soumettre</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Réinitialiser</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
