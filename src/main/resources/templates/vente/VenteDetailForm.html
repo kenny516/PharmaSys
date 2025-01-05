@@ -20,6 +20,7 @@
                             <form class="form form-vertical" th:action="@{/vente/detail/save}" th:object="${venteDetail}" method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
                                 <input type="hidden" th:field="*{vente.id}">
+                                <input type="hidden" th:field="*{vente.dateVente}">
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-12">

@@ -50,7 +50,7 @@ public class StockService {
         return quantite;
     }
 
-    public List<MvtStock> getUpdateStockForSale(VenteDetail venteDetail) {
+    public List<MvtStock> updateStockForSale(VenteDetail venteDetail) {
         if (getCurrentStockByMedicamentId(venteDetail.getMedicament().getId()) < venteDetail.getQuantite()){
             throw new IllegalArgumentException("Stock insuffisant pour effectuer la vente.");
         }
@@ -71,6 +71,7 @@ public class StockService {
             mvtStock.setDatePeremption(stock.getDatePeremption());
             mvtStock.setDateMvt(venteDetail.getVente().getDateVente());
             mvtStock.setTypeMvt(typeMvtStock);
+            mvtStocks.add(mvtStock);
             if (stock.getQuantiteDisponible() >= venteDetail.getQuantite()){
                 mvtStock.setQuantite(venteDetail.getQuantite());
                 break;
@@ -78,7 +79,6 @@ public class StockService {
                 mvtStock.setQuantite(stock.getQuantiteDisponible());
                 venteDetail.setQuantite(venteDetail.getQuantite() - stock.getQuantiteDisponible());
             }
-            mvtStocks.add(mvtStock);
             if (venteDetail.getQuantite() == 0){
                 break;
             }
@@ -92,7 +92,6 @@ public class StockService {
 
     public Stock updateStockByMvtStock(MvtStock mvtStock) {
         Stock stockCorrespondant = stockRepository.findStockByMedicamentAndDatePeremption(mvtStock.getMedicament().getId(), mvtStock.getDatePeremption());
-
         String typeMvt = mvtStock.getTypeMvt().getNom();
         double mvtQuantity = mvtStock.getQuantite();
 

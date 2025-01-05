@@ -17,10 +17,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/vente")
 public class VenteController {
-    private final VenteService venteService;
-    private final VenteDetailService venteDetailService;
-    private final MedicamentService medicamentService;
-    private final StockService stockService;
+    private  VenteService venteService;
+    private  VenteDetailService venteDetailService;
+    private  MedicamentService medicamentService;
+    private  StockService stockService;
 
     @GetMapping
     public String listVente(Model model) {
@@ -72,8 +72,7 @@ public class VenteController {
         List<Medicament> medicaments = medicamentService.readMedicaments();
         model.addAttribute("medicaments",medicaments);
         VenteDetail venteDetail= new VenteDetail();
-        Vente vente = new Vente();
-        vente.setId(idVente);
+        Vente vente = venteService.getVenteById(idVente);
         venteDetail.setVente(vente);
         if (id == null) {
             model.addAttribute("venteDetail", venteDetail);
@@ -84,15 +83,22 @@ public class VenteController {
         return "vente/VenteDetailForm";
     }
     @PostMapping("/detail/save")
-    public String saveVenteDetail(VenteDetail venteDetail) {
+    public String saveVenteDetail(VenteDetail venteDetail,Model model) {
+        Double quantiteInitial = 0.0;
         if (venteDetail.getId() == null) {
             Medicament medicament = medicamentService.getMedicamentById(venteDetail.getMedicament().getId());
             venteDetail.setPrixUnitaire(medicament.getPrix());
+        }else {
+            VenteDetail venteDetail1 = venteDetailService.getVenteDetailById(venteDetail.getId());
+            quantiteInitial = venteDetail1.getQuantite();
         }
         try {
-            stockService.getUpdateStockForSale(venteDetail);
+            venteDetail.setQuantite(venteDetail.getQuantite()-quantiteInitial);
+            stockService.updateStockForSale(venteDetail);
+            venteDetail.setQuantite(venteDetail.getQuantite()+quantiteInitial);
         } catch (IllegalArgumentException e) {
-            return "redirect:/vente/"+venteDetail.getVente().getId()+"/detail";
+            model.addAttribute("errorMessage", e.getMessage());
+            return "ErrorPage/Error";
         }
         venteDetailService.createVenteDetail(venteDetail);
         venteService.updateVenteData(venteDetail.getVente().getId());
@@ -104,7 +110,7 @@ public class VenteController {
         VenteDetail venteDetail = venteDetailService.getVenteDetailById(id);
         venteDetail.setQuantite(venteDetail.getQuantite()*-1);
         venteDetailService.deleteVenteDetail(id);
-        stockService.getUpdateStockForSale(venteDetail);
+        stockService.updateStockForSale(venteDetail);
         venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/"+venteDetail.getVente().getId()+"/detail";
     }
