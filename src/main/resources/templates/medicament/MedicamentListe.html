@@ -20,6 +20,7 @@
                             <th>Description</th>
                             <th>Prix</th>
                             <th>Laboratoire</th>
+                            <th>Public Cible</th>
                             <th>Edit</th>
                             <th>Delete</th>
 
@@ -32,6 +33,11 @@
                             <td th:text="${medicament.getDescription()}"></td>
                             <td th:text="${medicament.getPrix()}"></td>
                             <td th:text="${medicament.getLaboratoire().getNom()}"></td>
+                            <td>
+                                <a th:href="@{/medicament-public-cible(idMedicament=${medicament.getId()})}" class="btn icon btn-primary">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                            </td>
                             <td>
                                 <a th:href="@{/medicament/edit(id=${medicament.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-pencil"></i>

@@ -56,5 +56,4 @@ public class MedicamentController {
         return "redirect:/medicament";
     }
 
-
 }
