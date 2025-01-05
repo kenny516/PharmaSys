@@ -21,6 +21,7 @@
                             <th>medicament</th>
                             <th>quantite</th>
                             <th>date du mouvement</th>
+                            <th>Date Péremption</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -33,6 +34,7 @@
                             <td th:text="${mvtstock.getMedicament().nom}"></td>
                             <td th:text="${mvtstock.getQuantite()}"></td>
                             <td th:text="${mvtstock.getDateMvt()}"></td>
+                            <td th:text="${mvtstock.getDatePeremption()}"></td>
                             <td>
                                 <a th:href="@{/mvtstock/edit(id=${mvtstock.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-pencil"></i>

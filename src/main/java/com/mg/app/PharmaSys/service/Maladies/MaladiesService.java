@@ -2,7 +2,6 @@ package com.mg.app.PharmaSys.service.Maladies;
 
 import com.mg.app.PharmaSys.model.Maladies.Maladies;
 import com.mg.app.PharmaSys.repository.Maladies.MaladiesRepository;
-import com.mg.app.PharmaSys.repository.Maladies.MaladiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,7 @@ public class MaladiesService {
     public Maladies createMaladies(Maladies Maladies){
         return MaladiesRepository.save(Maladies);
     }
+
     public List<Maladies> readMaladies(){
         return MaladiesRepository.findAll();
     }
@@ -33,5 +33,6 @@ public class MaladiesService {
     public Maladies getMaladiesById(Integer id){
         return MaladiesRepository.findById(id).orElse(null);
     }
+
 
 }

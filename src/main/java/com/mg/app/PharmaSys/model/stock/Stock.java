@@ -36,6 +36,6 @@ public class Stock {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament Medicament;
+    private Medicament medicament;
 
 }

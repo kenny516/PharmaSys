@@ -25,7 +25,7 @@ CREATE TABLE Vente
     PRIMARY KEY (id)
 );
 
-CREATE TABLE PublicCible
+CREATE TABLE Public_cible
 (
     id        SERIAL,
     categorie VARCHAR(50),
@@ -61,10 +61,10 @@ CREATE TABLE Medicament
     FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
 );
 
-CREATE TABLE VenteDetail
+CREATE TABLE Vente_detail
 (
     id            SERIAL,
-    quantite      INTEGER,
+    quantite      NUMERIC(15, 2),
     prix_unitaire NUMERIC(15, 2),
     id_medicament INTEGER NOT NULL,
     id_vente      INTEGER NOT NULL,
@@ -84,14 +84,15 @@ CREATE TABLE Stock
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
 );
 
-CREATE TABLE MvtStock
+CREATE TABLE Mvt_stock
 (
     id            SERIAL,
     date_mvt      TIMESTAMP,
-    quantite      INTEGER,
+    quantite      NUMERIC(15, 2),
     description   TEXT,
     id_type_mvt   INTEGER NOT NULL,
     id_medicament INTEGER NOT NULL,
+    date_peremption        DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_type_mvt) REFERENCES Type_mvt_stock (id),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
@@ -118,11 +119,11 @@ CREATE TABLE Medicaments_maladies
     FOREIGN KEY (id_maladie) REFERENCES Maladie (id)
 );
 
-CREATE TABLE Medicaments_PublicCible
+CREATE TABLE Medicaments_public_cible
 (
     id_medicament INTEGER,
     id_public     INTEGER,
     PRIMARY KEY (id_medicament, id_public),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id),
-    FOREIGN KEY (id_public) REFERENCES PublicCible (id)
+    FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );

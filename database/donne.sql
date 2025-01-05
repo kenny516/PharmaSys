@@ -18,7 +18,7 @@ VALUES ('Enfants'),
 
 -- Table Type_mvt_stock
 INSERT INTO Type_mvt_stock (nom, description)
-VALUES ('Entrée', 'Ajout de nouveaux produits en stock'),
+VALUES ('Entree', 'Ajout de nouveaux produits en stock'),
        ('Sortie', 'Sortie de produits suite à une vente'),
        ('Correction', 'Mouvement de stock pour corriger une erreur');
 

@@ -1,0 +1,16 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="alert alert-danger text-center" role="alert">
+                <h1 class="display-4">Une erreur s'est produite</h1>
+                <p class="lead" th:text="${errorMessage}">
+                    Un problème est survenu lors du traitement de votre demande.
+                </p>
+                <hr>
+                <a href="/" class="btn btn-primary mt-3">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer.html"></div>

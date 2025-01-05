@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -27,7 +28,7 @@ public class MvtStock {
     private LocalDateTime dateMvt;
 
     @Column(name = "quantite")
-    private Integer quantite;
+    private Double quantite;
 
     @Column(name = "description")
     private String description;
@@ -35,6 +36,10 @@ public class MvtStock {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_type_mvt", nullable = false)
     private TypeMvtStock typeMvt;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date_peremption")
+    private LocalDate datePeremption;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_medicament", nullable = false)

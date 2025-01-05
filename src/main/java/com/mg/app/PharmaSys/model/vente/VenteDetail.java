@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ventedetail")
+@Table(name = "vente_detail")
 public class VenteDetail {
     @Id
     @Column(name = "id")
@@ -16,7 +16,7 @@ public class VenteDetail {
     private Integer id;
 
     @Column(name = "quantite")
-    private Integer quantite;
+    private Double quantite;
 
     @Column(name = "prix_unitaire")
     private Double prixUnitaire;
