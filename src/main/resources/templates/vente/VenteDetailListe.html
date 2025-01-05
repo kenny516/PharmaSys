@@ -33,7 +33,7 @@
                             <td th:text="${venteDetail.getPrixUnitaire()}"></td>
                             <td th:text="${venteDetail.getMedicament().getNom()}"></td>
                             <td>
-                                <a th:href="@{/vente/detail/edit(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-primary">
+                                <a th:href="@{/vente/detail/edit(idVenteDetail=${venteDetail.getId()},idVente=${vente.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>

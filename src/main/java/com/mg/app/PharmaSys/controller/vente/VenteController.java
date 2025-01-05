@@ -68,17 +68,17 @@ public class VenteController {
     }
 
     @GetMapping("/detail/edit")
-    public String editVenteDetail(@RequestParam(value = "idVenteDetail",required = false) Integer id,@RequestParam(value = "idVente",required = false) Integer idVente, Model model) {
+    public String editVenteDetail(@RequestParam(value = "idVenteDetail",required = false) Integer idVenteDetail,@RequestParam(value = "idVente",required = false) Integer idVente, Model model) {
         List<Medicament> medicaments = medicamentService.readMedicaments();
         model.addAttribute("medicaments",medicaments);
         VenteDetail venteDetail= new VenteDetail();
         Vente vente = venteService.getVenteById(idVente);
         venteDetail.setVente(vente);
-        if (id == null) {
+        if (idVenteDetail == null) {
             model.addAttribute("venteDetail", venteDetail);
             return "vente/VenteDetailForm";
         }
-        venteDetail = venteDetailService.getVenteDetailById(id);
+        venteDetail = venteDetailService.getVenteDetailById(idVenteDetail);
         model.addAttribute("venteDetail", venteDetail);
         return "vente/VenteDetailForm";
     }
@@ -89,13 +89,17 @@ public class VenteController {
             Medicament medicament = medicamentService.getMedicamentById(venteDetail.getMedicament().getId());
             venteDetail.setPrixUnitaire(medicament.getPrix());
         }else {
-            VenteDetail venteDetail1 = venteDetailService.getVenteDetailById(venteDetail.getId());
-            quantiteInitial = venteDetail1.getQuantite();
+            VenteDetail venteDetailOld = venteDetailService.getVenteDetailById(venteDetail.getId());
+            quantiteInitial = venteDetailOld.getQuantite();
+            if (quantiteInitial<venteDetail.getQuantite()){
+                venteDetail.setQuantite(venteDetail.getQuantite()-quantiteInitial);
+            }else {
+                venteDetail.setQuantite(quantiteInitial-venteDetail.getQuantite());
+            }
         }
         try {
-            venteDetail.setQuantite(venteDetail.getQuantite()-quantiteInitial);
             stockService.updateStockForSale(venteDetail);
-            venteDetail.setQuantite(venteDetail.getQuantite()+quantiteInitial);
+            venteDetail.setQuantite(quantiteInitial+venteDetail.getQuantite());
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "ErrorPage/Error";
