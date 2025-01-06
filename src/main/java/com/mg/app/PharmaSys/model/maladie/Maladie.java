@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.model.Maladies;
+package com.mg.app.PharmaSys.model.maladie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Maladies")
-public class Maladies {
+@Table(name = "Maladie")
+public class Maladie {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
