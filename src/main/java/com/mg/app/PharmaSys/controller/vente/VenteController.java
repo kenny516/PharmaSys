@@ -18,10 +18,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/vente")
 public class VenteController {
-    private VenteService venteService;
-    private VenteDetailService venteDetailService;
-    private MedicamentService medicamentService;
-    private StockService stockService;
+    private final VenteService venteService;
+    private final VenteDetailService venteDetailService;
+    private final MedicamentService medicamentService;
+    private final StockService stockService;
 
     @GetMapping
     public String listVente(Model model) {
