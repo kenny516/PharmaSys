@@ -73,7 +73,7 @@ CREATE TABLE Fournisseur
 CREATE TABLE Vente_detail
 (
     id              SERIAL,
-    quantite        INTEGER,
+    quantite        double precision,
     date_peremption DATE,
     prix_unitaire   double precision,
     id_medicament   INTEGER NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE MvtStock
 (
     id              SERIAL,
     date_mvt        TIMESTAMP,
-    quantite        INTEGER,
+    quantite        double precision,
     description     TEXT,
     date_peremption DATE,
     id_type_mvt     INTEGER NOT NULL,
