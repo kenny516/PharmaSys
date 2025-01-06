@@ -6,6 +6,7 @@ import com.mg.app.PharmaSys.repository.vente.VenteDetailRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -39,6 +40,14 @@ public class VenteDetailService {
         Vente vente = new Vente();
         vente.setId(id);
         return venteDetailRepository.findVenteDetailByVente(vente);
+    }
+
+    public List<VenteDetail> createMultipleVenteDetail(List<VenteDetail> venteDetails){
+        List<VenteDetail> venteDetailsInserer = new ArrayList<>();
+        for (VenteDetail venteDetail : venteDetails){
+            venteDetailsInserer.add(createVenteDetail(venteDetail));
+        }
+        return  venteDetailsInserer;
     }
 
 }

@@ -94,17 +94,15 @@ public class VenteController {
         } else {
             VenteDetail venteDetailOld = venteDetailService.getVenteDetailById(venteDetail.getId());
             quantiteInitial = venteDetailOld.getQuantite();
-            venteDetail.setQuantite(venteDetail.getQuantite() - quantiteInitial);
         }
         try {
-            stockService.updateStockForSale(venteDetail);
-            venteDetail.setQuantite(quantiteInitial + venteDetail.getQuantite());
+            List<VenteDetail> venteDetailsGenere =  stockService.processVenteDetails(venteDetail,quantiteInitial);
+            venteDetailService.createMultipleVenteDetail(venteDetailsGenere);
+            venteService.updateVenteData(venteDetail.getVente().getId());
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "ErrorPage/Error";
         }
-        venteDetailService.createVenteDetail(venteDetail);
-        venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
     }
 
@@ -113,7 +111,7 @@ public class VenteController {
         VenteDetail venteDetail = venteDetailService.getVenteDetailById(id);
         venteDetail.setQuantite(venteDetail.getQuantite() * -1);
         venteDetailService.deleteVenteDetail(id);
-        stockService.updateStockForSale(venteDetail);
+        stockService.processVenteDetails(venteDetail,0.0);
         venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
     }

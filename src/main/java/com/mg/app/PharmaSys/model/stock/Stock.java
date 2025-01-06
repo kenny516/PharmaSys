@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.View;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -16,7 +18,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "stock")
+@Table(name = "v_stock")
+@Immutable
 public class Stock {
     @Id
     @Column(name = "id")
@@ -25,10 +28,6 @@ public class Stock {
 
     @Column(name = "quantite_disponible")
     private Double quantiteDisponible;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @Column(name = "date_dernier_mouvement")
-    private LocalDateTime dateDernierMouvement;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_peremption")

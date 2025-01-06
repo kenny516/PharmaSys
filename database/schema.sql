@@ -65,6 +65,7 @@ CREATE TABLE Vente_detail
 (
     id            SERIAL,
     quantite      NUMERIC(15, 2),
+    date_peremption date,
     prix_unitaire NUMERIC(15, 2),
     id_medicament INTEGER NOT NULL,
     id_vente      INTEGER NOT NULL,
@@ -86,13 +87,13 @@ CREATE TABLE Stock
 
 CREATE TABLE Mvt_stock
 (
-    id            SERIAL,
-    date_mvt      TIMESTAMP,
-    quantite      NUMERIC(15, 2),
-    description   TEXT,
-    id_type_mvt   INTEGER NOT NULL,
-    id_medicament INTEGER NOT NULL,
-    date_peremption        DATE,
+    id              SERIAL,
+    date_mvt        TIMESTAMP,
+    quantite        NUMERIC(15, 2),
+    description     TEXT,
+    id_type_mvt     INTEGER NOT NULL,
+    id_medicament   INTEGER NOT NULL,
+    date_peremption DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_type_mvt) REFERENCES Type_mvt_stock (id),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
@@ -127,3 +128,17 @@ CREATE TABLE Medicaments_public_cible
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
+
+CREATE OR REPLACE VIEW v_stock AS
+(
+SELECT Max(id) as id,
+       id_medicament,
+       date_peremption,
+       SUM(CASE
+               WHEN id_type_mvt = 1 THEN quantite
+               WHEN id_type_mvt = 2 THEN -quantite
+               ELSE 0
+           END) AS quantite_disponible
+FROM mvtstock
+GROUP BY id_medicament, date_peremption
+    );
