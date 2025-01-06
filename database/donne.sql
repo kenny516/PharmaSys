@@ -1,74 +1,74 @@
--- Table Laboratoire
+-- Insertion des laboratoires
 INSERT INTO Laboratoire (nom, telephone, adresse)
-VALUES ('Laboratoire Roche', '0321010203', 'Antananarivo, Madagascar'),
-       ('Laboratoire Sanofi', '0323030405', 'Toamasina, Madagascar'),
-       ('Laboratoire Pfizer', '0325050607', 'Fianarantsoa, Madagascar');
+VALUES ('PharmaLab', '0123456789', '123 Rue de la Santé'),
+       ('MediCorp', '0987654321', '456 Avenue des Médicaments');
 
--- Table Maladie
+-- Insertion des maladies
 INSERT INTO Maladie (nom, description)
-VALUES ('Hypertension', 'Pression arterielle elevee nécessitant un traitement regulier.'),
-       ('Diabète', 'Maladie chronique liee a un exces de glucose dans le sang.'),
-       ('Grippe', 'Infection virale commune causant fievre et fatigue.');
+VALUES ('Grippe', 'Maladie virale causant fièvre et toux'),
+       ('Diabète', 'Trouble métabolique causant une glycémie élevée');
 
--- Table PublicCible
-INSERT INTO PublicCible (categorie)
-VALUES ('Enfants'),
-       ('Adultes'),
-       ('Toutes');
-
--- Table Type_mvt_stock
-INSERT INTO Type_mvt_stock (nom, description)
-VALUES ('Entree', 'Ajout de nouveaux produits en stock'),
-       ('Sortie', 'Sortie de produits suite à une vente'),
-       ('Correction', 'Mouvement de stock pour corriger une erreur');
-
--- Table Role
-INSERT INTO Role (nom, description)
-VALUES ('Admin', 'Gère le systeme et les utilisateurs'),
-       ('Pharmacien', 'Gere les ventes et les stocks'),
-       ('Caissier', 'Gère les encaissements des clients');
-
--- Table Medicament
-INSERT INTO Medicament (nom, description, prix, id_laboratoire)
-VALUES ('Paracétamol', 'Antalgique pour réduire les douleurs et la fievre.', 2000.00, 1),
-       ('Ibuprofène', 'Anti-inflammatoire et analgesique.', 3500.00, 2),
-       ('Insuline', 'Traitement pour le diabete.', 15000.00, 3);
-
--- Table Vente
+-- Insertion des ventes
 INSERT INTO Vente (date_vente, montant_total)
-VALUES ('2024-12-28 10:30:00', 5500.00),
-       ('2024-12-28 15:45:00', 20000.00);
+VALUES ('2025-01-05 10:00:00', 150.50),
+       ('2025-01-06 11:30:00', 200.00);
 
--- Table VenteDetail
-INSERT INTO VenteDetail (quantite, prix_unitaire, id_medicament, id_vente)
-VALUES (2, 2000.00, 1, 1),
-       (1, 15000.00, 3, 2);
+-- Insertion des publics cibles
+INSERT INTO Public_cible (categorie)
+VALUES ('Adultes'),
+       ('Enfants');
 
--- Table Stock
+-- Insertion des types de mouvements de stock
+INSERT INTO Type_mvt_stock (nom, description)
+VALUES ('Entrée', 'Ajout de médicaments au stock'),
+       ('Sortie', 'Retrait de médicaments du stock');
+
+-- Insertion des rôles
+INSERT INTO Role (nom, description)
+VALUES ('Administrateur', 'Gère le système'),
+       ('Pharmacien', 'Gère les médicaments et les ventes');
+
+-- Insertion des fournisseurs
+INSERT INTO Fournisseur (nom, contact)
+VALUES ('Fournisseur A', 'contact@fournisseura.com'),
+       ('Fournisseur B', 'contact@fournisseurb.com');
+
+-- Insertion des médicaments
+INSERT INTO Medicament (nom, description, prix, id_laboratoire)
+VALUES ('Doliprane', 'Médicament contre la douleur et la fièvre', 5.50, 1),
+       ('Insuline', 'Traitement du diabète', 20.00, 2);
+
+-- Insertion des détails des ventes
+INSERT INTO Vente_detail (quantite, date_peremption, prix_unitaire, id_medicament, id_vente)
+VALUES (2, '2026-01-05', 5.50, 1, 1),
+       (1, '2026-06-15', 20.00, 2, 2);
+
+-- Insertion dans le stock
 INSERT INTO Stock (quantite_disponible, date_dernier_mouvement, date_peremption, id_medicament)
-VALUES (100, '2024-12-01 09:00:00', '2025-12-31', 1),
-       (50, '2024-12-01 09:00:00', '2025-06-30', 2),
-       (20, '2024-12-01 09:00:00', '2026-01-15', 3);
+VALUES (100, '2025-01-05 09:00:00', '2026-01-05', 1),
+       (50, '2025-01-06 10:00:00', '2026-06-15', 2);
 
--- Table MvtStock
-INSERT INTO MvtStock (date_mvt, quantite, description, id_type_mvt, id_medicament)
-VALUES ('2024-12-01 09:00:00', 50, 'Ajout initial de stock', 1, 1),
-       ('2024-12-28 15:45:00', -1, 'Vente', 2, 3);
+-- Insertion des mouvements de stock
+INSERT INTO MvtStock (date_mvt, quantite, description, date_peremption, id_type_mvt, id_medicament)
+VALUES ('2025-01-05 08:30:00', 100, 'Stock initial', '2026-01-05', 1, 1),
+       ('2025-01-06 09:45:00', 50, 'Stock initial', '2026-06-15', 1, 2);
 
--- Table Utilisateur
+-- Insertion des utilisateurs
 INSERT INTO Utilisateur (nom, prenom, email, mot_de_passe, id_role)
-VALUES ('Randria', 'Jean', 'jean.randria@example.com', 'password123', 1),
-       ('Rakoto', 'Marie', 'marie.rakoto@example.com', 'password456', 2),
-       ('Andrianiaina', 'Paul', 'paul.andrianiaina@example.com', 'password789', 3);
+VALUES ('Dupont', 'Jean', 'jean.dupont@example.com', 'password123', 1),
+       ('Martin', 'Marie', 'marie.martin@example.com', 'securepass', 2);
 
--- Table Medicaments_maladies
-INSERT INTO Medicaments_maladies (id_medicament, id_maladie)
-VALUES (1, 3), -- Paracétamol pour la grippe
-       (3, 2);
--- Insuline pour le diabète
+-- Insertion des entrées fournisseur
+INSERT INTO Entree_fournisseur (quantite, date_peremption, id_medicament, id_fournisseur)
+VALUES (50, '2026-01-05', 1, 1),
+       (30, '2026-06-15', 2, 2);
 
--- Table Medicaments_PublicCible
-INSERT INTO Medicaments_PublicCible (id_medicament, id_public)
-VALUES (1, 2), -- Paracétamol pour les adultes
-       (2, 3), -- Ibuprofène pour les seniors
-       (3, 3); -- Insuline pour les seniors
+-- Insertion des relations médicament-maladie
+INSERT INTO Medicaments_maladie (id_medicament, id_maladie)
+VALUES (1, 1),
+       (2, 2);
+
+-- Insertion des relations médicament-public cible
+INSERT INTO Medicaments_Public_cible (id_medicament, id_public)
+VALUES (1, 1),
+       (2, 2);

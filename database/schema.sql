@@ -1,5 +1,6 @@
 CREATE DATABASE pharma_sys;
 \c pharma_sys;
+
 CREATE TABLE Laboratoire
 (
     id        SERIAL,
@@ -50,6 +51,14 @@ CREATE TABLE Role
     UNIQUE (nom)
 );
 
+CREATE TABLE Fournisseur
+(
+    id      SERIAL,
+    nom     VARCHAR(50),
+    contact VARCHAR(50),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE Medicament
 (
     id             SERIAL,
@@ -63,12 +72,12 @@ CREATE TABLE Medicament
 
 CREATE TABLE Vente_detail
 (
-    id            SERIAL,
-    quantite      NUMERIC(15, 2),
-    date_peremption date,
-    prix_unitaire NUMERIC(15, 2),
-    id_medicament INTEGER NOT NULL,
-    id_vente      INTEGER NOT NULL,
+    id              SERIAL,
+    quantite        INTEGER,
+    date_peremption DATE,
+    prix_unitaire   NUMERIC(15, 2),
+    id_medicament   INTEGER NOT NULL,
+    id_vente        INTEGER NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id),
     FOREIGN KEY (id_vente) REFERENCES Vente (id)
@@ -85,15 +94,15 @@ CREATE TABLE Stock
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
 );
 
-CREATE TABLE Mvt_stock
+CREATE TABLE MvtStock
 (
     id              SERIAL,
     date_mvt        TIMESTAMP,
-    quantite        NUMERIC(15, 2),
+    quantite        INTEGER,
     description     TEXT,
+    date_peremption DATE,
     id_type_mvt     INTEGER NOT NULL,
     id_medicament   INTEGER NOT NULL,
-    date_peremption DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_type_mvt) REFERENCES Type_mvt_stock (id),
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id)
@@ -111,6 +120,18 @@ CREATE TABLE Utilisateur
     FOREIGN KEY (id_role) REFERENCES Role (id)
 );
 
+CREATE TABLE Entree_fournisseur
+(
+    id              SERIAL,
+    quantite        NUMERIC(15, 2),
+    date_peremption DATE,
+    id_medicament   INTEGER NOT NULL,
+    id_fournisseur  INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_medicament) REFERENCES Medicament (id),
+    FOREIGN KEY (id_fournisseur) REFERENCES Fournisseur (id)
+);
+
 CREATE TABLE Medicaments_maladie
 (
     id_medicament INTEGER,
@@ -120,7 +141,7 @@ CREATE TABLE Medicaments_maladie
     FOREIGN KEY (id_maladie) REFERENCES Maladie (id)
 );
 
-CREATE TABLE Medicaments_public_cible
+CREATE TABLE Medicaments_Public_cible
 (
     id_medicament INTEGER,
     id_public     INTEGER,
@@ -129,9 +150,10 @@ CREATE TABLE Medicaments_public_cible
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
 
+
 CREATE OR REPLACE VIEW v_stock AS
 (
-SELECT Max(id) as id,
+SELECT Max(id)  as id,
        id_medicament,
        date_peremption,
        SUM(CASE
