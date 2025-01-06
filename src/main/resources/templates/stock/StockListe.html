@@ -17,36 +17,19 @@
                         <tr>
                             <th>Id</th>
                             <th>Quantité Disponible</th>
-                            <th>Date Dernier Mouvement</th>
                             <th>Date Péremption</th>
                             <th>Médicament</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="stock : ${stocks}">
                             <td th:text="${stock.getId()}"></td>
                             <td th:text="${stock.getQuantiteDisponible()}"></td>
-                            <td th:text="${stock.getDateDernierMouvement()}"></td>
                             <td th:text="${stock.getDatePeremption()}"></td>
                             <td th:text="${stock.getMedicament().nom}"></td>
-                            <td>
-                                <a th:href="@{/stock/edit(id=${stock.id})}" class="btn icon btn-primary">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a th:href="@{/stock/delete(id=${stock.id})}" class="btn icon btn-danger">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/stock/edit}" class="btn icon btn-primary">
-                        <i class="bi bi-plus-circle"></i>
-                    </a>
                 </div>
             </div>
         </div>

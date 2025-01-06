@@ -7,6 +7,7 @@ import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.repository.stock.MvtStockRepository;
 import com.mg.app.PharmaSys.repository.stock.StockRepository;
+import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.Objects;
 public class StockService {
     private final StockRepository stockRepository;
     private final MvtStockService mvtStockService;
+    private final VenteDetailService venteDetailService;
 
     public Stock createStock(Stock stock) {
         return stockRepository.save(stock);
@@ -49,79 +51,95 @@ public class StockService {
         }
         return quantite;
     }
-// a voir pour la gestion de retour en stock
-    public List<MvtStock> updateStockForSale(VenteDetail venteDetail) {
-        if (getCurrentStockByMedicamentId(venteDetail.getMedicament().getId()) < venteDetail.getQuantite()){
-            throw new IllegalArgumentException("Stock insuffisant pour effectuer la vente.");
-        }
-        List<Stock> stockCompatible = stockRepository.findStockByMedicament_IdOrderByDatePeremptionAsc(venteDetail.getMedicament().getId());
+
+
+    public List<VenteDetail> processVenteDetails(VenteDetail venteDetail, Double initialQuantity) {
+        double availableStock = getCurrentStockByMedicamentId(venteDetail.getMedicament().getId());
+
+        // Récupération des stocks disponibles triés par date de péremption
+        List<Stock> availableStocks = stockRepository.findStockByMedicament_IdOrderByDatePeremptionAsc(venteDetail.getMedicament().getId());
         List<MvtStock> mvtStocks = new ArrayList<>();
-        TypeMvtStock typeMvtStock = new TypeMvtStock();
-        if (venteDetail.getQuantite()>0){
-            typeMvtStock.setId(2);
-            typeMvtStock.setNom("Sortie");
-        }else {
-            typeMvtStock.setId(1);
-            typeMvtStock.setNom("Entree");
-        }
-        for (Stock stock : stockCompatible) {
-            MvtStock mvtStock = new MvtStock();
-            mvtStock.setDescription("ventedetail for vente id: " + venteDetail.getVente().getId());
-            mvtStock.setMedicament(venteDetail.getMedicament());
-            mvtStock.setDatePeremption(stock.getDatePeremption());
-            mvtStock.setDateMvt(venteDetail.getVente().getDateVente());
-            mvtStock.setTypeMvt(typeMvtStock);
-            mvtStocks.add(mvtStock);
-            if (stock.getQuantiteDisponible() >= venteDetail.getQuantite()){
-                mvtStock.setQuantite(venteDetail.getQuantite());
-                break;
-            }else {
-                mvtStock.setQuantite(stock.getQuantiteDisponible());
-                venteDetail.setQuantite(venteDetail.getQuantite() - stock.getQuantiteDisponible());
+        List<VenteDetail> venteDetailsGenere = new ArrayList<>();
+
+        if (venteDetail.getQuantite() > initialQuantity) {
+            if (availableStock < venteDetail.getQuantite()) {
+                throw new IllegalArgumentException("Stock insuffisant pour effectuer la vente.");
             }
-            if (venteDetail.getQuantite() == 0){
-                break;
-            }
+            // Gestion des sorties de stock (vente)
+            processVente(venteDetail, availableStocks, mvtStocks, venteDetailsGenere);
+        } else if (venteDetail.getId() != null) {
+            // Gestion des retours en stock
+            processRetourVente(venteDetail, initialQuantity, mvtStocks, venteDetailsGenere);
         }
+
+        // Enregistrer les mouvements de stock
         for (MvtStock mvtStock : mvtStocks) {
-            updateStockByMvtStock(mvtStock);
             mvtStockService.createMvtStock(mvtStock);
         }
-        return mvtStocks;
+        return venteDetailsGenere;
     }
 
-    public Stock updateStockByMvtStock(MvtStock mvtStock) {
-        Stock stockCorrespondant = stockRepository.findStockByMedicamentAndDatePeremption(mvtStock.getMedicament().getId(), mvtStock.getDatePeremption());
-        String typeMvt = mvtStock.getTypeMvt().getNom();
-        double mvtQuantity = mvtStock.getQuantite();
+    // Sous-fonction pour traiter une vente
+    private void processVente(VenteDetail venteDetail, List<Stock> stockCompatible, List<MvtStock> mvtStocks, List<VenteDetail> venteDetailsGenere) {
+        TypeMvtStock movementType = new TypeMvtStock();
+        movementType.setId(2); // 2 = Sortie de stock
 
-        if (stockCorrespondant != null) {
-            if ("Sortie".equals(typeMvt)) {
-                if (stockCorrespondant.getQuantiteDisponible() >= mvtQuantity) {
-                    stockCorrespondant.setQuantiteDisponible(
-                            stockCorrespondant.getQuantiteDisponible() - mvtQuantity
-                    );
-                    stockCorrespondant.setDateDernierMouvement(mvtStock.getDateMvt());
-                    return updateStock(stockCorrespondant);
-                } else {
-                    throw new IllegalArgumentException("Stock insuffisant pour effectuer une sortie.");
-                }
-            } else if ("Entree".equals(typeMvt)) {
-                stockCorrespondant.setQuantiteDisponible(
-                        stockCorrespondant.getQuantiteDisponible() + mvtQuantity
-                );
-                stockCorrespondant.setDateDernierMouvement(mvtStock.getDateMvt());
-                return updateStock(stockCorrespondant);
-            }
-        } else if ("Entree".equals(typeMvt)) {
-            Stock newStock = new Stock();
-            newStock.setMedicament(mvtStock.getMedicament());
-            newStock.setQuantiteDisponible(mvtQuantity);
-            newStock.setDatePeremption(mvtStock.getDatePeremption());
-            newStock.setDateDernierMouvement(mvtStock.getDateMvt());
-            return createStock(newStock);
+        double remainingQuantity = venteDetail.getQuantite();
+
+        for (Stock stock : stockCompatible) {
+            if (remainingQuantity <= 0) break;
+
+            // Création d'un détail de vente
+            VenteDetail generatedDetail = new VenteDetail();
+            generatedDetail.setVente(venteDetail.getVente());
+            generatedDetail.setMedicament(venteDetail.getMedicament());
+            generatedDetail.setPrixUnitaire(venteDetail.getPrixUnitaire());
+            generatedDetail.setDatePeremption(stock.getDatePeremption());
+
+            // Déterminer la quantité à prélever
+            double usedQuantity = Math.min(remainingQuantity, stock.getQuantiteDisponible());
+            generatedDetail.setQuantite(usedQuantity);
+            remainingQuantity -= usedQuantity;
+
+            // Création d'un mouvement de stock
+            MvtStock stockMovement = new MvtStock();
+            stockMovement.setDescription("Détail de la vente ID: " + venteDetail.getVente().getId());
+            stockMovement.setMedicament(venteDetail.getMedicament());
+            stockMovement.setDatePeremption(stock.getDatePeremption());
+            stockMovement.setDateMvt(venteDetail.getVente().getDateVente());
+            stockMovement.setTypeMvt(movementType);
+            stockMovement.setQuantite(usedQuantity);
+
+            // Ajouter aux listes
+            mvtStocks.add(stockMovement);
+            venteDetailsGenere.add(generatedDetail);
         }
-        return null;
+
+        if (remainingQuantity > 0) {
+            throw new IllegalArgumentException("Stock insuffisant pour satisfaire la vente.");
+        }
+    }
+/// ////////////
+    // Sous-fonction pour gérer un retour de vente (annulation)
+    private void processRetourVente(VenteDetail venteDetail, Double quantiteInitial, List<MvtStock> mvtStocks,List<VenteDetail> venteDetailsGenere) {
+        TypeMvtStock typeMvtStock = new TypeMvtStock();
+        typeMvtStock.setId(1); // 1 représente le type "ENTREE"
+
+
+        // Créer le mouvement de stock pour le retour
+        MvtStock mvtStock = new MvtStock();
+        mvtStock.setDescription("Annulation de la vente ID: " + venteDetail.getVente().getId());
+        mvtStock.setMedicament(venteDetail.getMedicament());
+        mvtStock.setDatePeremption(venteDetail.getDatePeremption());
+        mvtStock.setDateMvt(venteDetail.getVente().getDateVente());
+        mvtStock.setTypeMvt(typeMvtStock);
+        mvtStock.setQuantite(venteDetail.getQuantite());
+
+        mvtStocks.add(mvtStock);
+
+        if (quantiteInitial - venteDetail.getQuantite()>0) {
+            venteDetailsGenere.add(venteDetail);
+        }
     }
 
 

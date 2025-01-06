@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "public_cible")
+@Table(name = "Public_cible")
 public class PublicCible {
     @Id
     @Column(name = "id")

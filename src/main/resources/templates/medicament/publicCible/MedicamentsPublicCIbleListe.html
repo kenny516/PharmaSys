@@ -1,0 +1,51 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Liste des Medicaments Public Cible</h3>
+                <p class="text-subtitle text-muted">Liste des medicaments associés à un public cible</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="table1">
+                        <thead>
+                        <tr>
+                            <th>Id Medicament</th>
+                            <th>Nom Medicament</th>
+                            <th>Public Cible</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="medicamentsPublicCible : ${medicamentsPublicCibles}">
+                            <td th:text="${medicamentsPublicCible.medicament.getId()}"></td>
+                            <td th:text="${medicamentsPublicCible.medicament.getNom()}"></td>
+                            <td th:text="${medicamentsPublicCible.publicCible.getCategorie()}"></td>
+                            <td>
+                                <a th:href="@{/medicament-public-cible/edit(idMedicament=${medicamentsPublicCible.medicament.id},idPublicCible=${medicamentsPublicCible.publicCible.id})}"
+                                   class="btn icon btn-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a th:href="@{/medicament-public-cible/delete(idMedicament=${medicamentsPublicCible.medicament.id},idPublicCible=${medicamentsPublicCible.publicCible.id})}"
+                                   class="btn icon btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/medicament-public-cible/edit(idMedicament=${idMedicament})}"
+                       class="btn icon btn-primary">
+                        <i class="bi bi-plus-circle"></i> Ajouter un public cible
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
