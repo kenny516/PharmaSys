@@ -39,7 +39,8 @@
                                                 <label for="phone-icon">Description</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="description"
-                                                           data-parsley-required="true">
+                                                           th:field="*{description}"
+                                                           data-parsley-required="true" id="phone-icon" >
                                                     <div class="form-control-icon">
                                                         <i class="bi bi-phone"></i>
                                                     </div>
