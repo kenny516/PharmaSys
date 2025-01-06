@@ -1,7 +1,7 @@
 package com.mg.app.PharmaSys.model.medicament.Maladie;
 
 
-import com.mg.app.PharmaSys.model.Maladies.Maladies;
+import com.mg.app.PharmaSys.model.maladie.Maladie;
 import com.mg.app.PharmaSys.model.medicament.Medicament;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class MedicamentsMaladie {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_maladie", insertable = false, updatable = false)
-    private Maladies maladie;
+    private Maladie maladie;
 
 
 }
