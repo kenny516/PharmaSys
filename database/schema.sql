@@ -22,7 +22,7 @@ CREATE TABLE Vente
 (
     id            SERIAL,
     date_vente    TIMESTAMP,
-    montant_total NUMERIC(15, 2),
+    montant_total double precision,
     PRIMARY KEY (id)
 );
 
@@ -51,6 +51,17 @@ CREATE TABLE Role
     UNIQUE (nom)
 );
 
+CREATE TABLE Medicament
+(
+    id             SERIAL,
+    nom            VARCHAR(50),
+    description    TEXT,
+    prix           double precision,
+    id_laboratoire INTEGER,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
+);
+
 CREATE TABLE Fournisseur
 (
     id      SERIAL,
@@ -59,23 +70,12 @@ CREATE TABLE Fournisseur
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Medicament
-(
-    id             SERIAL,
-    nom            VARCHAR(50),
-    description    TEXT,
-    prix           NUMERIC(15, 2),
-    id_laboratoire INTEGER,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
-);
-
 CREATE TABLE Vente_detail
 (
     id              SERIAL,
     quantite        INTEGER,
     date_peremption DATE,
-    prix_unitaire   NUMERIC(15, 2),
+    prix_unitaire   double precision,
     id_medicament   INTEGER NOT NULL,
     id_vente        INTEGER NOT NULL,
     PRIMARY KEY (id),
@@ -86,7 +86,7 @@ CREATE TABLE Vente_detail
 CREATE TABLE Stock
 (
     id                     SERIAL,
-    quantite_disponible    NUMERIC(15, 2),
+    quantite_disponible    double precision,
     date_dernier_mouvement TIMESTAMP,
     date_peremption        DATE,
     id_medicament          INTEGER NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE Utilisateur
 CREATE TABLE Entree_fournisseur
 (
     id              SERIAL,
-    quantite        NUMERIC(15, 2),
+    quantite        double precision,
     date_peremption DATE,
     id_medicament   INTEGER NOT NULL,
     id_fournisseur  INTEGER NOT NULL,
