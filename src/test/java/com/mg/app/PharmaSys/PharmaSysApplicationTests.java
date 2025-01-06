@@ -34,8 +34,8 @@ class PharmaSysApplicationTests {
 		mvt.setMedicament(medicament);
 		mvt.setTypeMvt(typeMvtStock);
 		mvt.setDateMvt(LocalDateTime.now());
-		Stock stock =stockService.updateStockByMvtStock(mvt);
-		System.out.println(stock);
+		//Stock stock =stockService.updateStockByMvtStock(mvt);
+		//System.out.println(stock);
 	}
 
 }

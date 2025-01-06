@@ -4,6 +4,9 @@ import com.mg.app.PharmaSys.model.medicament.Medicament;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,6 +20,10 @@ public class VenteDetail {
 
     @Column(name = "quantite")
     private Double quantite;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date_peremption")
+    private LocalDate datePeremption;
 
     @Column(name = "prix_unitaire")
     private Double prixUnitaire;
