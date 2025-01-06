@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.model.Maladies;
+package com.mg.app.PharmaSys.model.maladie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
