@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.model.Maladies;
+package com.mg.app.PharmaSys.model.maladie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "Maladie")
-public class Maladies {
+public class Maladie {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,8 @@ public class Maladies {
     @NotNull(message = "Le nom est obligatoire")
     private String nom;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 50)
     private String description;
+
 
 }

@@ -1,10 +1,10 @@
 package com.mg.app.PharmaSys.controller.medicament;
 
-import com.mg.app.PharmaSys.model.Maladies.Maladies;
+import com.mg.app.PharmaSys.model.maladie.Maladie;
 import com.mg.app.PharmaSys.model.medicament.Maladie.MedicamentMaladieId;
 import com.mg.app.PharmaSys.model.medicament.Maladie.MedicamentsMaladie;
 import com.mg.app.PharmaSys.model.medicament.Medicament;
-import com.mg.app.PharmaSys.service.Maladies.MaladiesService;
+import com.mg.app.PharmaSys.service.maladie.MaladieService;
 import com.mg.app.PharmaSys.service.medicament.MedicamentMaladieService;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/medicament-maladie")
 public class MedicamentMaladieController {
     private final MedicamentMaladieService medicamentMaladieService;
-    private final MaladiesService maladieService;
+    private final MaladieService maladieService;
     private final MedicamentService medicamentService;
 
 
@@ -39,7 +39,7 @@ public class MedicamentMaladieController {
     @GetMapping("/edit")
     public String editMedicamentMaladie(@RequestParam(value = "idMedicament") Integer idMedicament, @RequestParam(value = "idMaladie",required = false) Integer idMaladie, Model model) {
         MedicamentsMaladie medicamentsMaladie;
-        List<Maladies> maladies = maladieService.readMaladies();
+        List<Maladie> maladies = maladieService.readMaladie();
         model.addAttribute("maladies", maladies);
         if (idMaladie == null) {
             Medicament medicament = medicamentService.getMedicamentById(idMedicament);
