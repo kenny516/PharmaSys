@@ -1,0 +1,72 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Recherche Medicament FORMULAIRE</h3>
+                <p class="text-subtitle text-muted">Medicaments formulaire Recherche</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts">
+        <div class="row match-height">
+            <div class="col-md-6 col-12 flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"></h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/medicament/recherche}" method="post" data-parsley-validate>
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label class="input-group-text"
+                                                       for="inputGroupSelect01">Public cible</label>
+                                                <select class="form-select"
+                                                        id="inputGroupSelect01" name="publicCible"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <!-- Liste dynamique des laboratoires -->
+                                                    <option th:each="publicCible : ${publicCibles}"
+                                                            th:value="${publicCible.getId()}"
+                                                            th:text="${publicCible.getCategorie()}">
+                                                        Public Cible
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label class="input-group-text"
+                                                       for="inputGroupSelect02">Maladie</label>
+                                                <select class="form-select"
+                                                        id="inputGroupSelect02"
+                                                        data-parsley-required="true" name="maladie">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <!-- Liste dynamique des laboratoires -->
+                                                    <option th:each="maladie : ${maladies}"
+                                                            th:value="${maladie.getId()}"
+                                                            th:text="${maladie.getNom()}">
+                                                        Maladie
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

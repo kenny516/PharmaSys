@@ -32,6 +32,10 @@ public class MedicamentService{
         return medicamentRepository.findById(id).orElse(null);
     }
 
+     public List<Medicament> rechercheMultiCritere(Integer idMaladie, Integer idPublic) {
+         return medicamentRepository.rechercheMultiCritere(idMaladie, idPublic);
+     }
+
 
 
 }

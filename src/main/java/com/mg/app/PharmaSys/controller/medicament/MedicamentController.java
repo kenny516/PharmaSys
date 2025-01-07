@@ -1,10 +1,14 @@
 package com.mg.app.PharmaSys.controller.medicament;
 
 
+import com.mg.app.PharmaSys.model.maladie.Maladie;
 import com.mg.app.PharmaSys.model.medicament.Laboratoire;
 import com.mg.app.PharmaSys.model.medicament.Medicament;
+import com.mg.app.PharmaSys.model.medicament.PublicCible;
+import com.mg.app.PharmaSys.service.maladie.MaladieService;
 import com.mg.app.PharmaSys.service.medicament.LaboratoireService;
 import com.mg.app.PharmaSys.service.medicament.MedicamentService;
+import com.mg.app.PharmaSys.service.medicament.PublicCibleService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,8 @@ import java.util.List;
 public class MedicamentController {
     private final MedicamentService medicamentService;
     private final LaboratoireService laboratoireService;
+    private final PublicCibleService publicCibleService;
+    private final MaladieService maladieService;
 
 
     @GetMapping
@@ -54,6 +60,21 @@ public class MedicamentController {
     public String deleteMedicament(@RequestParam("id") Integer id) {
         medicamentService.deleteMedicament(id);
         return "redirect:/medicament";
+    }
+
+    @GetMapping("/rechercheForm")
+    public String RechercheMedicamentPage(Model model) {
+        List<PublicCible> publicCibles = publicCibleService.readPublicCible();
+        List<Maladie> maladies = maladieService.readMaladie();
+        model.addAttribute("publicCibles", publicCibles);
+        model.addAttribute("maladies", maladies);
+        return "medicament/Recherche/RechercheForm";
+    }
+    @PostMapping("/recherche")
+    public String RechercheMedicament(@RequestParam("maladie") Integer idMaladie,@RequestParam("publicCible") Integer idPublicCible,Model model) {
+        List<Medicament> list = medicamentService.rechercheMultiCritere(idMaladie,idPublicCible);
+        model.addAttribute("medicaments",list);
+        return "medicament/MedicamentListe";
     }
 
 }
