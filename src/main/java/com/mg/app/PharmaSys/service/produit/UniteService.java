@@ -28,5 +28,9 @@ public class UniteService {
         uniteRepository.deleteById(id);
     }
 
+    public Unite getUniteById(Integer id){
+        return uniteRepository.findById(id).orElse(null);
+    }
+
 
 }

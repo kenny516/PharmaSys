@@ -28,9 +28,10 @@ public class CategorieService {
         categorieRepository.deleteById(id);
     }
 
-    public Categorie categorieById(Integer id){
+    public Categorie getCategorieById(Integer id){
         return categorieRepository.findById(id).orElse(null);
     }
+
 
 
 }
