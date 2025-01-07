@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class MaladieController {
         model.addAttribute("Maladies", Maladies);
         return "maladie/MaladieListe";
     }
+
+
 
     @GetMapping("/edit")
     public String editMaladie(@RequestParam(value = "id",required = false) Integer id, Model model) {
