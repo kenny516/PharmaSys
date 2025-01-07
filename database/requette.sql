@@ -1,0 +1,1 @@
+SELECT max(id),max(date_vente),sum(montant_total) FROM vente;
