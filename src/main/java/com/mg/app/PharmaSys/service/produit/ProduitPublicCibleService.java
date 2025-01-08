@@ -4,7 +4,7 @@ import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.model.caracteristique.PublicCible;
 import com.mg.app.PharmaSys.model.produit.publicCible.ProduitsPublicCible;
 import com.mg.app.PharmaSys.model.produit.publicCible.ProduitsPublicCibleId;
-import com.mg.app.PharmaSys.repository.medicament.ProduitPublicCibleRepository;
+import com.mg.app.PharmaSys.repository.produit.ProduitPublicCibleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

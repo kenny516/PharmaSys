@@ -29,7 +29,7 @@
                             <td th:text="${vente.getDateVente()}"></td>
                             <td th:text="${vente.getMontantTotal()}"></td>
                             <td>
-                                <a th:href="@{/vente/{id}/detail(id=${vente.getId()})}" class="btn icon btn-primary">
+                                <a th:href="@{/venteDetail(idVente=${vente.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>

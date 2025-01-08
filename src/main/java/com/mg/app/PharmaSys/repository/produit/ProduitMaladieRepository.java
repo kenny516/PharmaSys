@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.repository.medicament;
+package com.mg.app.PharmaSys.repository.produit;
 
 import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladieId;
 import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladie;

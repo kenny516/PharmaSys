@@ -1,7 +1,7 @@
 package com.mg.app.PharmaSys.service.produit;
 
 import com.mg.app.PharmaSys.model.produit.Produit;
-import com.mg.app.PharmaSys.repository.medicament.ProduitRepository;
+import com.mg.app.PharmaSys.repository.produit.ProduitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +32,8 @@ public class ProduitService {
         return produitRepository.findById(id).orElse(null);
     }
 
-     public List<Produit> rechercheMultiCritere(Integer idMaladie, Integer idPublic) {
-         return produitRepository.rechercheMultiCritere(idMaladie, idPublic);
+     public List<Produit> rechercheMultiCritere(Integer idMaladie, Integer idPublic,Integer idCategorie) {
+         return produitRepository.rechercheMultiCritere(idMaladie, idPublic,idCategorie);
      }
 
 

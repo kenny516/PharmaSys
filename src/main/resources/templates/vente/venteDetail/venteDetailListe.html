@@ -3,7 +3,6 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Ventes</h3>
                 <p class="text-subtitle text-muted">Liste des ventes</p>
                 <H3>Details de la vente</H3>
                 <p th:text="'Date :' +${vente.getDateVente()}"></p>
@@ -33,19 +32,19 @@
                             <td th:text="${venteDetail.getPrixUnitaire()}"></td>
                             <td th:text="${venteDetail.getProduit().getNom()}"></td>
                             <td>
-                                <a th:href="@{/vente/detail/edit(idVenteDetail=${venteDetail.getId()},idVente=${vente.getId()})}" class="btn icon btn-primary">
+                                <a th:href="@{/venteDetail/edit(idVenteDetail=${venteDetail.getId()},idVente=${vente.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                             <td>
-                                <a th:href="@{/vente/detail/delete(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-danger">
+                                <a th:href="@{/venteDetail/delete(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/vente/detail/edit(idVente=${vente.getId()})}" class="btn icon btn-primary">
+                    <a th:href="@{/venteDetail/edit(idVente=${vente.getId()})}" class="btn icon btn-primary">
                         <i class="bi bi-plus-circle"></i>
                     </a>
                 </div>

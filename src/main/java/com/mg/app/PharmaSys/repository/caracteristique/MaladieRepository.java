@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.repository.produit;
+package com.mg.app.PharmaSys.repository.caracteristique;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

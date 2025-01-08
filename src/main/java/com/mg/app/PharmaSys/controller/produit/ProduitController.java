@@ -70,15 +70,17 @@ public class ProduitController {
     public String RechercheMedicamentPage(Model model) {
         List<PublicCible> publicCibles = publicCibleService.readPublicCible();
         List<Maladie> maladies = maladieService.readMaladie();
+        List<Categorie> categories = categorieService.readCategorie();
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);
-        return "produit/Recherche/RechercheForm";
+        model.addAttribute("categories", categories);
+        return "produit/recherche/rechercheForm";
     }
     @PostMapping("/recherche")
-    public String RechercheMedicament(@RequestParam("maladie") Integer idMaladie,@RequestParam("publicCible") Integer idPublicCible,Model model) {
-        List<Produit> list = ProduitService.rechercheMultiCritere(idMaladie,idPublicCible);
+    public String RechercheMedicament(@RequestParam("maladie") Integer idMaladie,@RequestParam("publicCible") Integer idPublicCible,@RequestParam("idCategorie") Integer idCategorie,Model model) {
+        List<Produit> list = ProduitService.rechercheMultiCritere(idMaladie,idPublicCible,idCategorie);
         model.addAttribute("produits",list);
-        return "produit/MedicamentListe";
+        return "produit/produitListe";
     }
 
 }

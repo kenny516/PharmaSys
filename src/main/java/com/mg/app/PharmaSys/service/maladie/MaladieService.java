@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mg.app.PharmaSys.model.caracteristique.Maladie;
-import com.mg.app.PharmaSys.repository.produit.MaladieRepository;
+import com.mg.app.PharmaSys.repository.caracteristique.MaladieRepository;
 
 
 @Service

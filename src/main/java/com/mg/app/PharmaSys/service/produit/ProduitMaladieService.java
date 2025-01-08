@@ -3,7 +3,7 @@ package com.mg.app.PharmaSys.service.produit;
 import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladieId;
 import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladie;
 import com.mg.app.PharmaSys.model.produit.Produit;
-import com.mg.app.PharmaSys.repository.medicament.ProduitMaladieRepository;
+import com.mg.app.PharmaSys.repository.produit.ProduitMaladieRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

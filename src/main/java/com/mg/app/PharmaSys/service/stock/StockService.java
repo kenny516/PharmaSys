@@ -116,7 +116,6 @@ public class StockService {
             throw new IllegalArgumentException("Stock insuffisant pour satisfaire la vente.");
         }
     }
-/// ////////////
     // Sous-fonction pour gérer un retour de vente (annulation)
     private void processRetourVente(VenteDetail venteDetail, Double quantiteInitial, List<MvtStock> mvtStocks,List<VenteDetail> venteDetailsGenere) {
         TypeMvtStock typeMvtStock = new TypeMvtStock();
