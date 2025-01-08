@@ -3,17 +3,17 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Vente FORMULAIRE</h3>
-                <p class="text-subtitle text-muted">Vente formulaire</p>
+                <h3>Formulaire de Vente</h3>
+                <p class="text-subtitle text-muted">Enregistrez ou modifiez les informations d'une vente</p>
             </div>
         </div>
     </div>
-    <section id="basic-vertical-layouts">
-        <div class="row match-height">
-            <div class="col-md-6 col-12 flex">
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"></h4>
+                        <h4 class="card-title">Détails de la Vente</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -21,37 +21,46 @@
                                 <input type="hidden" th:field="*{id}">
                                 <div class="form-body">
                                     <div class="row">
+                                        <!-- Champ Date -->
                                         <div class="col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="date-icon">Date</label>
-                                                <div class="position-relative">
-                                                    <input type="datetime-local" class="form-control" placeholder="Nom"
-                                                           th:field="*{dateVente}" id="date-icon"
-                                                           data-parsley-required="true">
-                                                    <div class="form-control-icon">
-                                                        <!-- Icône mise à jour pour Date -->
+                                            <div class="form-group">
+                                                <label for="date-icon" class="form-label">Date de la Vente</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
                                                         <i class="bi bi-calendar-date"></i>
-                                                    </div>
+                                                    </span>
+                                                    <input type="datetime-local" class="form-control"
+                                                           th:field="*{dateVente}" id="date-icon"
+                                                           data-parsley-required="true" placeholder="Sélectionnez la date">
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Champ Montant -->
                                         <div class="col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="montant-icon">Montant (attention à ne pas changer si possible)</label>
-                                                <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Montant"
-                                                           th:field="*{montantTotal}" id="montant-icon"
-                                                           data-parsley-required="true">
-                                                    <div class="form-control-icon">
-                                                        <!-- Icône mise à jour pour Montant -->
+                                            <div class="form-group">
+                                                <label for="montant-icon" class="form-label">Montant Total (€)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
                                                         <i class="bi bi-cash"></i>
-                                                    </div>
+                                                    </span>
+                                                    <input type="text" class="form-control" th:field="*{montantTotal}"
+                                                           id="montant-icon" placeholder="Saisissez le montant total"
+                                                           data-parsley-required="true" data-parsley-type="number">
                                                 </div>
+                                                <small class="form-text text-muted">Le montant ne doit être modifié qu'en cas de correction nécessaire.</small>
                                             </div>
                                         </div>
+                                        <!-- Boutons d'Action -->
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <i class="bi bi-check-circle"></i> Enregistrer
+                                            </button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                            </button>
+                                            <a th:href="@{/vente}" class="btn btn-danger me-1 mb-1">
+                                                <i class="bi bi-x-circle"></i> Annuler
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

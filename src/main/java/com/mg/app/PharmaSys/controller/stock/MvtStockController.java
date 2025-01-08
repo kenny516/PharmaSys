@@ -49,6 +49,10 @@ public class MvtStockController {
 
     @PostMapping("/save")
     public String saveMvtStock(MvtStock mvtStock) {
+        Produit produitMvt = produitService.getProduitById(mvtStock.getProduit().getId());
+        if (!produitMvt.getPerissable()){
+            mvtStock.setDatePeremption(null);
+        }
         mvtStockService.createMvtStock(mvtStock);
         return "redirect:/mvtstock";
     }

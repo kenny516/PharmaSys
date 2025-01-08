@@ -27,7 +27,7 @@ public class VenteController {
     public String listVente(Model model) {
         List<Vente> ventes = venteService.readVente();
         model.addAttribute("ventes", ventes);
-        return "venteListe";
+        return "vente/venteListe";
     }
 
     @GetMapping("/edit")
@@ -35,11 +35,11 @@ public class VenteController {
         Vente vente = new Vente();
         if (id == null) {
             model.addAttribute("vente", vente);
-            return "venteForm";
+            return "vente/venteForm";
         }
         vente = venteService.getVenteById(id);
         model.addAttribute("vente", vente);
-        return "venteForm";
+        return "vente/venteForm";
     }
 
     @PostMapping("/save")
@@ -66,7 +66,7 @@ public class VenteController {
         List<VenteDetail> venteDetails = venteDetailService.getVenteDetailByVente(idVente);
         model.addAttribute("vente", vente);
         model.addAttribute("venteDetails", venteDetails);
-        return "venteDetailListe";
+        return "vente/venteDetail/venteDetailListe";
     }
 
     @GetMapping("/detail/edit")
@@ -78,11 +78,11 @@ public class VenteController {
         venteDetail.setVente(vente);
         if (idVenteDetail == null) {
             model.addAttribute("venteDetail", venteDetail);
-            return "venteDetailForm";
+            return "vente/venteDetail/venteDetailForm";
         }
         venteDetail = venteDetailService.getVenteDetailById(idVenteDetail);
         model.addAttribute("venteDetail", venteDetail);
-        return "venteDetailForm";
+        return "vente/venteDetail/venteDetailForm";
     }
 
     @PostMapping("/detail/save")

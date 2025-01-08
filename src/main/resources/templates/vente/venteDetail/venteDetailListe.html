@@ -31,7 +31,7 @@
                             <td th:text="${venteDetail.getId()}"></td>
                             <td th:text="${venteDetail.getQuantite()}"></td>
                             <td th:text="${venteDetail.getPrixUnitaire()}"></td>
-                            <td th:text="${venteDetail.getMedicament().getNom()}"></td>
+                            <td th:text="${venteDetail.getProduit().getNom()}"></td>
                             <td>
                                 <a th:href="@{/vente/detail/edit(idVenteDetail=${venteDetail.getId()},idVente=${vente.getId()})}" class="btn icon btn-primary">
                                     <i class="bi bi-pencil"></i>
