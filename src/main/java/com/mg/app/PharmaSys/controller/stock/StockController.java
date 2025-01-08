@@ -20,6 +20,6 @@ public class StockController {
     public String listStock(Model model) {
         List<Stock> stocks = stockService.readStock();
         model.addAttribute("stocks", stocks);
-        return "stock/StockListe";
+        return "stock/stockListe";
     }
 }

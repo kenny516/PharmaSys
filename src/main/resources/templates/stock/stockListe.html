@@ -1,0 +1,38 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>STOCKS</h3>
+                <p class="text-subtitle text-muted">Liste des stocks</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Quantité Disponible</th>
+                            <th class="text-center">Date Péremption</th>
+                            <th class="text-center">Médicament</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="stock : ${stocks}">
+                            <td class="text-center" th:text="${stock.getId()}"></td>
+                            <td class="text-center" th:text="${stock.getQuantiteDisponible()}"></td>
+                            <td class="text-center" th:text="${stock.getDatePeremption()}"></td>
+                            <td class="text-center" th:text="${stock.getProduit().nom}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

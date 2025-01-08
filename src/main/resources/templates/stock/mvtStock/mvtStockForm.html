@@ -1,0 +1,123 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Mouvement de Stock</h3>
+                <p class="text-subtitle text-muted">Formulaire pour ajouter ou modifier un mouvement de stock</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="row match-height w-100 justify-content-center">
+            <div class="col-md-8 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Détails du Mouvement</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/mvtstock/save}" th:object="${mvtStock}"
+                                  method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <!-- Date du Mouvement -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="date-mvt-icon" class="form-label">Date du Mouvement</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-calendar-event"></i>
+                                                    </span>
+                                                    <input type="datetime-local" class="form-control"
+                                                           th:field="*{dateMvt}" id="date-mvt-icon"
+                                                           data-parsley-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Date de Péremption -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="expiration-date-icon" class="form-label">Date de Péremption</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-calendar-x"></i>
+                                                    </span>
+                                                    <input type="date" class="form-control"
+                                                           th:field="*{datePeremption}" id="expiration-date-icon"
+                                                           data-parsley-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Quantité -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="quantity-icon" class="form-label">Quantité</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-box"></i>
+                                                    </span>
+                                                    <input type="number" class="form-control"
+                                                           th:field="*{quantite}" id="quantity-icon"
+                                                           placeholder="Quantité" data-parsley-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Description -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="description-icon" class="form-label">Description</label>
+                                                <textarea class="form-control" th:field="*{description}"
+                                                          id="description-icon" placeholder="Description"
+                                                          data-parsley-required="true"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- Type de Mouvement -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type-mvt-id" class="form-label">Type de Mouvement</label>
+                                                <select class="form-control" th:field="*{typeMvt.id}" id="type-mvt-id"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="type : ${typesMvt}" th:value="${type.id}"
+                                                            th:text="${type.nom}"
+                                                            th:selected="|${type.id} == ${mvtStock.typeMvt?.id}|">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Médicament -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="medicament-id" class="form-label">Médicament</label>
+                                                <select class="form-control" th:field="*{produit.id}" id="medicament-id"
+                                                        data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir...</option>
+                                                    <option th:each="produit : ${produits}" th:value="${produit.id}"
+                                                            th:text="${produit.nom}"
+                                                            th:selected="|${produit.id} == ${mvtStock.produit?.id}|">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Boutons d'action -->
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <i class="bi bi-check-circle"></i> Enregistrer
+                                            </button>
+                                            <a th:href="@{/mvtstock}" class="btn btn-light-secondary me-1 mb-1">
+                                                <i class="bi bi-arrow-left-circle"></i> Annuler
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

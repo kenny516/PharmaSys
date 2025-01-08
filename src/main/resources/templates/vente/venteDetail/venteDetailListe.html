@@ -1,0 +1,55 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <p class="text-subtitle text-muted">Liste des ventes</p>
+                <H3>Details de la vente</H3>
+                <p th:text="'Date :' +${vente.getDateVente()}"></p>
+                <p th:text="'Total : ' + ${vente.getMontantTotal()}"></p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Quantite</th>
+                            <th class="text-center">Prix_unitaire</th>
+                            <th class="text-center">Medicament</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="venteDetail : ${venteDetails}">
+                            <td class="text-center" th:text="${venteDetail.getId()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getQuantite()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getPrixUnitaire()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getProduit().getNom()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/venteDetail/edit(idVenteDetail=${venteDetail.getId()},idVente=${vente.getId()})}" class="btn icon btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/venteDetail/delete(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/venteDetail/edit(idVente=${vente.getId()})}" class="btn icon btn-success">
+                        <i class="bi bi-plus-circle"></i> Ajouter une vente details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

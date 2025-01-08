@@ -1,9 +1,9 @@
 package com.mg.app.PharmaSys.controller.stock;
 
-import com.mg.app.PharmaSys.model.medicament.Medicament;
+import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.model.stock.MvtStock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
-import com.mg.app.PharmaSys.service.medicament.MedicamentService;
+import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.MvtStockService;
 import com.mg.app.PharmaSys.service.stock.TypeMvtStockService;
 import lombok.AllArgsConstructor;
@@ -19,20 +19,20 @@ import java.util.List;
 public class MvtStockController {
 
     private final MvtStockService mvtStockService;
-    private final MedicamentService medicamentService;
+    private final ProduitService produitService;
     private final TypeMvtStockService typeMvtStockService;
 
     @GetMapping
     public String listMvtStock(Model model) {
-        List<MvtStock> mouvements = mvtStockService.readMvtStock();
-        model.addAttribute("mouvements", mouvements);
-        return "stock/MvtStockListe";
+        List<MvtStock> mvtStocks = mvtStockService.readMvtStock();
+        model.addAttribute("mvtStocks", mvtStocks);
+        return "stock/mvtStock/mvtStockListe";
     }
 
     @GetMapping("/edit")
     public String editMvtStock(@RequestParam(value = "id", required = false) Integer id, Model model) {
         MvtStock mvtStock;
-        List<Medicament> medicaments = medicamentService.readMedicaments();
+        List<Produit> produits = produitService.readProduits();
         List<TypeMvtStock> typesMvt = typeMvtStockService.readTypeMvtStock();
 
         if (id == null) {
@@ -42,13 +42,17 @@ public class MvtStockController {
         }
 
         model.addAttribute("mvtStock", mvtStock);
-        model.addAttribute("medicaments", medicaments);
+        model.addAttribute("produits", produits);
         model.addAttribute("typesMvt", typesMvt);
-        return "stock/MvtStockForm";
+        return "stock/mvtStock/mvtStockForm";
     }
 
     @PostMapping("/save")
     public String saveMvtStock(MvtStock mvtStock) {
+        Produit produitMvt = produitService.getProduitById(mvtStock.getProduit().getId());
+        if (!produitMvt.getPerissable()){
+            mvtStock.setDatePeremption(null);
+        }
         mvtStockService.createMvtStock(mvtStock);
         return "redirect:/mvtstock";
     }

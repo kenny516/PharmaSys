@@ -1,6 +1,6 @@
 package com.mg.app.PharmaSys.model.vente;
 
-import com.mg.app.PharmaSys.model.medicament.Medicament;
+import com.mg.app.PharmaSys.model.produit.Produit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +29,8 @@ public class VenteDetail {
     private Double prixUnitaire;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament medicament;
+    @JoinColumn(name = "id_produit", nullable = false)
+    private Produit produit;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_vente", nullable = false)

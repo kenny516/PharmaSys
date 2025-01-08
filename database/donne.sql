@@ -1,88 +1,95 @@
--- Inserer des donnees dans la table Laboratoire
+-- Insertion dans la table Laboratoire
 INSERT INTO Laboratoire (nom, telephone, adresse)
-VALUES ('Pfizer', '0123456789', 'New York, USA'),
-       ('Sanofi', '0987654321', 'Paris, France'),
-       ('Novartis', '1234567890', 'Basel, Switzerland');
+VALUES ('Laboratoire Pharma', '0123456789', '123 Rue Principale'),
+       ('Laboratoire Medicinal', '0987654321', '45 Avenue des Sciences'),
+       ('Laboratoire Biohealth', '0543219876', '89 Boulevard Santé');
 
--- Inserer des donnees dans la table Maladie
+-- Insertion dans la table Maladie
 INSERT INTO Maladie (nom, description)
-VALUES ('Diabete', 'Maladie chronique caracterisee par une hyperglycemie persistante.'),
-       ('Hypertension', 'elevation persistante de la pression arterielle.'),
-       ('Grippe', 'Infection virale qui attaque le systeme respiratoire.');
+VALUES ('Diabete', 'Maladie chronique affectant le metabolisme du glucose'),
+       ('Hypertension', 'Augmentation anormale de la pression arterielle'),
+       ('Grippe', 'Infection virale des voies respiratoires');
 
--- Inserer des donnees dans la table Type_mvt_stock
-INSERT INTO Type_mvt_stock (nom, description)
-VALUES ('Entree', 'Ajout de produits au stock'),
-       ('Sortie', 'Retrait de produits du stock');
-
--- Inserer des donnees dans la table Role
-INSERT INTO Role (nom, description)
-VALUES ('Admin', 'Administrateur avec tous les privileges'),
-       ('Pharmacien', 'Gestionnaire des ventes et du stock'),
-       ('Client', 'Utilisateur achetant des produits.');
-
--- Inserer des donnees dans la table Public_cible
-INSERT INTO Public_cible (categorie)
-VALUES ('Enfants'),
-       ('Adultes'),
-       ('Personnes âgees');
-
--- Inserer des donnees dans la table Fournisseur
-INSERT INTO Fournisseur (nom, contact)
-VALUES ('MedSupply Co', 'medsupply@example.com'),
-       ('Global Pharma', 'globalpharma@example.com'),
-       ('HealthLine', 'contact@healthline.com');
-
--- Inserer des donnees dans la table Medicament
-INSERT INTO Medicament (nom, description, prix, id_laboratoire)
-VALUES ('Doliprane', 'Antidouleur et antipyretique', 5.50, 2),
-       ('Insuline', 'Traitement du diabete', 20.00, 1),
-       ('Aspirine', 'Soulage la douleur et reduit la fievre', 3.00, 3);
-
--- Inserer des donnees dans la table Vente
+-- Insertion dans la table Vente
 INSERT INTO Vente (date_vente, montant_total)
-VALUES ('2025-01-01 10:30:00', 55.00),
-       ('2025-01-03 15:45:00', 30.00),
-       ('2025-01-04 12:00:00', 20.00);
+VALUES ('2025-01-07 10:15:00', 150.75),
+       ('2025-01-07 14:30:00', 80.50),
+       ('2025-01-08 09:00:00', 200.00);
 
--- Inserer des donnees dans la table Vente_detail
-INSERT INTO Vente_detail (quantite, date_peremption, prix_unitaire, id_medicament, id_vente)
-VALUES (2, '2025-12-31', 5.50, 1, 1),
-       (1, '2025-06-30', 20.00, 2, 1),
-       (1, '2026-01-01', 30.00, 3, 2);
+-- Insertion dans la table Public_cible
+INSERT INTO Public_cible (categorie)
+VALUES ('Adultes'),
+       ('Enfants'),
+       ('Seniors');
 
--- Inserer des donnees dans la table Stock
-INSERT INTO Stock (quantite_disponible, date_dernier_mouvement, date_peremption, id_medicament)
-VALUES (100, '2025-01-01 09:00:00', '2025-12-31', 1),
-       (50, '2025-01-01 09:00:00', '2025-06-30', 2),
-       (30, '2025-01-01 09:00:00', '2026-01-01', 3);
+-- Insertion dans la table Type_mvt_stock
+INSERT INTO Type_mvt_stock (nom, description)
+VALUES ('Entree', 'Ajout de produits dans le stock'),
+       ('Sortie', 'Retrait de produits du stock'),
+       ('Ajustement', 'Correction du stock');
 
--- Inserer des donnees dans la table MvtStock
-INSERT INTO MvtStock (date_mvt, quantite, description, date_peremption, id_type_mvt, id_medicament)
-VALUES ('2025-01-01 09:00:00', 100, 'Reception initiale', '2025-12-31', 1, 1),
-       ('2025-01-01 09:00:00', 50, 'Reception initiale', '2025-06-30', 1, 2),
-       ('2025-01-01 09:00:00', 30, 'Reception initiale', '2026-01-01', 1, 3);
+-- Insertion dans la table Role
+INSERT INTO Role (nom, description)
+VALUES ('Administrateur', 'Gestionnaire du systeme'),
+       ('Pharmacien', 'Gestion des ventes et du stock'),
+       ('Assistant', 'Support pour les taches quotidiennes');
 
--- Inserer des donnees dans la table Utilisateur
+-- Insertion dans la table Fournisseur
+INSERT INTO Fournisseur (nom, contact)
+VALUES ('Pharma Distrib', '0321654987'),
+       ('Medi Supply', '0423765908'),
+       ('Sante Plus', '0523654789');
+
+-- Insertion dans la table Unite
+INSERT INTO Unite (nom, description)
+VALUES ('Boite', 'Unite de mesure pour les produits en boite'),
+       ('Flacon', 'Unite de mesure pour les produits liquides'),
+       ('Plaquette', 'Unite de mesure pour les comprimes');
+
+-- Insertion dans la table Categorie
+INSERT INTO Categorie (nom, description)
+VALUES ('Antibiotiques', 'Medicaments pour traiter les infections bacteriennes'),
+       ('Antalgiques', 'Medicaments contre la douleur'),
+       ('Antihypertenseurs', 'Medicaments pour la pression arterielle');
+
+-- Insertion dans la table Produit
+INSERT INTO Produit (nom, description, prix, perissable, id_unite, id_categorie, id_laboratoire)
+VALUES ('Paracetamol', 'Analgésique et antipyrétique', 5.50, FALSE, 3, 2, 1),
+       ('Amoxicilline', 'Antibiotique large spectre', 10.00, TRUE, 1, 1, 2),
+       ('Captopril', 'Traitement de l hypertension', 8.00, FALSE, 1, 3, 3);
+
+-- Insertion dans la table Vente_detail
+INSERT INTO Vente_detail (quantite, date_peremption, prix_unitaire, id_produit, id_vente)
+VALUES (2, '2026-01-01', 5.50, 1, 1),
+       (1, '2026-06-01', 10.00, 2, 2),
+       (3, NULL, 8.00, 3, 3);
+
+-- Insertion dans la table Mvt_stock
+INSERT INTO Mvt_stock (date_mvt, quantite, description, date_peremption, id_type_mvt, id_produit)
+VALUES ('2025-01-01 08:00:00', 100, 'Reception de stock', '2026-01-01', 1, 1),
+       ('2025-01-05 10:00:00', 50, 'Vente de stock', NULL, 2, 2),
+       ('2025-01-07 12:00:00', -5, 'Correction d inventaire', NULL, 3, 3);
+
+-- Insertion dans la table Utilisateur
 INSERT INTO Utilisateur (nom, prenom, email, mot_de_passe, id_role)
-VALUES ('Doe', 'John', 'john.doe@example.com', 'password123', 1),
-       ('Smith', 'Anna', 'anna.smith@example.com', 'password456', 2),
-       ('Brown', 'James', 'james.brown@example.com', 'password789', 3);
+VALUES ('Admin', 'Systeme', 'admin@pharma.local', 'password', 1),
+       ('Dupont', 'Jean', 'jean.dupont@pharma.local', 'password', 2),
+       ('Martin', 'Claire', 'claire.martin@pharma.local', 'password', 3);
 
--- Inserer des donnees dans la table Entree_fournisseur
-INSERT INTO Entree_fournisseur (quantite, date_peremption, id_medicament, id_fournisseur)
-VALUES (100, '2025-12-31', 1, 1),
-       (50, '2025-06-30', 2, 2),
-       (30, '2026-01-01', 3, 3);
+-- Insertion dans la table Entree_fournisseur
+INSERT INTO Entree_fournisseur (quantite, date_peremption, id_produit, id_fournisseur)
+VALUES (100, '2026-01-01', 1, 1),
+       (200, '2026-06-01', 2, 2),
+       (150, '2026-12-01', 3, 3);
 
--- Inserer des donnees dans la table Medicaments_maladie
-INSERT INTO Medicaments_maladie (id_medicament, id_maladie)
+-- Insertion dans la table Produit_maladie
+INSERT INTO Produit_maladie (id_produit, id_maladie)
 VALUES (1, 3),
        (2, 1),
        (3, 2);
 
--- Inserer des donnees dans la table Medicaments_Public_cible
-INSERT INTO Medicaments_Public_cible (id_medicament, id_public)
+-- Insertion dans la table Produit_public_cible
+INSERT INTO Produit_public_cible (id_produit, id_public)
 VALUES (1, 2),
-       (2, 3),
-       (3, 2);
+       (2, 1),
+       (3, 3);
