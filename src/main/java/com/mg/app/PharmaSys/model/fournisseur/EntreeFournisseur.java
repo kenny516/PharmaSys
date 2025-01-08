@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +28,10 @@ public class EntreeFournisseur {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_peremption")
     private LocalDate datePeremption;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Column(name = "date_entree")
+    private LocalDateTime dateEntree;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produit")

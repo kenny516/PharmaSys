@@ -64,7 +64,7 @@ public class venteDetailController {
             venteService.updateVenteData(venteDetail.getVente().getId());
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "ErrorPage/Error";
+            return "error/Error";
         }
         return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
     }
