@@ -1,6 +1,6 @@
 package com.mg.app.PharmaSys.model.stock;
 
-import com.mg.app.PharmaSys.model.medicament.Medicament;
+import com.mg.app.PharmaSys.model.produit.Produit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +31,7 @@ public class Stock {
     private LocalDate datePeremption;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament medicament;
+    @JoinColumn(name = "id_produit", nullable = false)
+    private Produit produit;
 
 }

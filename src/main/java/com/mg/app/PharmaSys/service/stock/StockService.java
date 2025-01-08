@@ -1,20 +1,17 @@
 package com.mg.app.PharmaSys.service.stock;
 
-import com.mg.app.PharmaSys.model.medicament.Medicament;
+
 import com.mg.app.PharmaSys.model.stock.MvtStock;
 import com.mg.app.PharmaSys.model.stock.Stock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
-import com.mg.app.PharmaSys.repository.stock.MvtStockRepository;
 import com.mg.app.PharmaSys.repository.stock.StockRepository;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
 @Service
@@ -44,9 +41,9 @@ public class StockService {
         return stockRepository.findById(id).orElse(null);
     }
 
-    public Double getCurrentStockByMedicamentId(Integer medicamentId) {
+    public Double getCurrentStockByProduitId(Integer produitId) {
         Double quantite = 0.0;
-        for (Stock stock : stockRepository.findStockByMedicament_IdOrderByDatePeremptionAsc(medicamentId)) {
+        for (Stock stock : stockRepository.findStockByProduit_IdOrderByDatePeremptionAsc(produitId)) {
             quantite += stock.getQuantiteDisponible();
         }
         return quantite;
@@ -54,10 +51,10 @@ public class StockService {
 
 
     public List<VenteDetail> processVenteDetails(VenteDetail venteDetail, Double initialQuantity) {
-        double availableStock = getCurrentStockByMedicamentId(venteDetail.getMedicament().getId());
+        double availableStock = getCurrentStockByProduitId(venteDetail.getProduit().getId());
 
         // Récupération des stocks disponibles triés par date de péremption
-        List<Stock> availableStocks = stockRepository.findStockByMedicament_IdOrderByDatePeremptionAsc(venteDetail.getMedicament().getId());
+        List<Stock> availableStocks = stockRepository.findStockByProduit_IdOrderByDatePeremptionAsc(venteDetail.getProduit().getId());
         List<MvtStock> mvtStocks = new ArrayList<>();
         List<VenteDetail> venteDetailsGenere = new ArrayList<>();
 
@@ -92,7 +89,7 @@ public class StockService {
             // Création d'un détail de vente
             VenteDetail generatedDetail = new VenteDetail();
             generatedDetail.setVente(venteDetail.getVente());
-            generatedDetail.setMedicament(venteDetail.getMedicament());
+            generatedDetail.setProduit(venteDetail.getProduit());
             generatedDetail.setPrixUnitaire(venteDetail.getPrixUnitaire());
             generatedDetail.setDatePeremption(stock.getDatePeremption());
 
@@ -104,7 +101,7 @@ public class StockService {
             // Création d'un mouvement de stock
             MvtStock stockMovement = new MvtStock();
             stockMovement.setDescription("Détail de la vente ID: " + venteDetail.getVente().getId());
-            stockMovement.setMedicament(venteDetail.getMedicament());
+            stockMovement.setProduit(venteDetail.getProduit());
             stockMovement.setDatePeremption(stock.getDatePeremption());
             stockMovement.setDateMvt(venteDetail.getVente().getDateVente());
             stockMovement.setTypeMvt(movementType);
@@ -129,7 +126,7 @@ public class StockService {
         // Créer le mouvement de stock pour le retour
         MvtStock mvtStock = new MvtStock();
         mvtStock.setDescription("Annulation de la vente ID: " + venteDetail.getVente().getId());
-        mvtStock.setMedicament(venteDetail.getMedicament());
+        mvtStock.setProduit(venteDetail.getProduit());
         mvtStock.setDatePeremption(venteDetail.getDatePeremption());
         mvtStock.setDateMvt(venteDetail.getVente().getDateVente());
         mvtStock.setTypeMvt(typeMvtStock);

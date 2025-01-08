@@ -1,0 +1,54 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Liste des Medicaments Maladie</h3>
+                <p class="text-subtitle text-muted">Liste des maladie associés à un produit</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="table1">
+                        <thead>
+                        <tr>
+                            <th>Id Medicament</th>
+                            <th>Nom Medicament</th>
+                            <th>Maladie</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="produitMaladie : ${produitsMaladies}">
+                            <td th:text="${produitMaladie.produit.getId()}"></td>
+                            <td th:text="${produitMaladie.produit.getNom()}"></td>
+                            <td th:text="${produitMaladie.maladie.getNom()}"></td>
+                            <td>
+                                <a th:href="@{/produit-maladie/edit(idProduit=${produitMaladie.produit.id},idMaladie=${produitMaladie.maladie.id})}"
+                                   class="btn icon btn-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/produit-maladie/delete(idProduit=${produitMaladie.produit.id},idMaladie=${produitMaladie.maladie.id})}"
+                                   class="btn icon btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/produit-maladie/edit(idProduit=${idProduit})}"
+                       class="btn icon btn-primary">
+                        <i class="bi bi-plus-circle"></i> Ajouter une maladie
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

@@ -1,0 +1,54 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Liste des produits public cible</h3>
+                <p class="text-subtitle text-muted">Liste des produits associés à un public cible</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="table1">
+                        <thead>
+                        <tr>
+                            <th>Id produit</th>
+                            <th>Nom produit</th>
+                            <th>Public Cible</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="produitsPublicCible : ${produitPublicCible}">
+                            <td th:text="${produitsPublicCible.produit.getId()}"></td>
+                            <td th:text="${produitsPublicCible.produit.getNom()}"></td>
+                            <td th:text="${produitsPublicCible.publicCible.getCategorie()}"></td>
+                            <td>
+                                <a th:href="@{/produit-public-cible/edit(idProduit=${produitsPublicCible.produit.id},idPublicCible=${produitsPublicCible.publicCible.id})}"
+                                   class="btn icon btn-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/produit-public-cible/delete(idProduit=${produitsPublicCible.produit.id},idPublicCible=${produitsPublicCible.publicCible.id})}"
+                                   class="btn icon btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/produit-public-cible/edit(idProduit=${idProduit})}"
+                       class="btn icon btn-primary">
+                        <i class="bi bi-plus-circle"></i> Ajouter un public cible
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

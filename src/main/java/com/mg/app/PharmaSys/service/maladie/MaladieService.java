@@ -3,11 +3,10 @@ package com.mg.app.PharmaSys.service.maladie;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.mg.app.PharmaSys.model.maladie.Maladie;
-import com.mg.app.PharmaSys.repository.maladie.MaladieRepository;
+import com.mg.app.PharmaSys.model.caracteristique.Maladie;
+import com.mg.app.PharmaSys.repository.produit.MaladieRepository;
 
 
 @Service

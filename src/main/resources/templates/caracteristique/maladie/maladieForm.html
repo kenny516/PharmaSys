@@ -1,0 +1,71 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>MALADIE FORMULAIRE</h3>
+                <p class="text-subtitle text-muted">Maladie formulaire</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="row match-height w-100 justify-content-center">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Informations de la maladie</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/caracteristique/maladie/save}" th:object="${maladie}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <!-- Champ Nom -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="name-icon" class="form-label">Nom</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-building"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Nom"
+                                                           th:field="*{nom}" id="name-icon"
+                                                           data-parsley-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Champ Description -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="description-icon" class="form-label">Description</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-text-paragraph"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Description"
+                                                           th:field="*{description}" id="description-icon"
+                                                           data-parsley-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Boutons Submit et Reset -->
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <i class="bi bi-check-circle"></i> Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

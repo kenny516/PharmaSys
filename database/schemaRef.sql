@@ -1,6 +1,5 @@
 CREATE DATABASE pharma_sys_ref;
 \c pharma_sys_ref;
-
 CREATE TABLE Laboratoire
 (
     id        SERIAL,
@@ -61,15 +60,17 @@ CREATE TABLE Fournisseur
 
 CREATE TABLE Unite
 (
-    id  SERIAL,
-    nom VARCHAR(50),
+    id          SERIAL,
+    nom         VARCHAR(50),
+    description TEXT,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE Categorie
 (
-    id  INTEGER,
-    nom VARCHAR(50),
+    id          SERIAL,
+    nom         VARCHAR(50),
+    description TEXT,
     PRIMARY KEY (id),
     UNIQUE (nom)
 );
@@ -80,7 +81,7 @@ CREATE TABLE Produit
     nom            VARCHAR(50),
     description    TEXT,
     prix           DOUBLE PRECISION,
-    perissable     BOOLEAN,
+    perissable     BOOLEAN default false,
     id_unite       INTEGER NOT NULL,
     id_categorie   INTEGER NOT NULL,
     id_laboratoire INTEGER,
@@ -103,7 +104,7 @@ CREATE TABLE Vente_detail
     FOREIGN KEY (id_vente) REFERENCES Vente (id)
 );
 
-CREATE TABLE MvtStock
+CREATE TABLE Mvt_stock
 (
     id              SERIAL,
     date_mvt        TIMESTAMP,
@@ -150,7 +151,7 @@ CREATE TABLE Produits_maladie
     FOREIGN KEY (id_maladie) REFERENCES Maladie (id)
 );
 
-CREATE TABLE Produits_Public_cible
+CREATE TABLE Produits_public_cible
 (
     id_produit INTEGER,
     id_public  INTEGER,
