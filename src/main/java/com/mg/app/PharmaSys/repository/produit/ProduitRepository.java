@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProduitRepository extends JpaRepository<Produit, Integer> {
 
-    @Query(value = "SELECT DISTINCT m.id, m.nom, m.description, m.prix,m.id_laboratoire " +
+    @Query(value = "SELECT DISTINCT m.id, m.nom, m.description, m.prix,m.perissable,m.id_unite,m.id_categorie,m.id_laboratoire " +
             "FROM produit m " +
             "         JOIN produits_maladie mm ON m.id = mm.id_produit " +
             "         JOIN produits_public_cible mp ON m.id = mp.id_produit " +

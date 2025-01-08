@@ -36,7 +36,13 @@ public class ProduitController {
     @GetMapping
     public String listMedicament(Model model) {
         List<Produit> produits = ProduitService.readProduits();
+        List<PublicCible> publicCibles = publicCibleService.readPublicCible();
+        List<Maladie> maladies = maladieService.readMaladie();
+        List<Categorie> categories = categorieService.readCategorie();
         model.addAttribute("produits", produits);
+        model.addAttribute("publicCibles", publicCibles);
+        model.addAttribute("maladies", maladies);
+        model.addAttribute("categories", categories);
         return "produit/produitListe";
     }
 
@@ -66,20 +72,16 @@ public class ProduitController {
         return "redirect:/produit";
     }
 
-    @GetMapping("/rechercheForm")
-    public String RechercheMedicamentPage(Model model) {
+    @PostMapping("/recherche")
+    public String RechercheMedicament(@RequestParam("maladie") Integer idMaladie,@RequestParam("publicCible") Integer idPublicCible,@RequestParam("categorie") Integer idCategorie,Model model) {
+        List<Produit> list = ProduitService.rechercheMultiCritere(idMaladie,idPublicCible,idCategorie);
         List<PublicCible> publicCibles = publicCibleService.readPublicCible();
         List<Maladie> maladies = maladieService.readMaladie();
         List<Categorie> categories = categorieService.readCategorie();
+        model.addAttribute("produits",list);
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);
         model.addAttribute("categories", categories);
-        return "produit/recherche/rechercheForm";
-    }
-    @PostMapping("/recherche")
-    public String RechercheMedicament(@RequestParam("maladie") Integer idMaladie,@RequestParam("publicCible") Integer idPublicCible,@RequestParam("idCategorie") Integer idCategorie,Model model) {
-        List<Produit> list = ProduitService.rechercheMultiCritere(idMaladie,idPublicCible,idCategorie);
-        model.addAttribute("produits",list);
         return "produit/produitListe";
     }
 
