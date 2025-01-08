@@ -9,41 +9,41 @@
         </div>
     </div>
     <section class="section">
-        <div class="card">
+        <div class="card shadow-sm border-0">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-striped" id="table1">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Nom</th>
-                            <th>Téléphone</th>
-                            <th>Adresse</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Téléphone</th>
+                            <th class="text-center">Adresse</th>
+                            <th class="text-center">Modifier</th>
+                            <th class="text-center">Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="laboratoire : ${laboratoires}">
-                            <td th:text="${laboratoire.getId()}"></td>
-                            <td th:text="${laboratoire.getNom()}"></td>
-                            <td th:text="${laboratoire.getTelephone()}"></td>
-                            <td th:text="${laboratoire.getAdresse()}"></td>
-                            <td>
-                                <a th:href="@{/caracteristique/laboratoire/edit(id=${laboratoire.getId()})}" class="btn icon btn-primary">
+                            <td class="text-center" th:text="${laboratoire.getId()}"></td>
+                            <td class="text-center" th:text="${laboratoire.getNom()}"></td>
+                            <td class="text-center" th:text="${laboratoire.getTelephone()}"></td>
+                            <td class="text-center" th:text="${laboratoire.getAdresse()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/caracteristique/laboratoire/edit(id=${laboratoire.getId()})}" class="btn btn-outline-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a th:href="@{/caracteristique/laboratoire/delete(id=${laboratoire.getId()})}" class="btn icon btn-danger">
+                            <td class="text-center">
+                                <a th:href="@{/caracteristique/laboratoire/delete(id=${laboratoire.getId()})}" class="btn btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/caracteristique/laboratoire/edit}" class="btn icon btn-primary">
-                        <i class="bi bi-plus-circle"></i>
+                    <a th:href="@{/caracteristique/laboratoire/edit}" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Ajouter un laboratoire
                     </a>
                 </div>
             </div>

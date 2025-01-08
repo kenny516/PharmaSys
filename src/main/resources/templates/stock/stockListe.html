@@ -12,21 +12,21 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-striped" id="table1">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Quantité Disponible</th>
-                            <th>Date Péremption</th>
-                            <th>Médicament</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Quantité Disponible</th>
+                            <th class="text-center">Date Péremption</th>
+                            <th class="text-center">Médicament</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="stock : ${stocks}">
-                            <td th:text="${stock.getId()}"></td>
-                            <td th:text="${stock.getQuantiteDisponible()}"></td>
-                            <td th:text="${stock.getDatePeremption()}"></td>
-                            <td th:text="${stock.getProduit().nom}"></td>
+                            <td class="text-center" th:text="${stock.getId()}"></td>
+                            <td class="text-center" th:text="${stock.getQuantiteDisponible()}"></td>
+                            <td class="text-center" th:text="${stock.getDatePeremption()}"></td>
+                            <td class="text-center" th:text="${stock.getProduit().nom}"></td>
                         </tr>
                         </tbody>
                     </table>

@@ -3,59 +3,44 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>MEDICAMENTS</h3>
+                <h3>Médicaments</h3>
                 <p class="text-subtitle text-muted">Liste des médicaments avec recherche multicritère</p>
             </div>
         </div>
     </div>
     <section class="section">
         <!-- Formulaire de recherche -->
-        <div class="card mb-3">
+        <div class="card mb-4 shadow-sm border-0">
             <div class="card-body">
                 <form class="form form-vertical" th:action="@{/produit/recherche}" method="post" data-parsley-validate>
                     <div class="row">
-                        <!-- Categorie -->
-                        <div class="col-md-4">
+                        <!-- Catégorie -->
+                        <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="categorie">Catégorie</label>
-                                <select class="form-select" id="categorie" name="categorie"
-                                        data-parsley-required="true">
+                                <select class="form-select" id="categorie" name="categorie" data-parsley-required="true">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="categorie : ${categories}"
-                                            th:value="${categorie.getId()}"
-                                            th:text="${categorie.getNom()}">
-                                        Categorie
-                                    </option>
+                                    <option th:each="categorie : ${categories}" th:value="${categorie.getId()}" th:text="${categorie.getNom()}"></option>
                                 </select>
                             </div>
                         </div>
                         <!-- Public Cible -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label for="publicCible">Public cible</label>
-                                <select class="form-select" id="publicCible" name="publicCible"
-                                        data-parsley-required="true">
+                                <label for="publicCible">Public Cible</label>
+                                <select class="form-select" id="publicCible" name="publicCible" data-parsley-required="true">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="publicCible : ${publicCibles}"
-                                            th:value="${publicCible.getId()}"
-                                            th:text="${publicCible.getCategorie()}">
-                                        Public Cible
-                                    </option>
+                                    <option th:each="publicCible : ${publicCibles}" th:value="${publicCible.getId()}" th:text="${publicCible.getCategorie()}"></option>
                                 </select>
                             </div>
                         </div>
                         <!-- Maladie -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="maladie">Maladie</label>
-                                <select class="form-select" id="maladie" name="maladie"
-                                        data-parsley-required="true">
+                                <select class="form-select" id="maladie" name="maladie" data-parsley-required="true">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="maladie : ${maladies}"
-                                            th:value="${maladie.getId()}"
-                                            th:text="${maladie.getNom()}">
-                                        Maladie
-                                    </option>
+                                    <option th:each="maladie : ${maladies}" th:value="${maladie.getId()}" th:text="${maladie.getNom()}"></option>
                                 </select>
                             </div>
                         </div>
@@ -66,7 +51,7 @@
                             <button type="submit" class="btn btn-primary me-2">
                                 <i class="bi bi-search"></i> Rechercher
                             </button>
-                            <button type="reset" class="btn btn-light-secondary">
+                            <button type="reset" class="btn btn-outline-secondary">
                                 <i class="bi bi-arrow-clockwise"></i> Réinitialiser
                             </button>
                         </div>
@@ -76,65 +61,61 @@
         </div>
 
         <!-- Tableau des médicaments -->
-        <div class="card">
+        <div class="card shadow-sm border-0">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-striped" id="table1">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Nom</th>
-                            <th>Description</th>
-                            <th>Prix</th>
-                            <th>Laboratoire</th>
-                            <th>Public Cible</th>
-                            <th>Maladie</th>
-                            <th>Perissable</th>
-                            <th>Catégorie</th>
-                            <th>Unité</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Prix</th>
+                            <th class="text-center">Laboratoire</th>
+                            <th class="text-center">Public Cible</th>
+                            <th class="text-center">Maladie</th>
+                            <th class="text-center">Périssable</th>
+                            <th class="text-center">Catégorie</th>
+                            <th class="text-center">Unité</th>
+                            <th class="text-center">Modifier</th>
+                            <th class="text-center">Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="produit : ${produits}">
-                            <td th:text="${produit.getId()}"></td>
-                            <td th:text="${produit.getNom()}"></td>
-                            <td th:text="${produit.getDescription()}"></td>
-                            <td th:text="${produit.getPrix()}"></td>
-                            <td th:text="${produit.getLaboratoire().getNom()}"></td>
-                            <td>
-                                <a th:href="@{/produit-public-cible(idProduit=${produit.getId()})}"
-                                   class="btn icon btn-primary">
+                            <td class="text-center" th:text="${produit.getId()}"></td>
+                            <td class="text-center" th:text="${produit.getNom()}"></td>
+                            <td class="text-center" th:text="${produit.getDescription()}"></td>
+                            <td class="text-center" th:text="${produit.getPrix()}"></td>
+                            <td class="text-center" th:text="${produit.getLaboratoire().getNom()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/produit-public-cible(idProduit=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a th:href="@{/produit-maladie(idProduit=${produit.getId()})}"
-                                   class="btn icon btn-primary">
+                            <td class="text-center">
+                                <a th:href="@{/produit-maladie(idProduit=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>
-                            <td th:text="${produit.getPerissable()}"></td>
-                            <td th:text="${produit.getCategorie().getNom()}"></td>
-                            <td th:text="${produit.getUnite().getNom()}"></td>
-                            <td>
-                                <a th:href="@{/produit/edit(id=${produit.getId()})}"
-                                   class="btn icon btn-primary">
+                            <td class="text-center" th:text="${produit.getPerissable()}"></td>
+                            <td class="text-center" th:text="${produit.getCategorie().getNom()}"></td>
+                            <td class="text-center" th:text="${produit.getUnite().getNom()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/produit/edit(id=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a th:href="@{/produit/delete(id=${produit.getId()})}"
-                                   class="btn icon btn-danger">
+                            <td class="text-center">
+                                <a th:href="@{/produit/delete(id=${produit.getId()})}" class="btn btn-outline-danger btn-sm">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/produit/edit}" class="btn icon btn-primary mt-3">
-                        <i class="bi bi-plus-circle"></i> Ajouter
+                    <a th:href="@{/produit/edit}" class="btn btn-success mt-3">
+                        <i class="bi bi-plus-circle"></i> Ajouter un médicament
                     </a>
                 </div>
             </div>

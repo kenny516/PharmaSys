@@ -3,47 +3,46 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Liste des Medicaments Maladie</h3>
-                <p class="text-subtitle text-muted">Liste des maladie associés à un produit</p>
+                <h3>Liste des Médicaments Maladie</h3>
+                <p class="text-subtitle text-muted">Liste des maladies associées à un produit</p>
             </div>
         </div>
     </div>
     <section class="section">
-        <div class="card">
+        <div class="card shadow-sm border-0">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-striped" id="table1">
                         <thead>
                         <tr>
-                            <th>Id Medicament</th>
-                            <th>Nom Medicament</th>
-                            <th>Maladie</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center">ID Médicament</th>
+                            <th class="text-center">Nom Médicament</th>
+                            <th class="text-center">Maladie</th>
+                            <th class="text-center">Modifier</th>
+                            <th class="text-center">Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="produitMaladie : ${produitsMaladies}">
-                            <td th:text="${produitMaladie.produit.getId()}"></td>
-                            <td th:text="${produitMaladie.produit.getNom()}"></td>
-                            <td th:text="${produitMaladie.maladie.getNom()}"></td>
-                            <td>
+                            <td class="text-center" th:text="${produitMaladie.produit.getId()}"></td>
+                            <td class="text-center" th:text="${produitMaladie.produit.getNom()}"></td>
+                            <td class="text-center" th:text="${produitMaladie.maladie.getNom()}"></td>
+                            <td class="text-center">
                                 <a th:href="@{/produit-maladie/edit(idProduit=${produitMaladie.produit.id},idMaladie=${produitMaladie.maladie.id})}"
-                                   class="btn icon btn-primary">
+                                   class="btn btn-outline-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a th:href="@{/produit-maladie/delete(idProduit=${produitMaladie.produit.id},idMaladie=${produitMaladie.maladie.id})}"
-                                   class="btn icon btn-danger">
+                                   class="btn btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/produit-maladie/edit(idProduit=${idProduit})}"
-                       class="btn icon btn-primary">
+                    <a th:href="@{/produit-maladie/edit(idProduit=${idProduit})}" class="btn btn-success">
                         <i class="bi bi-plus-circle"></i> Ajouter une maladie
                     </a>
                 </div>

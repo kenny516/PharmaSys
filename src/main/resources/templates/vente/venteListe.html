@@ -12,42 +12,42 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="table1">
+                    <table class="table table-striped" id="table1">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>date</th>
-                            <th>Montant_total</th>
-                            <th>Detail</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">date</th>
+                            <th class="text-center">Montant_total</th>
+                            <th class="text-center">Detail</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="vente : ${ventes}">
-                            <td th:text="${vente.getId()}"></td>
-                            <td th:text="${vente.getDateVente()}"></td>
-                            <td th:text="${vente.getMontantTotal()}"></td>
-                            <td>
-                                <a th:href="@{/venteDetail(idVente=${vente.getId()})}" class="btn icon btn-primary">
+                            <td class="text-center" th:text="${vente.getId()}"></td>
+                            <td class="text-center" th:text="${vente.getDateVente()}"></td>
+                            <td class="text-center" th:text="${vente.getMontantTotal()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/venteDetail(idVente=${vente.getId()})}" class="btn icon btn-outline-primary">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a th:href="@{/vente/edit(id=${vente.getId()})}" class="btn icon btn-primary">
+                            <td class="text-center">
+                                <a th:href="@{/vente/edit(id=${vente.getId()})}" class="btn icon btn-outline-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a th:href="@{/vente/delete(id=${vente.getId()})}" class="btn icon btn-danger">
+                            <td class="text-center">
+                                <a th:href="@{/vente/delete(id=${vente.getId()})}" class="btn icon btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a th:href="@{/vente/edit}" class="btn icon btn-primary">
-                        <i class="bi bi-plus-circle"></i>
+                    <a th:href="@{/vente/edit}" class="btn icon btn-success">
+                        <i class="bi bi-plus-circle"></i> Ajouter une vente
                     </a>
                 </div>
             </div>
