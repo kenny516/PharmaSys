@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/venteDetail/save}" th:object="${entreeFournisseur}" method="post" data-parsley-validate>
+                            <form class="form form-vertical" th:action="@{/fournisseur-entree/save}" th:object="${entreeFournisseur}" method="post" data-parsley-validate>
                                 <!-- Champs cachés -->
                                 <input type="hidden" th:field="*{id}">
                                 <input type="hidden" th:field="*{datePeremption}">

@@ -48,7 +48,7 @@ public class EntreeFournisseurService {
 
         if (entreeFournisseur.getQuantite() > initialQuantity) {
             if (availableStock < entreeFournisseur.getQuantite()) {
-                throw new IllegalArgumentException("Stock insuffisant pour effectuer la vente.");
+                throw new IllegalArgumentException("Stock insuffisant pour stock actuel"+availableStock);
             }
             TypeMvtStock movementType = new TypeMvtStock();
             movementType.setId(1); // 1 0 entree
