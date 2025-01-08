@@ -1,6 +1,6 @@
 package com.mg.app.PharmaSys.model.stock;
 
-import com.mg.app.PharmaSys.model.medicament.Medicament;
+import com.mg.app.PharmaSys.model.produit.Produit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mvtstock")
+@Table(name = "mvt_stock")
 public class MvtStock {
     @Id
     @Column(name = "id")
@@ -27,7 +28,7 @@ public class MvtStock {
     private LocalDateTime dateMvt;
 
     @Column(name = "quantite")
-    private Integer quantite;
+    private Double quantite;
 
     @Column(name = "description")
     private String description;
@@ -36,8 +37,12 @@ public class MvtStock {
     @JoinColumn(name = "id_type_mvt", nullable = false)
     private TypeMvtStock typeMvt;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date_peremption")
+    private LocalDate datePeremption;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_medicament", nullable = false)
-    private Medicament medicament;
+    @JoinColumn(name = "id_produit", nullable = false)
+    private Produit produit;
 
 }

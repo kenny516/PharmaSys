@@ -1,0 +1,59 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>MOUVEMENT STOCKS</h3>
+                <p class="text-subtitle text-muted">Liste des mouvements de stock</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Type de mouvement</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Médicament</th>
+                            <th class="text-center">Quantité</th>
+                            <th class="text-center">Date du mouvement</th>
+                            <th class="text-center">Date Péremption</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="mvtstock : ${mvtStocks}">
+                            <td class="text-center" th:text="${mvtstock.getId()}"></td>
+                            <td class="text-center" th:text="${mvtstock.getTypeMvt().getNom()}"></td>
+                            <td class="text-center" th:text="${mvtstock.getDescription()}"></td>
+                            <td class="text-center" th:text="${mvtstock.getProduit().nom}"></td>
+                            <td class="text-center" th:text="${mvtstock.getQuantite()}"></td>
+                            <td class="text-center" th:text="${mvtstock.getDateMvt()}"></td>
+                            <td class="text-center" th:text="${mvtstock.getDatePeremption()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/mvtstock/edit(id=${mvtstock.getId()})}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/mvtstock/delete(id=${mvtstock.getId()})}" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/mvtstock/edit}" class="btn btn-success mt-3">
+                        <i class="bi bi-plus-circle"></i> Ajouter un mouvement
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

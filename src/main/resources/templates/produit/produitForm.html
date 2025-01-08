@@ -1,0 +1,120 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Produit Formulaire</h3>
+                <p class="text-subtitle text-muted">Créer ou modifier un produit</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center vh-100">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="card-title">Détails du Produit</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="form form-vertical" th:action="@{/produit/save}" th:object="${produit}" method="post" data-parsley-validate>
+                            <input type="hidden" th:field="*{id}">
+                            <div class="form-body">
+                                <div class="row">
+                                    <!-- Nom -->
+                                    <div class="col-12 mb-3">
+                                        <label for="first-name-icon" class="form-label">Nom</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="bi bi-capsule"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="first-name-icon" placeholder="Nom"
+                                                   th:field="*{nom}" data-parsley-required="true">
+                                        </div>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="col-12 mb-3">
+                                        <label for="description-icon" class="form-label">Description</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="bi bi-file-earmark-text"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="description-icon" placeholder="Description"
+                                                   th:field="*{description}" data-parsley-required="true">
+                                        </div>
+                                    </div>
+
+                                    <!-- Prix -->
+                                    <div class="col-12 mb-3">
+                                        <label for="mobile-id-icon" class="form-label">Prix</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="bi bi-currency-dollar"></i>
+                                            </span>
+                                            <input type="number" class="form-control" id="mobile-id-icon" placeholder="Prix"
+                                                   th:field="*{prix}" data-parsley-required="true">
+                                        </div>
+                                    </div>
+
+                                    <!-- Laboratoire -->
+                                    <div class="col-12 mb-3">
+                                        <label for="inputGroupSelect01" class="form-label">Laboratoire</label>
+                                        <select class="form-select" id="inputGroupSelect01" th:field="*{laboratoire}" data-parsley-required="true">
+                                            <option value="" selected disabled>Choisir...</option>
+                                            <option th:each="laboratoire : ${laboratoires}"
+                                                    th:value="${laboratoire.getId()}"
+                                                    th:text="${laboratoire.getNom()}"
+                                                    th:selected="|${laboratoire.getId()} == ${produit.laboratoire?.getId()}|">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Catégorie -->
+                                    <div class="col-12 mb-3">
+                                        <label for="inputGroupSelect02" class="form-label">Catégorie</label>
+                                        <select class="form-select" id="inputGroupSelect02" th:field="*{categorie}" data-parsley-required="true">
+                                            <option value="" selected disabled>Choisir...</option>
+                                            <option th:each="categorie : ${categories}"
+                                                    th:value="${categorie.getId()}"
+                                                    th:text="${categorie.getNom()}"
+                                                    th:selected="|${categorie.getId()} == ${produit.categorie?.getId()}|">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Unité -->
+                                    <div class="col-12 mb-3">
+                                        <label for="inputGroupSelect03" class="form-label">Unité</label>
+                                        <select class="form-select" id="inputGroupSelect03" th:field="*{unite}" data-parsley-required="true">
+                                            <option value="" selected disabled>Choisir...</option>
+                                            <option th:each="unite : ${unites}"
+                                                    th:value="${unite.getId()}"
+                                                    th:text="${unite.getNom()}"
+                                                    th:selected="|${unite.getId()} == ${produit.unite?.getId()}|">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Péremption -->
+                                    <div class="col-12 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" th:field="*{perissable}">
+                                            <label class="form-check-label" for="checkbox1">Périssable ?</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Boutons -->
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+                                        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

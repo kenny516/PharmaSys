@@ -65,38 +65,84 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
+                        <!-- Titre du menu -->
                         <li class="sidebar-title">Menu</li>
-                        <li class="sidebar-item active ">
+
+                        <!-- Dashboard -->
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-house-door-fill"></i> <!-- Nouvelle icône -->
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="/medicament" class='sidebar-link'>
-                                <i class="bi bi-capsule"></i>
-                                <span>Medicament</span>
+
+                        <!-- Médicaments -->
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-capsule-pill"></i> <!-- Nouvelle icône -->
+                                <span>Produit</span>
+                                <i class="bi bi-chevron-down ms-auto"></i>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item  ">
-                                    <a href="/medicament" class="submenu-link">Medicament</a>
-                                </li>
-                                <li class="submenu-item  ">
-                                    <a href="/laboratoire" class="submenu-link">Laboratoire</a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="/produit" class="submenu-link">Tous les produits</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="/stock" class='sidebar-link'>
-                                <i class="bi bi-clipboard2-data-fill"></i>
-                                <span>Stock</span>
+
+                        <!-- Caracteristique -->
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-bar-chart-line"></i> <!-- Nouvelle icône -->
+                                <span>Caracteristique</span>
+                                <i class="bi bi-chevron-down ms-auto"></i>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item  ">
-                                    <a href="/stock" class="submenu-link">Stock</a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="/caracteristique/categorie" class="submenu-link">Catégories de produits</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="/mvtstock" class="submenu-link">Mouvement stock</a>
+                                <li class="submenu-item">
+                                    <a href="/caracteristique/laboratoire" class="submenu-link">Laboratoires</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/caracteristique/maladie" class="submenu-link">Maladies</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/caracteristique/public-cible" class="submenu-link">Public Cible</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/caracteristique/unite" class="submenu-link">Unités de mesure</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Stock -->
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-boxes"></i> <!-- Nouvelle icône -->
+                                <span>Stock</span>
+                                <i class="bi bi-chevron-down ms-auto"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="/stock" class="submenu-link">Gestion du Stock</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="/mvtstock" class="submenu-link">Mouvement de Stock</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Vente -->
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-cart-check"></i> <!-- Nouvelle icône -->
+                                <span>Vente</span>
+                                <i class="bi bi-chevron-down ms-auto"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="/vente" class="submenu-link">Historique des Ventes</a>
                                 </li>
                             </ul>
                         </li>
@@ -105,3 +151,9 @@
             </div>
         </div>
         <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
