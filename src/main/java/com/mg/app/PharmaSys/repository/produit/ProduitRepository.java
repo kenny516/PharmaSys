@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface ProduitRepository extends JpaRepository<Produit, Integer> {
 
-    @Query(value = "SELECT DISTINCT m.id, m.nom, m.description, m.prix,m.perissable,m.id_unite,m.id_categorie,m.id_laboratoire " +
-            "FROM produit m " +
-            "         JOIN produit_maladie mm ON m.id = mm.id_produit " +
-            "         JOIN produit_public_cible mp ON m.id = mp.id_produit " +
-            "WHERE mm.id_maladie = :idMaladie " +
-            "  AND mp.id_public = :idPublic " +
-            "  AND m.id_categorie = :idCategorie",nativeQuery = true)
+    @Query(value = "SELECT DISTINCT m " +
+            "FROM Produit m " +
+            "         JOIN ProduitsMaladie mm ON m.id = mm.produit.id " +
+            "         JOIN ProduitsPublicCible mp ON m.id = mp.produit.id " +
+            "WHERE (:idMaladie is null or mm.maladie.id = :idMaladie) " +
+            "  AND (:idPublic is null or mp.publicCible.id = :idPublic) " +
+            "  AND (:idCategorie is null or m.categorie.id = :idCategorie)")
     List<Produit> rechercheMultiCritere(@Param("idMaladie") Integer idMaladie, @Param("idPublic") Integer idPublic,@Param("idCategorie") Integer idCategorie);
 }

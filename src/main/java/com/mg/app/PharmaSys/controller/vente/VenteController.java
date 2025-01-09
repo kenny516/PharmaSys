@@ -83,7 +83,7 @@ public class VenteController {
 
 
     @PostMapping("/recherche")
-    public String FiltreProduit(@RequestParam("categorie") Integer id_Categorie,@RequestParam("publicCible") Integer id_PublicCible,@RequestParam("administration") Integer id_administration,Model model) {
+    public String FiltreProduit(@RequestParam(value = "categorie",required = false) Integer id_Categorie,@RequestParam(value = "publicCible",required = false) Integer id_PublicCible,@RequestParam(value = "administration",required = false) Integer id_administration,Model model) {
         List<Vente> list = venteService.rechercheMulticritere(id_Categorie,id_administration,id_PublicCible);
 
         model.addAttribute("ventes", list);
