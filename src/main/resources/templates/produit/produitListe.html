@@ -18,7 +18,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="categorie">Catégorie</label>
-                                <select class="form-select" id="categorie" name="categorie" data-parsley-required="true">
+                                <select class="form-select" id="categorie" name="categorie">
                                     <option value="" selected disabled>Choisir...</option>
                                     <option th:each="categorie : ${categories}" th:value="${categorie.getId()}" th:text="${categorie.getNom()}"></option>
                                 </select>
@@ -28,7 +28,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="publicCible">Public Cible</label>
-                                <select class="form-select" id="publicCible" name="publicCible" data-parsley-required="true">
+                                <select class="form-select" id="publicCible" name="publicCible" >
                                     <option value="" selected disabled>Choisir...</option>
                                     <option th:each="publicCible : ${publicCibles}" th:value="${publicCible.getId()}" th:text="${publicCible.getCategorie()}"></option>
                                 </select>
@@ -38,7 +38,7 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="maladie">Maladie</label>
-                                <select class="form-select" id="maladie" name="maladie" data-parsley-required="true">
+                                <select class="form-select" id="maladie" name="maladie">
                                     <option value="" selected disabled>Choisir...</option>
                                     <option th:each="maladie : ${maladies}" th:value="${maladie.getId()}" th:text="${maladie.getNom()}"></option>
                                 </select>
