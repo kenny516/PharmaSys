@@ -1,6 +1,7 @@
 package com.mg.app.PharmaSys.service.stock;
 
 
+import com.mg.app.PharmaSys.model.fournisseur.EntreeFournisseur;
 import com.mg.app.PharmaSys.model.stock.MvtStock;
 import com.mg.app.PharmaSys.model.stock.Stock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
@@ -120,8 +121,6 @@ public class StockService {
     private void processRetourVente(VenteDetail venteDetail, Double quantiteInitial, List<MvtStock> mvtStocks,List<VenteDetail> venteDetailsGenere) {
         TypeMvtStock typeMvtStock = new TypeMvtStock();
         typeMvtStock.setId(1); // 1 représente le type "ENTREE"
-
-
         // Créer le mouvement de stock pour le retour
         MvtStock mvtStock = new MvtStock();
         mvtStock.setDescription("Annulation de la vente ID: " + venteDetail.getVente().getId());
@@ -137,6 +136,7 @@ public class StockService {
             venteDetailsGenere.add(venteDetail);
         }
     }
+
 
 
 }
