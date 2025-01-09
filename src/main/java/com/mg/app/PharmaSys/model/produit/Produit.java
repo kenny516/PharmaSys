@@ -1,5 +1,6 @@
 package com.mg.app.PharmaSys.model.produit;
 
+import com.mg.app.PharmaSys.model.caracteristique.Administration;
 import com.mg.app.PharmaSys.model.caracteristique.Categorie;
 import com.mg.app.PharmaSys.model.caracteristique.Unite;
 import jakarta.persistence.*;
@@ -46,4 +47,8 @@ public class Produit {
     @JoinColumn(name = "id_laboratoire")
     private com.mg.app.PharmaSys.model.caracteristique.Laboratoire Laboratoire;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_administration")
+    private Administration administration;
 }

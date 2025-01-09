@@ -48,4 +48,8 @@ public class VenteService {
         vente.setMontantTotal(montantTotal);
         return updateVente(vente);
     }
+
+    public List<Vente> rechercheMulticritere(Integer id_categorie, Integer id_administration, Integer id_publicCible) {
+        return venteRepository.rechercheMulticritere(id_categorie, id_administration, id_publicCible);
+    }
 }

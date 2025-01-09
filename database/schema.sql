@@ -21,8 +21,11 @@ CREATE TABLE Vente
 (
     id            SERIAL,
     date_vente    TIMESTAMP,
+    id_produit INTEGER,
     montant_total DOUBLE PRECISION,
-    PRIMARY KEY (id)
+    quantite DOUBLE PRECISION,
+    PRIMARY KEY (id),
+   FOREIGN KEY (id_produit) REFERENCES Produit (id)
 );
 
 CREATE TABLE Public_cible
@@ -69,11 +72,20 @@ CREATE TABLE Unite
 CREATE TABLE Categorie
 (
     id          SERIAL,
-    nom         VARCHAR(50),
+    nom        VARCHAR(50),
     description TEXT,
     PRIMARY KEY (id),
     UNIQUE (nom)
 );
+
+CREATE TABLE Administration
+(
+    id  SERIAL ,
+    nom VARCHAR(255),
+    PRIMARY KEY (id)
+
+);
+
 
 CREATE TABLE Produit
 (
@@ -85,10 +97,12 @@ CREATE TABLE Produit
     id_unite       INTEGER NOT NULL,
     id_categorie   INTEGER NOT NULL,
     id_laboratoire INTEGER,
+    id_administration INTEGER,
     PRIMARY KEY (id),
     FOREIGN KEY (id_unite) REFERENCES Unite (id),
     FOREIGN KEY (id_categorie) REFERENCES Categorie (id),
-    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
+    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id),
+    FOREIGN KEY (id_administration) REFERENCES Administration(id)
 );
 
 CREATE TABLE Vente_detail
@@ -159,3 +173,5 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_produit) REFERENCES Produit (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
+
+
