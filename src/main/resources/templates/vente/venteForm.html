@@ -35,6 +35,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-12 mb-3">
+                                            <label for="inputGroupSelect01" class="form-label">Produit</label>
+                                            <select class="form-select" id="inputGroupSelect01" th:field="*{produit.id}" data-parsley-required="true">
+                                                <option value="" selected disabled>Choisir...</option>
+                                                <option th:each="produit : ${produits}"
+                                                        th:value="${produit.getId()}"
+                                                        th:text="${produit.getNom()}">
+                                                </option>
+                                            </select>
+                                        </div>
                                         <!-- Champ Montant -->
                                         <div class="col-12">
                                             <div class="form-group">
@@ -43,11 +53,25 @@
                                                     <span class="input-group-text">
                                                         <i class="bi bi-cash"></i>
                                                     </span>
-                                                    <input type="text" class="form-control" th:field="*{montantTotal}"
+                                                    <input type="number" class="form-control" th:field="*{montantTotal}"
                                                            id="montant-icon" placeholder="Saisissez le montant total"
                                                            data-parsley-required="true" data-parsley-type="number">
                                                 </div>
                                                 <small class="form-text text-muted">Le montant ne doit être modifié qu'en cas de correction nécessaire.</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="montant-icon2" class="form-label">Quantite</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-cash"></i>
+                                                    </span>
+                                                    <input type="number" class="form-control" th:field="*{quantite}"
+                                                           id="montant-icon2" placeholder="Saisissez le montant total"
+                                                           data-parsley-required="true" data-parsley-type="number">
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Boutons d'Action -->

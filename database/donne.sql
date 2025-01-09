@@ -48,9 +48,9 @@ VALUES ('Boite', 'Unite de mesure pour les produits en boite'),
 
 -- Insertion dans la table Categorie
 INSERT INTO Categorie (nom, description)
-VALUES ('Antibiotiques', 'Medicaments pour traiter les infections bacteriennes'),
-       ('Antalgiques', 'Medicaments contre la douleur'),
-       ('Antihypertenseurs', 'Medicaments pour la pression arterielle');
+VALUES ('Medicament', 'Medicaments pour traiter les infections bacteriennes'),
+       ('outils Medical', 'Medicaments contre la douleur'),
+       ('desinfectant', 'Medicaments pour la pression arterielle');
 
 -- Insertion dans la table Produit
 INSERT INTO Produit (nom, description, prix, perissable, id_unite, id_categorie, id_laboratoire)

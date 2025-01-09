@@ -1,11 +1,8 @@
 package com.mg.app.PharmaSys.service.fournisseur;
 
-import com.mg.app.PharmaSys.controller.fournisseur.EntreeFournisseurController;
 import com.mg.app.PharmaSys.model.fournisseur.EntreeFournisseur;
 import com.mg.app.PharmaSys.model.stock.MvtStock;
-import com.mg.app.PharmaSys.model.stock.Stock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
-import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.repository.fournisseur.EntreeFournisseurRepository;
 import com.mg.app.PharmaSys.service.stock.MvtStockService;
 import com.mg.app.PharmaSys.service.stock.StockService;
@@ -13,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor

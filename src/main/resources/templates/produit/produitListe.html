@@ -76,6 +76,7 @@
                             <th class="text-center">Maladie</th>
                             <th class="text-center">Périssable</th>
                             <th class="text-center">Catégorie</th>
+                            <th class="text-center">administration</th>
                             <th class="text-center">Unité</th>
                             <th class="text-center">Modifier</th>
                             <th class="text-center">Supprimer</th>
@@ -100,6 +101,7 @@
                             </td>
                             <td class="text-center" th:text="${produit.getPerissable()}"></td>
                             <td class="text-center" th:text="${produit.getCategorie().getNom()}"></td>
+                            <td class="text-center" th:text="${produit.getAdministration().getNom()}"></td>
                             <td class="text-center" th:text="${produit.getUnite().getNom()}"></td>
                             <td class="text-center">
                                 <a th:href="@{/produit/edit(id=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
