@@ -1,0 +1,101 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <p class="text-subtitle text-muted">Liste des venteDetails</p>
+                <H3>VenteDetails</H3>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <form class="form form-vertical" th:action="@{/venteDetail/recherche}" method="post" data-parsley-validate>
+                    <div class="row">
+                        <!-- Catégorie -->
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="categorie">Catégorie</label>
+                                <select class="form-select" id="categorie" name="categorie" >
+                                    <option value="" selected disabled>Choisir...</option>
+                                    <option th:each="categorie : ${categories}" th:value="${categorie.getId()}" th:text="${categorie.getNom()}"
+                                        th:selected="|${categorie.getId() == categorieId}|"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Public Cible -->
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="publicCible">Public Cible</label>
+                                <select class="form-select" id="publicCible" name="publicCible" >
+                                    <option value="" selected disabled>Choisir...</option>
+                                    <option th:each="publicCible : ${public_cibles}" th:value="${publicCible.getId()}" th:text="${publicCible.getCategorie()}"
+                                        th:selected="|${publicCible.getId() == publicCibleId}|"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Maladie -->
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="maladie">Administration</label>
+                                <select class="form-select" id="maladie" name="administration" >
+                                    <option value="" selected disabled>Choisir...</option>
+                                    <option th:each="administration : ${administrations}" th:value="${administration.getId()}" th:text="${administration.getNom()}"
+                                        th:selected="|${administration.getId() == administrationId}|"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <!-- Boutons -->
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="bi bi-search"></i> Rechercher
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Quantite</th>
+                            <th class="text-center">Prix_unitaire</th>
+                            <th class="text-center">Medicament</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="venteDetail : ${venteDetails}">
+                            <td class="text-center" th:text="${venteDetail.getId()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getQuantite()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getPrixUnitaire()}"></td>
+                            <td class="text-center" th:text="${venteDetail.getProduit().getNom()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/venteDetail/edit(idVenteDetail=${venteDetail.getId()},idVente=${venteDetail.getVente().getId()})}" class="btn icon btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/venteDetail/delete(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

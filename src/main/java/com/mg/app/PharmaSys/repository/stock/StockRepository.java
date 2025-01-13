@@ -15,4 +15,5 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
     @Query(value = "SELECT * FROM v_stock WHERE id_produit = :idProduit AND date_peremption = :datePeremption", nativeQuery = true)
     Stock findStockByMedicamentAndDatePeremption(@Param("idProduit") Integer idProduit, @Param("datePeremption") LocalDate datePeremption);
 
+    Integer id(Integer id);
 }

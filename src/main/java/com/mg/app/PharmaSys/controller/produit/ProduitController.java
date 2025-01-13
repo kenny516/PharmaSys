@@ -43,6 +43,11 @@ public class ProduitController {
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);
         model.addAttribute("categories", categories);
+
+        model.addAttribute("idCategorie",null);
+        model.addAttribute("idPublicCible",null);
+        model.addAttribute("idMaladie",null);
+
         return "produit/produitListe";
     }
 
@@ -82,6 +87,10 @@ public class ProduitController {
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);
         model.addAttribute("categories", categories);
+
+        model.addAttribute("idCategorie",idCategorie);
+        model.addAttribute("idPublicCible",idPublicCible);
+        model.addAttribute("idMaladie",idMaladie);
         return "produit/produitListe";
     }
 
