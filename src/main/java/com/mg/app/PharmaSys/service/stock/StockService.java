@@ -50,12 +50,16 @@ public class StockService {
         return quantite;
     }
 
+    public List<Stock> getStockDispoByIdProduit(Integer idProduit){
+        return stockRepository.findStockByProduit_IdOrderByDatePeremptionAsc(idProduit);
+    }
+
 
     public List<VenteDetail> processVenteDetails(VenteDetail venteDetail, Double initialQuantity) {
         double availableStock = getCurrentStockByProduitId(venteDetail.getProduit().getId());
 
         // Récupération des stocks disponibles triés par date de péremption
-        List<Stock> availableStocks = stockRepository.findStockByProduit_IdOrderByDatePeremptionAsc(venteDetail.getProduit().getId());
+        List<Stock> availableStocks = getStockDispoByIdProduit(venteDetail.getProduit().getId());
         List<MvtStock> mvtStocks = new ArrayList<>();
         List<VenteDetail> venteDetailsGenere = new ArrayList<>();
 

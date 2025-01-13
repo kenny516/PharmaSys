@@ -9,56 +9,6 @@
         </div>
     </div>
     <section class="section">
-        <div class="card mb-4 shadow-sm border-0">
-            <div class="card-body">
-                <form class="form form-vertical" th:action="@{/vente/recherche}" method="post" data-parsley-validate>
-                    <div class="row">
-                        <!-- Catégorie -->
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label for="categorie">Catégorie</label>
-                                <select class="form-select" id="categorie" name="categorie" >
-                                    <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="categorie : ${categories}" th:value="${categorie.getId()}" th:text="${categorie.getNom()}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Public Cible -->
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label for="publicCible">Public Cible</label>
-                                <select class="form-select" id="publicCible" name="publicCible" >
-                                    <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="publicCible : ${public_cibles}" th:value="${publicCible.getId()}" th:text="${publicCible.getCategorie()}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Maladie -->
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label for="maladie">Administration</label>
-                                <select class="form-select" id="maladie" name="administration" >
-                                    <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="administration : ${administrations}" th:value="${administration.getId()}" th:text="${administration.getNom()}"></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <!-- Boutons -->
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2">
-                                <i class="bi bi-search"></i> Rechercher
-                            </button>
-                            <button type="reset" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">

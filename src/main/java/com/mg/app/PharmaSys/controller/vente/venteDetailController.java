@@ -1,8 +1,14 @@
 package com.mg.app.PharmaSys.controller.vente;
 
+import com.mg.app.PharmaSys.model.caracteristique.Administration;
+import com.mg.app.PharmaSys.model.caracteristique.Categorie;
+import com.mg.app.PharmaSys.model.caracteristique.PublicCible;
 import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
+import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
+import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
+import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
@@ -22,6 +28,48 @@ public class venteDetailController {
     private final VenteDetailService venteDetailService;
     private final ProduitService produitService;
     private final StockService stockService;
+    private final CategorieService categorieService;
+    private final PublicCibleService publicCibleService;
+    private final AdministrationService administrationService;
+
+
+    @GetMapping("/general")
+    public String listVenteDetail(Model model) {
+        List<VenteDetail> venteDetails = venteDetailService.readVenteDetail();
+        model.addAttribute("venteDetails", venteDetails);
+        List<Categorie> categorie = categorieService.readCategorie();
+        model.addAttribute("categories", categorie);
+        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        model.addAttribute("public_cibles", public_cible);
+        List<Administration> administration = administrationService.getAllAdministrations();
+        model.addAttribute("administrations", administration);
+
+        model.addAttribute("categorieId",null);
+        model.addAttribute("publicCibleId",null);
+        model.addAttribute("administrationId",null);
+        return "vente/venteDetail/venteDetailListeGeneral";
+    }
+
+    @PostMapping("/recherche")
+    public String FiltreProduit(@RequestParam(value = "categorie", required = false) Integer id_Categorie, @RequestParam(value = "publicCible", required = false) Integer id_PublicCible, @RequestParam(value = "administration", required = false) Integer id_administration, Model model) {
+        List<VenteDetail> venteDetails = venteDetailService.rechercheMulticritere(id_Categorie, id_administration, id_PublicCible);
+        model.addAttribute("venteDetails", venteDetails);
+
+        List<Categorie> categorie = categorieService.readCategorie();
+        model.addAttribute("categories", categorie);
+
+        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        model.addAttribute("public_cibles", public_cible);
+
+        List<Administration> administration = administrationService.getAllAdministrations();
+        model.addAttribute("administrations", administration);
+
+        model.addAttribute("categorieId",id_Categorie);
+        model.addAttribute("publicCibleId",id_PublicCible);
+        model.addAttribute("administrationId",id_administration);
+        return "vente/venteDetail/venteDetailListeGeneral";
+    }
+    // vente detail relier avec vente
 
     @GetMapping("")
     public String listVenteDetail(@RequestParam(value = "idVente") Integer idVente, Model model) {
@@ -59,7 +107,7 @@ public class venteDetailController {
             quantiteInitial = venteDetailOld.getQuantite();
         }
         try {
-            List<VenteDetail> venteDetailsGenere =  stockService.processVenteDetails(venteDetail,quantiteInitial);
+            List<VenteDetail> venteDetailsGenere = stockService.processVenteDetails(venteDetail, quantiteInitial);
             venteDetailService.createMultipleVenteDetail(venteDetailsGenere);
             venteService.updateVenteData(venteDetail.getVente().getId());
         } catch (IllegalArgumentException e) {
@@ -74,7 +122,7 @@ public class venteDetailController {
         VenteDetail venteDetail = venteDetailService.getVenteDetailById(id);
         venteDetail.setQuantite(venteDetail.getQuantite() * -1);
         venteDetailService.deleteVenteDetail(id);
-        stockService.processVenteDetails(venteDetail,0.0);
+        stockService.processVenteDetails(venteDetail, 0.0);
         venteService.updateVenteData(venteDetail.getVente().getId());
         return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
     }

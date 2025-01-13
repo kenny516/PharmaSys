@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,17 +25,8 @@ public class Vente {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateVente;
 
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_produit", nullable = false)
-    private Produit produit;
-
     @Column(name = "montant_total")
     private Double montantTotal;
-
-
-    @Column(name = "quantite")
-    private Double quantite;
 
     @OneToMany(mappedBy = "vente")
     private Set<VenteDetail> ventedetails = new LinkedHashSet<>();

@@ -2,16 +2,17 @@ package com.mg.app.PharmaSys.service.caracteristique;
 
 import com.mg.app.PharmaSys.model.caracteristique.Administration;
 import com.mg.app.PharmaSys.repository.caracteristique.AdministrationRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class AdministrationService {
 
-    @Autowired
-    private AdministrationRepository administrationRepository;
+    private final AdministrationRepository administrationRepository;
 
     public List<Administration> getAllAdministrations() {
         return administrationRepository.findAll();

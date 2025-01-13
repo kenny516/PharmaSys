@@ -27,9 +27,6 @@ import java.util.List;
 public class VenteController {
     private final VenteService venteService;
     private final VenteDetailService venteDetailService;
-    private final CategorieService categorieService;
-    private final PublicCibleService publicCibleService;
-    private final AdministrationService administrationService;
     private final ProduitService produitService;
 
 
@@ -37,15 +34,6 @@ public class VenteController {
     public String listVente(Model model) {
         List<Vente> ventes = venteService.readVente();
         model.addAttribute("ventes", ventes);
-
-        List<Categorie> categorie = categorieService.readCategorie();
-        model.addAttribute("categories", categorie);
-
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
-        model.addAttribute("public_cibles", public_cible);
-
-        List<Administration> administration = administrationService.getAllAdministrations();
-        model.addAttribute("administrations", administration);
         return "vente/venteListe";
     }
 
@@ -83,19 +71,9 @@ public class VenteController {
 
 
     @PostMapping("/recherche")
-    public String FiltreProduit(@RequestParam(value = "categorie",required = false) Integer id_Categorie,@RequestParam(value = "publicCible",required = false) Integer id_PublicCible,@RequestParam(value = "administration",required = false) Integer id_administration,Model model) {
-        List<Vente> list = venteService.rechercheMulticritere(id_Categorie,id_administration,id_PublicCible);
-
+    public String FiltreProduit(Model model) {
+        List<Vente> list = venteService.rechercheMulticritere();
         model.addAttribute("ventes", list);
-
-        List<Categorie> categorie = categorieService.readCategorie();
-        model.addAttribute("categories", categorie);
-
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
-        model.addAttribute("public_cibles", public_cible);
-
-        List<Administration> administration = administrationService.getAllAdministrations();
-        model.addAttribute("administrations", administration);
         return "vente/venteListe";
 
     }

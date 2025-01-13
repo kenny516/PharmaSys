@@ -50,4 +50,8 @@ public class VenteDetailService {
         return  venteDetailsInserer;
     }
 
+    public List<VenteDetail> rechercheMulticritere(Integer idCategorie, Integer idAdministration, Integer idPublicCible) {
+        return venteDetailRepository.rechercheMulticritere(idCategorie, idAdministration, idPublicCible);
+    }
+
 }
