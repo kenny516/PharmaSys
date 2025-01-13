@@ -21,11 +21,8 @@ CREATE TABLE Vente
 (
     id            SERIAL,
     date_vente    TIMESTAMP,
-    id_produit INTEGER,
     montant_total DOUBLE PRECISION,
-    quantite DOUBLE PRECISION,
-    PRIMARY KEY (id),
-   FOREIGN KEY (id_produit) REFERENCES Produit (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Public_cible
@@ -72,7 +69,7 @@ CREATE TABLE Unite
 CREATE TABLE Categorie
 (
     id          SERIAL,
-    nom        VARCHAR(50),
+    nom         VARCHAR(50),
     description TEXT,
     PRIMARY KEY (id),
     UNIQUE (nom)
@@ -80,29 +77,27 @@ CREATE TABLE Categorie
 
 CREATE TABLE Administration
 (
-    id  SERIAL ,
-    nom VARCHAR(255),
+    id  SERIAL,
+    nom VARCHAR(50),
     PRIMARY KEY (id)
-
 );
-
 
 CREATE TABLE Produit
 (
-    id             SERIAL,
-    nom            VARCHAR(50),
-    description    TEXT,
-    prix           DOUBLE PRECISION,
-    perissable     BOOLEAN default false,
-    id_unite       INTEGER NOT NULL,
-    id_categorie   INTEGER NOT NULL,
-    id_laboratoire INTEGER,
-    id_administration INTEGER,
+    id                SERIAL,
+    nom               VARCHAR(50),
+    description       TEXT,
+    prix              DOUBLE PRECISION,
+    perissable        BOOLEAN default false,
+    id_administration INTEGER NOT NULL,
+    id_unite          INTEGER NOT NULL,
+    id_categorie      INTEGER NOT NULL,
+    id_laboratoire    INTEGER,
     PRIMARY KEY (id),
+    FOREIGN KEY (id_administration) REFERENCES Administration (id),
     FOREIGN KEY (id_unite) REFERENCES Unite (id),
     FOREIGN KEY (id_categorie) REFERENCES Categorie (id),
-    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id),
-    FOREIGN KEY (id_administration) REFERENCES Administration(id)
+    FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
 );
 
 CREATE TABLE Vente_detail
@@ -149,6 +144,7 @@ CREATE TABLE Entree_fournisseur
     id              SERIAL,
     quantite        DOUBLE PRECISION,
     date_peremption DATE,
+    date_entree     TIMESTAMP,
     id_produit      INTEGER NOT NULL,
     id_fournisseur  INTEGER NOT NULL,
     PRIMARY KEY (id),
@@ -173,5 +169,3 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_produit) REFERENCES Produit (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
-
-

@@ -41,10 +41,6 @@ public class VenteController {
     public String editVente(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Vente vente = new Vente();
         if (id == null) {
-
-            List<Produit> produit = produitService.readProduits();
-            model.addAttribute("produits", produit);
-
             model.addAttribute("vente", vente);
             return "vente/venteForm";
         }
