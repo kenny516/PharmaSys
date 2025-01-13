@@ -114,7 +114,7 @@ public class venteDetailController {
             model.addAttribute("errorMessage", e.getMessage());
             return "error/Error";
         }
-        return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
+        return "redirect:/venteDetail?idVente=" + venteDetail.getVente().getId();
     }
 
     @GetMapping("/delete")
@@ -124,7 +124,7 @@ public class venteDetailController {
         venteDetailService.deleteVenteDetail(id);
         stockService.processVenteDetails(venteDetail, 0.0);
         venteService.updateVenteData(venteDetail.getVente().getId());
-        return "redirect:/vente/" + venteDetail.getVente().getId() + "/detail";
+        return "redirect:/venteDetail?idVente=" + venteDetail.getVente().getId();
     }
 
 }
