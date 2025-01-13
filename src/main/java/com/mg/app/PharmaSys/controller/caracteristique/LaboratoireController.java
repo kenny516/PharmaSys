@@ -24,13 +24,7 @@ public class LaboratoireController {
 
     @GetMapping("/edit")
     public String editLaboratoire(@RequestParam(value = "id",required = false) Integer id, Model model) {
-        Laboratoire laboratoire;
-        if (id == null) {
-            laboratoire = new Laboratoire();
-            model.addAttribute("laboratoire", laboratoire);
-            return "caracteristique/laboratoire/laboratoireForm";
-        }
-        laboratoire = laboratoireService.getLaboratoireById(id);
+        Laboratoire laboratoire = (id == null) ? new Laboratoire() : laboratoireService.getLaboratoireById(id);
         model.addAttribute("laboratoire", laboratoire);
         return "caracteristique/laboratoire/laboratoireForm";
     }

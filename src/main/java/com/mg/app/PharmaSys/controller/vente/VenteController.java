@@ -1,8 +1,15 @@
 package com.mg.app.PharmaSys.controller.vente;
 
+import com.mg.app.PharmaSys.model.caracteristique.Administration;
+import com.mg.app.PharmaSys.model.caracteristique.Categorie;
+import com.mg.app.PharmaSys.model.caracteristique.Maladie;
+import com.mg.app.PharmaSys.model.caracteristique.PublicCible;
 import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
+import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
+import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
+import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
@@ -20,6 +27,8 @@ import java.util.List;
 public class VenteController {
     private final VenteService venteService;
     private final VenteDetailService venteDetailService;
+    private final ProduitService produitService;
+
 
     @GetMapping
     public String listVente(Model model) {
@@ -54,6 +63,15 @@ public class VenteController {
         }
         venteService.deleteVente(id);
         return "redirect:/vente";
+    }
+
+
+    @PostMapping("/recherche")
+    public String FiltreProduit(Model model) {
+        List<Vente> list = venteService.rechercheMulticritere();
+        model.addAttribute("ventes", list);
+        return "vente/venteListe";
+
     }
 
 

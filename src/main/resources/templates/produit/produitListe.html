@@ -18,9 +18,12 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="categorie">Catégorie</label>
-                                <select class="form-select" id="categorie" name="categorie" data-parsley-required="true">
+                                <select class="form-select" id="categorie" name="categorie">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="categorie : ${categories}" th:value="${categorie.getId()}" th:text="${categorie.getNom()}"></option>
+                                    <option th:each="categorie : ${categories}" th:value="${categorie.getId()}"
+                                            th:text="${categorie.getNom()}"
+                                            th:selected="|${categorie.getId() == idCategorie }|"
+                                    ></option>
                                 </select>
                             </div>
                         </div>
@@ -28,9 +31,11 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="publicCible">Public Cible</label>
-                                <select class="form-select" id="publicCible" name="publicCible" data-parsley-required="true">
+                                <select class="form-select" id="publicCible" name="publicCible">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="publicCible : ${publicCibles}" th:value="${publicCible.getId()}" th:text="${publicCible.getCategorie()}"></option>
+                                    <option th:each="publicCible : ${publicCibles}" th:value="${publicCible.getId()}"
+                                            th:text="${publicCible.getCategorie()}"
+                                            th:selected="|${publicCible.getId() == idPublicCible}|"></option>
                                 </select>
                             </div>
                         </div>
@@ -38,9 +43,11 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="maladie">Maladie</label>
-                                <select class="form-select" id="maladie" name="maladie" data-parsley-required="true">
+                                <select class="form-select" id="maladie" name="maladie">
                                     <option value="" selected disabled>Choisir...</option>
-                                    <option th:each="maladie : ${maladies}" th:value="${maladie.getId()}" th:text="${maladie.getNom()}"></option>
+                                    <option th:each="maladie : ${maladies}" th:value="${maladie.getId()}"
+                                            th:text="${maladie.getNom()}"
+                                            th:selected="|${maladie.getId() == idMaladie}|"></option>
                                 </select>
                             </div>
                         </div>
@@ -76,6 +83,7 @@
                             <th class="text-center">Maladie</th>
                             <th class="text-center">Périssable</th>
                             <th class="text-center">Catégorie</th>
+                            <th class="text-center">administration</th>
                             <th class="text-center">Unité</th>
                             <th class="text-center">Modifier</th>
                             <th class="text-center">Supprimer</th>
@@ -89,25 +97,30 @@
                             <td class="text-center" th:text="${produit.getPrix()}"></td>
                             <td class="text-center" th:text="${produit.getLaboratoire().getNom()}"></td>
                             <td class="text-center">
-                                <a th:href="@{/produit-public-cible(idProduit=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
+                                <a th:href="@{/produit-public-cible(idProduit=${produit.getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a th:href="@{/produit-maladie(idProduit=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
+                                <a th:href="@{/produit-maladie(idProduit=${produit.getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                             </td>
                             <td class="text-center" th:text="${produit.getPerissable()}"></td>
                             <td class="text-center" th:text="${produit.getCategorie().getNom()}"></td>
+                            <td class="text-center" th:text="${produit.getAdministration().getNom()}"></td>
                             <td class="text-center" th:text="${produit.getUnite().getNom()}"></td>
                             <td class="text-center">
-                                <a th:href="@{/produit/edit(id=${produit.getId()})}" class="btn btn-outline-primary btn-sm">
+                                <a th:href="@{/produit/edit(id=${produit.getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a th:href="@{/produit/delete(id=${produit.getId()})}" class="btn btn-outline-danger btn-sm">
+                                <a th:href="@{/produit/delete(id=${produit.getId()})}"
+                                   class="btn btn-outline-danger btn-sm">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>

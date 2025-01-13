@@ -48,4 +48,8 @@ public class VenteService {
         vente.setMontantTotal(montantTotal);
         return updateVente(vente);
     }
+
+    public List<Vente> rechercheMulticritere() {
+        return venteRepository.rechercheMulticritere();
+    }
 }

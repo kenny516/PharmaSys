@@ -75,17 +75,26 @@ CREATE TABLE Categorie
     UNIQUE (nom)
 );
 
+CREATE TABLE Administration
+(
+    id  SERIAL,
+    nom VARCHAR(50),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE Produit
 (
-    id             SERIAL,
-    nom            VARCHAR(50),
-    description    TEXT,
-    prix           DOUBLE PRECISION,
-    perissable     BOOLEAN default false,
-    id_unite       INTEGER NOT NULL,
-    id_categorie   INTEGER NOT NULL,
-    id_laboratoire INTEGER,
+    id                SERIAL,
+    nom               VARCHAR(50),
+    description       TEXT,
+    prix              DOUBLE PRECISION,
+    perissable        BOOLEAN default false,
+    id_administration INTEGER NOT NULL,
+    id_unite          INTEGER NOT NULL,
+    id_categorie      INTEGER NOT NULL,
+    id_laboratoire    INTEGER,
     PRIMARY KEY (id),
+    FOREIGN KEY (id_administration) REFERENCES Administration (id),
     FOREIGN KEY (id_unite) REFERENCES Unite (id),
     FOREIGN KEY (id_categorie) REFERENCES Categorie (id),
     FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
@@ -135,6 +144,7 @@ CREATE TABLE Entree_fournisseur
     id              SERIAL,
     quantite        DOUBLE PRECISION,
     date_peremption DATE,
+    date_entree     TIMESTAMP,
     id_produit      INTEGER NOT NULL,
     id_fournisseur  INTEGER NOT NULL,
     PRIMARY KEY (id),
