@@ -169,3 +169,14 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_produit) REFERENCES Produit (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
+
+CREATE TABLE Produit_conseil
+(
+    id          SERIAL,
+    id_produit  INTEGER NOT NULL,
+    date_debut  date,
+    date_fin    date,
+    description TEXT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id)
+);
