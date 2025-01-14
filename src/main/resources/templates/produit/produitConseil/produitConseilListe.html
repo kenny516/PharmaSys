@@ -1,0 +1,111 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Médicaments</h3>
+                <p class="text-subtitle text-muted">Liste des médicaments avec recherche multicritère</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <!-- Formulaire de recherche -->
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="card-body">
+                <form class="form form-vertical" th:action="@{/produi-conseils/recherche}" method="post" data-parsley-validate>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" name="date" id="date" class="form-control"
+                                 th:value="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <!-- Boutons -->
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="bi bi-search"></i> Rechercher
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tableau des médicaments -->
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Prix</th>
+                            <th class="text-center">Laboratoire</th>
+                            <th class="text-center">Public Cible</th>
+                            <th class="text-center">Maladie</th>
+                            <th class="text-center">Périssable</th>
+                            <th class="text-center">Catégorie</th>
+                            <th class="text-center">administration</th>
+                            <th class="text-center">Unité</th>
+                            <th class="text-center">date debut</th>
+                            <th class="text-center">date fin</th>
+                            <th class="text-center">Modifier</th>
+                            <th class="text-center">Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="produitConseil : ${produitConseils}">
+                            <td class="text-center" th:text="${produitConseil.getProduit().getNom()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getDescription()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getPrix()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getLaboratoire().getNom()}"></td>
+
+                            <td class="text-center">
+                                <a th:href="@{/produit-public-cible(idProduit=${produitConseil.getProduit().getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/produit-maladie(idProduit=${produitConseil.getProduit().getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                            </td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getPerissable()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getCategorie().getNom()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getAdministration().getNom()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getProduit().getUnite().getNom()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getDateDebut()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getDateFin()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/produi-conseils/edit(id=${produitConseil.getProduit().getId()})}"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/produi-conseils/delete(id=${produitConseil.getId()})}"
+                                   class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/produi-conseils/edit}" class="btn btn-success mt-3">
+                        <i class="bi bi-plus-circle"></i> Ajouter un Conseil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
