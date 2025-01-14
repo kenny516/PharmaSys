@@ -53,7 +53,6 @@
                             <th class="text-center">Périssable</th>
                             <th class="text-center">Catégorie</th>
                             <th class="text-center">administration</th>
-                            <th class="text-center">Unité</th>
                             <th class="text-center">date debut</th>
                             <th class="text-center">date fin</th>
                             <th class="text-center">Modifier</th>
@@ -63,7 +62,7 @@
                         <tbody>
                         <tr th:each="produitConseil : ${produitConseils}">
                             <td class="text-center" th:text="${produitConseil.getProduit().getNom()}"></td>
-                            <td class="text-center" th:text="${produitConseil.getProduit().getDescription()}"></td>
+                            <td class="text-center" th:text="${produitConseil.getDescription()}"></td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getPrix()}"></td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getLaboratoire().getNom()}"></td>
 
@@ -82,7 +81,6 @@
                             <td class="text-center" th:text="${produitConseil.getProduit().getPerissable()}"></td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getCategorie().getNom()}"></td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getAdministration().getNom()}"></td>
-                            <td class="text-center" th:text="${produitConseil.getProduit().getUnite().getNom()}"></td>
                             <td class="text-center" th:text="${produitConseil.getDateDebut()}"></td>
                             <td class="text-center" th:text="${produitConseil.getDateFin()}"></td>
                             <td class="text-center">
