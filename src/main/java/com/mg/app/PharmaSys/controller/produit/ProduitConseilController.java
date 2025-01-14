@@ -49,10 +49,9 @@ public class ProduitConseilController {
     }
 
     @PostMapping("recherche")
-    public String recherche(@RequestParam(value = "date",required = false) LocalDate date, Model model){
-        if (date == null){
-            date = LocalDate.now();
-        }
+    public String recherche(@RequestParam(value = "mois")Integer mois,@RequestParam(value = "annee")Integer annee, Model model){
+        LocalDate date = LocalDate.of(annee,mois,1);
+
         model.addAttribute("date",date);
 
         List<ProduitConseil> produitConseils = produitConseilService.rechercheF(date);

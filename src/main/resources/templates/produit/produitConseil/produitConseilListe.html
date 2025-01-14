@@ -12,14 +12,66 @@
         <!-- Formulaire de recherche -->
         <div class="card mb-4 shadow-sm border-0">
             <div class="card-body">
-                <form class="form form-vertical" th:action="@{/produi-conseils/recherche}" method="post" data-parsley-validate>
+                <form class="form form-vertical" th:action="@{/produi-conseils/recherche}" method="post"
+                      data-parsley-validate>
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label for="date">Date</label>
-                                <input type="date" name="date" id="date" class="form-control"
-                                 th:value="date">
-                            </div>
+                        <div class="form-group">
+                            <label for="inputGroupSelect01" class="form-label">mois</label>
+                            <select class="form-select" id="inputGroupSelect01" data-parsley-required="true"
+                                    name="mois">
+                                <option value="" selected disabled>Choisir un mois...</option>
+                                <option value="1">
+                                    janvier
+                                </option>
+                                <option value="2">
+                                    fevrier
+                                </option>
+                                <option value="3">
+                                    mars
+                                </option>
+                                <option value="4">
+                                    avril
+                                </option>
+                                <option value="5">
+                                    mai
+                                </option>
+                                <option value="6">
+                                    juin
+                                </option>
+                                <option value="7">
+                                    juillet
+                                </option>
+                                <option value="8">
+                                    aout
+                                </option>
+                                <option value="9">
+                                    septembre
+                                </option>
+                                <option value="10">
+                                    octobre
+                                </option>
+                                <option value="11">
+                                    novembre
+                                </option>
+                                <option value="12">
+                                    decembre
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="inputGroupSelect02" class="form-label">annee</label>
+                            <select class="form-select" id="inputGroupSelect02" data-parsley-required="true"
+                                    name="annee">
+                                <option value="" selected disabled>Choisir un anne...</option>
+                                <option value="2024">
+                                    2024
+                                </option>
+                                <option value="2025">
+                                    2025
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -64,7 +116,8 @@
                             <td class="text-center" th:text="${produitConseil.getProduit().getNom()}"></td>
                             <td class="text-center" th:text="${produitConseil.getDescription()}"></td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getPrix()}"></td>
-                            <td class="text-center" th:text="${produitConseil.getProduit().getLaboratoire().getNom()}"></td>
+                            <td class="text-center"
+                                th:text="${produitConseil.getProduit().getLaboratoire().getNom()}"></td>
 
                             <td class="text-center">
                                 <a th:href="@{/produit-public-cible(idProduit=${produitConseil.getProduit().getId()})}"
@@ -79,8 +132,10 @@
                                 </a>
                             </td>
                             <td class="text-center" th:text="${produitConseil.getProduit().getPerissable()}"></td>
-                            <td class="text-center" th:text="${produitConseil.getProduit().getCategorie().getNom()}"></td>
-                            <td class="text-center" th:text="${produitConseil.getProduit().getAdministration().getNom()}"></td>
+                            <td class="text-center"
+                                th:text="${produitConseil.getProduit().getCategorie().getNom()}"></td>
+                            <td class="text-center"
+                                th:text="${produitConseil.getProduit().getAdministration().getNom()}"></td>
                             <td class="text-center" th:text="${produitConseil.getDateDebut()}"></td>
                             <td class="text-center" th:text="${produitConseil.getDateFin()}"></td>
                             <td class="text-center">
