@@ -17,12 +17,19 @@ CREATE TABLE Maladie
     PRIMARY KEY (id)
 );
 
+CREATE TABLE client(
+    id SERIAL PRIMARY KEY ,
+    nom VARCHAR(50)
+);
+
 CREATE TABLE Vente
 (
     id            SERIAL,
+    id_client     INTEGER,
     date_vente    TIMESTAMP,
     montant_total DOUBLE PRECISION,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_client) REFERENCES client (id)
 );
 
 CREATE TABLE Public_cible
