@@ -25,7 +25,7 @@ public class ProduitConseilController {
 
     @GetMapping
     public String getAllProduitConseils(Model model) {
-        List<ProduitConseil> produitConseils = produitConseilService.getAllProduitConseils();
+        List<ProduitConseil> produitConseils = produitConseilService.rechercheF22();
         model.addAttribute("date",LocalDate.now());
         model.addAttribute("produitConseils", produitConseils);
         return "produit/produitConseil/produitConseilListe";

@@ -39,6 +39,10 @@ public class ProduitConseilService {
     public List<ProduitConseil> rechercheF(LocalDate date) {
         return produitConseilRepository.getProduitConseil(date);
     }
+    public List<ProduitConseil> rechercheF22() {
+        return produitConseilRepository.getProduitConseil2024();
+    }
+
 
 }
 

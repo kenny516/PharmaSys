@@ -28,6 +28,12 @@ public interface ProduitConseilRepository extends JpaRepository<ProduitConseil, 
             "AND EXTRACT(MONTH FROM CAST(:date AS DATE)) <= EXTRACT(MONTH FROM pc.date_fin)",
             nativeQuery = true)
     List<ProduitConseil> getProduitConseil(@Param("date") LocalDate date);
+    @Query(value = "SELECT pc.* " +
+            "FROM Produit_conseil pc " +
+            "WHERE 2024 >= EXTRACT(YEAR FROM pc.date_debut) " +
+            "AND 2024 <= EXTRACT(YEAR FROM pc.date_fin)",
+            nativeQuery = true)
+    List<ProduitConseil> getProduitConseil2024();
 
 
 

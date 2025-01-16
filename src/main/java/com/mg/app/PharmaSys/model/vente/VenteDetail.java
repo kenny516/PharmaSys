@@ -28,6 +28,7 @@ public class VenteDetail {
     @Column(name = "prix_unitaire")
     private Double prixUnitaire;
 
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_produit", nullable = false)
     private Produit produit;

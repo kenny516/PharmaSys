@@ -1,0 +1,38 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Clients</h3>
+                <p class="text-subtitle text-muted">Liste des Clients</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Prenom</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="vente : ${listeVente}">
+                            <td class="text-center" th:text="${vente.getClient().getNom()}"></td>
+                            <td class="text-center" th:text="${vente.getClient().getPrenom()}"></td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
