@@ -1,15 +1,10 @@
 package com.mg.app.PharmaSys.controller.vente;
 
 import com.mg.app.PharmaSys.model.caracteristique.*;
-import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
-import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
-import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
-import com.mg.app.PharmaSys.service.caracteristique.ClientService;
-import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
+import com.mg.app.PharmaSys.service.vente.ClientService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
-import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import com.mg.app.PharmaSys.service.vente.VenteService;
 import lombok.AllArgsConstructor;
@@ -18,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -83,7 +77,5 @@ public class VenteController {
         model.addAttribute("listeVente",listeVente);
         return "caracteristique/Client/ClientList";
     }
-
-
 
 }

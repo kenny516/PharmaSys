@@ -36,6 +36,4 @@ public class Vente {
 
     @OneToMany(mappedBy = "vente")
     private Set<VenteDetail> ventedetails = new LinkedHashSet<>();
-
-
 }

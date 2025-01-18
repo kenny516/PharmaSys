@@ -1,9 +1,7 @@
-package com.mg.app.PharmaSys.service.caracteristique;
+package com.mg.app.PharmaSys.service.vente;
 
-import com.mg.app.PharmaSys.model.caracteristique.Categorie;
 import com.mg.app.PharmaSys.model.caracteristique.Client;
-import com.mg.app.PharmaSys.repository.caracteristique.CategorieRepository;
-import com.mg.app.PharmaSys.repository.caracteristique.ClientRepository;
+import com.mg.app.PharmaSys.repository.vente.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
