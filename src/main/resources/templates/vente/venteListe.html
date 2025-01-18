@@ -9,6 +9,31 @@
         </div>
     </div>
     <section class="section">
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="card-body">
+                <form class="form form-vertical" th:action="@{/vente/client}" method="post" data-parsley-validate>
+                    Client acheteur a une date donnée
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input class="form-control" type="date" id="date" name="date" >
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-2">
+                                    <i class="bi bi-search"></i> Rechercher
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -19,6 +44,7 @@
                             <th class="text-center">date vente</th>
                             <th class="text-center">Montant_total</th>
                             <th class="text-center">Vente details</th>
+                            <th class="text-center">Nom client</th>
                             <th class="text-center">Edit</th>
                             <th class="text-center">Delete</th>
                         </tr>
@@ -28,7 +54,7 @@
                             <td class="text-center" th:text="${vente.getId()}"></td>
                             <td class="text-center" th:text="${vente.getDateVente()}"></td>
                             <td class="text-center" th:text="${vente.getMontantTotal()}"></td>
-
+                            <td class="text-center" th:text="${vente.client.getNom()}"></td>
                             <td class="text-center">
                                 <a th:href="@{/venteDetail(idVente=${vente.getId()})}"
                                    class="btn btn-outline-primary btn-sm">

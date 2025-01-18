@@ -50,7 +50,18 @@
                                                 <small class="form-text text-muted">Le montant ne doit être modifié qu'en cas de correction nécessaire.</small>
                                             </div>
                                         </div>
-                                        
+
+                                        <div class="col-12 mb-3">
+                                            <label for="inputGroupSelect01" class="form-label">Client</label>
+                                            <select class="form-select" id="inputGroupSelect01" th:field="*{client.id}" data-parsley-required="true">
+                                                <option value="" selected disabled>Choisir...</option>
+                                                <option th:each="client : ${listeClient}"
+                                                        th:value="${client.getId()}"
+                                                        th:text="${client.getNom()}"
+                                                        th:selected="|${client.getId()} == ${vente.client?.getId()}|">
+                                                </option>
+                                            </select>
+                                        </div>
                                         <!-- Boutons d'Action -->
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">

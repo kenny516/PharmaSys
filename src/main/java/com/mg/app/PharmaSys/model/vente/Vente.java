@@ -1,5 +1,6 @@
 package com.mg.app.PharmaSys.model.vente;
 
+import com.mg.app.PharmaSys.model.caracteristique.Client;
 import com.mg.app.PharmaSys.model.produit.Produit;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,8 +29,11 @@ public class Vente {
     @Column(name = "montant_total")
     private Double montantTotal;
 
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_client", nullable = false)
+    private Client client;
+
     @OneToMany(mappedBy = "vente")
     private Set<VenteDetail> ventedetails = new LinkedHashSet<>();
-
-
 }

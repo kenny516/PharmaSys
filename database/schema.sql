@@ -17,12 +17,19 @@ CREATE TABLE Maladie
     PRIMARY KEY (id)
 );
 
+CREATE TABLE client(
+    id SERIAL PRIMARY KEY ,
+    nom VARCHAR(50)
+);
+
 CREATE TABLE Vente
 (
     id            SERIAL,
+    id_client     INTEGER,
     date_vente    TIMESTAMP,
     montant_total DOUBLE PRECISION,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_client) REFERENCES client (id)
 );
 
 CREATE TABLE Public_cible
@@ -168,4 +175,15 @@ CREATE TABLE Produit_public_cible
     PRIMARY KEY (id_produit, id_public),
     FOREIGN KEY (id_produit) REFERENCES Produit (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
+);
+
+CREATE TABLE Produit_conseil
+(
+    id          SERIAL,
+    id_produit  INTEGER NOT NULL,
+    date_debut  date,
+    date_fin    date,
+    description TEXT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id)
 );

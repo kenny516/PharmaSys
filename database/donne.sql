@@ -83,3 +83,10 @@ VALUES (1, 2), -- Paracétamol pour Hypertension
 INSERT INTO Produit_public_cible (id_produit, id_public)
 VALUES (1, 2), -- Paracétamol pour Adultes
        (2, 1); -- Amoxicilline pour Enfants
+
+INSERT INTO Produit_conseil (id_produit, date_debut, date_fin, description)
+VALUES (1, '2025-01-01', '2025-01-31', 'Conseillé pour la grippe saisonnière en janvier.'),
+       (2, '2025-02-01', '2025-02-28', 'Produit recommandé pour les allergies au printemps.');
+
+
+
