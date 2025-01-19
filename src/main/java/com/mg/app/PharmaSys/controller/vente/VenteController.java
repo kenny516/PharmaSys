@@ -1,6 +1,6 @@
 package com.mg.app.PharmaSys.controller.vente;
 
-import com.mg.app.PharmaSys.model.caracteristique.*;
+import com.mg.app.PharmaSys.model.vente.Client;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.vente.ClientService;
@@ -35,7 +35,7 @@ public class VenteController {
     @GetMapping("/edit")
     public String editVente(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Vente vente = new Vente();
-        List<Client> listeClient = clientService.getAll();
+        List<Client> listeClient = clientService.findAll();
         model.addAttribute("listeClient",listeClient);
         if (id == null) {
             model.addAttribute("vente", vente);

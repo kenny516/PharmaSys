@@ -1,13 +1,10 @@
 package com.mg.app.PharmaSys.model.vente;
 
-import com.mg.app.PharmaSys.model.caracteristique.Client;
-import com.mg.app.PharmaSys.model.produit.Produit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;

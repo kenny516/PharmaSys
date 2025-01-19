@@ -1,0 +1,51 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>CLients</h3>
+                <p class="text-subtitle text-muted">Liste des clients enregistrer</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Prenom</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="client : ${listeClient}">
+                            <td class="text-center" th:text="${client.getId()}"></td>
+                            <td class="text-center" th:text="${client.getNom()}"></td>
+                            <td class="text-center" th:text="${client.getPrenom()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/client/edit(id=${client.getId()})}" class="btn icon btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a th:href="@{/client/delete(id=${client.getId()})}" class="btn icon btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/client/new}" class="btn icon btn-success">
+                        <i class="bi bi-plus-circle"></i> Ajouter une vente
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
