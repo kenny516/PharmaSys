@@ -1,0 +1,71 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Formulaire Client</h3>
+                <p class="text-subtitle text-muted">Enregistrez ou modifiez les informations d'un Client</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Client</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/client/save}" th:object="${client}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="nom" class="form-label">Nom</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" th:field="*{nom}"
+                                                           id="nom" placeholder="nom"
+                                                           data-parsley-required="true" data-parsley-type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="prenom" class="form-label">Prenom</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-cash"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" th:field="*{prenom}"
+                                                           id="prenom" placeholder="nom"
+                                                           data-parsley-required="true" data-parsley-type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <i class="bi bi-check-circle"></i> Enregistrer
+                                            </button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                            </button>
+                                            <a th:href="@{/client}" class="btn btn-danger me-1 mb-1">
+                                                <i class="bi bi-x-circle"></i> Annuler
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

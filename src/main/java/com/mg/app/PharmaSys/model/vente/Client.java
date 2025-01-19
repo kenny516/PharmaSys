@@ -1,4 +1,4 @@
-package com.mg.app.PharmaSys.model.caracteristique;
+package com.mg.app.PharmaSys.model.vente;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
