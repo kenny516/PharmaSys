@@ -17,19 +17,19 @@ public class ClientController {
     @GetMapping
     public String liste(Model model) {
         model.addAttribute("listeClient", clientService.findAll());
-        return "vente/clientListe";
+        return "vente/client/clientListe";
     }
 
     @GetMapping("/new")
     public String form(Model model) {
         model.addAttribute("client", new Client());
-        return "vente/clientForm";
+        return "vente/client/clientForm";
     }
 
     @GetMapping("/edit")
     public String edit(@RequestParam(value = "id") Integer id, Model model) {
         model.addAttribute("client", clientService.findById(id));
-        return "vente/clientForm";
+        return "vente/client/clientForm";
     }
 
     @PostMapping("/save")
