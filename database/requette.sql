@@ -14,3 +14,5 @@ VALUES
     (4, '2025-04-01', '2025-04-30', 'Idéal pour prévenir les infections respiratoires en avril.'),
     (5, '2025-05-01', '2025-05-31', 'Recommandé pour renforcer l’immunité avant l’été.'),
     (6, '2025-06-01', '2025-06-30', 'Utilisé pour soulager les symptômes de reflux gastrique en été.');
+
+

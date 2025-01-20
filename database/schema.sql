@@ -17,9 +17,11 @@ CREATE TABLE Maladie
     PRIMARY KEY (id)
 );
 
-CREATE TABLE client(
-    id SERIAL PRIMARY KEY ,
-    nom VARCHAR(50)
+CREATE TABLE client
+(
+    id     SERIAL PRIMARY KEY,
+    nom    VARCHAR(50),
+    prenom VARCHAR(50)
 );
 
 CREATE TABLE Vente
