@@ -112,8 +112,6 @@ Les contributions sont les bienvenues! Si vous souhaitez contribuer à ce projet
 5. Poussez vos modifications sur votre fork (`git push origin feature/nom-fonctionnalite`).
 6. Ouvrez une Pull Request.
 
-## Licence
-Ce projet est sous **Licence MIT**.
 
 ---
 
