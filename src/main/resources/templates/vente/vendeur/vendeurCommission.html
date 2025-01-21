@@ -17,13 +17,17 @@
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="startDate">Date debut</label>
-                                <input class="form-control" type="date" id="startDate" name="startDate" data-parsley-required="true" >
+                                <input class="form-control" type="date" id="startDate" name="startDate" data-parsley-required="true"
+                                    th:value="${startDate}"
+                                >
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="endDate">Date fin</label>
-                                <input class="form-control" type="date" id="endDate" name="endDate" data-parsley-required="true">
+                                <input class="form-control" type="date" id="endDate" name="endDate" data-parsley-required="true"
+                                       th:value="${endDate}"
+                                >
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -38,6 +42,7 @@
                         </div>
                     </div>
                 </form>
+                <p th:text="'De  ' + ${startDate} + '  à  ' + ${endDate}"></p>
             </div>
         </div>
 
@@ -50,7 +55,7 @@
                             <th class="text-center">Id vendeur</th>
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prenom</th>
-                            <th class="text-center">total Ventes realiser</th>
+                            <th class="text-center">total Montants Ventes realiser</th>
                             <th class="text-center">commission</th>
                         </tr>
                         </thead>

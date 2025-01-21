@@ -24,6 +24,8 @@ public class VendeurController {
             startDate = LocalDate.now().minusMonths(1);
             endDate = LocalDate.now();
         }
+        model.addAttribute("startDate",startDate);
+        model.addAttribute("endDate",endDate);
         List<CommissionDTO> commissions = venteService.getCommissionsByDateRange(startDate, endDate);
         model.addAttribute("commissions",commissions);
         return "vente/vendeur/vendeurCommission";
