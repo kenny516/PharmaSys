@@ -62,6 +62,17 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class="col-12 mb-3">
+                                            <label for="vendeur" class="form-label">Vendeur</label>
+                                            <select class="form-select" id="vendeur" th:field="*{vendeur.id}" data-parsley-required="true">
+                                                <option value="" selected disabled>Choisir...</option>
+                                                <option th:each="vendeur : ${vendeurList}"
+                                                        th:value="${vendeur.getId()}"
+                                                        th:text="${vendeur.getNom()}"
+                                                        th:selected="|${vendeur.getId()} == ${vente.vendeur?.getId()}|">
+                                                </option>
+                                            </select>
+                                        </div>
                                         <!-- Boutons d'Action -->
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">

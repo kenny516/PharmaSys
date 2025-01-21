@@ -1,0 +1,72 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Commission periodique</h3>
+                <p class="text-subtitle text-muted">Liste des commissions par vendeur</p>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card mb-4 shadow-sm border-0">
+            <div class="card-body">
+                <form class="form form-vertical" th:action="@{/vendeur/commissions}" method="get" data-parsley-validate>
+                    Commission a une date donne
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="startDate">Date debut</label>
+                                <input class="form-control" type="date" id="startDate" name="startDate" data-parsley-required="true" >
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="endDate">Date fin</label>
+                                <input class="form-control" type="date" id="endDate" name="endDate" data-parsley-required="true">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-2">
+                                    <i class="bi bi-search"></i> Rechercher
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Id vendeur</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Prenom</th>
+                            <th class="text-center">total Ventes realiser</th>
+                            <th class="text-center">commission</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="commission : ${commissions}">
+                            <td class="text-center" th:text="${commission.getIdVendeur()}"></td>
+                            <td class="text-center" th:text="${commission.getNom()}"></td>
+                            <td class="text-center" th:text="${commission.getPrenom()}"></td>
+                            <td class="text-center" th:text="${commission.getTotalVentes()}"></td>
+                            <td class="text-center" th:text="${commission.getCommission()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
