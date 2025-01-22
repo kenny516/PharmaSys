@@ -1,18 +1,11 @@
 package com.mg.app.PharmaSys.controller.produit;
 
 
-import com.mg.app.PharmaSys.model.caracteristique.Maladie;
-import com.mg.app.PharmaSys.model.caracteristique.Laboratoire;
+import com.mg.app.PharmaSys.model.caracteristique.*;
 import com.mg.app.PharmaSys.model.produit.Produit;
-import com.mg.app.PharmaSys.model.caracteristique.PublicCible;
-import com.mg.app.PharmaSys.model.caracteristique.Categorie;
-import com.mg.app.PharmaSys.model.caracteristique.Unite;
+import com.mg.app.PharmaSys.service.caracteristique.*;
 import com.mg.app.PharmaSys.service.maladie.MaladieService;
-import com.mg.app.PharmaSys.service.caracteristique.LaboratoireService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
-import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
-import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
-import com.mg.app.PharmaSys.service.caracteristique.UniteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +24,7 @@ public class ProduitController {
     private final CategorieService categorieService;
     private final PublicCibleService publicCibleService;
     private final MaladieService maladieService;
+    private final AdministrationService administrationService;
 
 
     @GetMapping
@@ -40,6 +34,7 @@ public class ProduitController {
         List<Maladie> maladies = maladieService.readMaladie();
         List<Categorie> categories = categorieService.readCategorie();
         model.addAttribute("produits", produits);
+
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);
         model.addAttribute("categories", categories);
@@ -57,10 +52,12 @@ public class ProduitController {
         List<Laboratoire> laboratoires = laboratoireService.readLaboratoire();
         List<Unite> unites = uniteService.readUnite();
         List<Categorie> categories = categorieService.readCategorie();
+        List<Administration> administrations = administrationService.getAllAdministrations();
         model.addAttribute("produit", produit);
         model.addAttribute("laboratoires", laboratoires);
         model.addAttribute("unites",unites);
         model.addAttribute("categories",categories);
+        model.addAttribute("administrations",administrations);
         return "produit/produitForm";
     }
 

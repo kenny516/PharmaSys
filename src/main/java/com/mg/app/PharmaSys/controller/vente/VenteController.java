@@ -1,10 +1,12 @@
 package com.mg.app.PharmaSys.controller.vente;
 
 import com.mg.app.PharmaSys.model.vente.Client;
+import com.mg.app.PharmaSys.model.vente.Vendeur;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.vente.ClientService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
+import com.mg.app.PharmaSys.service.vente.VendeurService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import com.mg.app.PharmaSys.service.vente.VenteService;
 import lombok.AllArgsConstructor;
@@ -23,7 +25,7 @@ public class VenteController {
     private final VenteDetailService venteDetailService;
     private final ProduitService produitService;
     private final ClientService clientService;
-
+    private final VendeurService vendeurService;
 
     @GetMapping
     public String listVente(Model model) {
@@ -36,7 +38,9 @@ public class VenteController {
     public String editVente(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Vente vente = new Vente();
         List<Client> listeClient = clientService.findAll();
+        List<Vendeur> vendeurList = vendeurService.vendeurList();
         model.addAttribute("listeClient",listeClient);
+        model.addAttribute("vendeurList",vendeurList);
         if (id == null) {
             model.addAttribute("vente", vente);
             return "vente/venteForm";

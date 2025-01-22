@@ -55,11 +55,22 @@
                                                    th:field="*{prix}" data-parsley-required="true">
                                         </div>
                                     </div>
-
+                                    <!-- Administration -->
+                                    <div class="col-12 mb-3">
+                                        <label for="administration" class="form-label">Administration</label>
+                                        <select class="form-select" id="administration" th:field="*{administration.id}" data-parsley-required="true">
+                                            <option value="" selected disabled>Choisir...</option>
+                                            <option th:each="administration : ${administrations}"
+                                                    th:value="${administration.getId()}"
+                                                    th:text="${administration.getNom()}"
+                                                    th:selected="|${administration.getId()} == ${produit.administration?.getId()}|">
+                                            </option>
+                                        </select>
+                                    </div>
                                     <!-- Laboratoire -->
                                     <div class="col-12 mb-3">
                                         <label for="inputGroupSelect01" class="form-label">Laboratoire</label>
-                                        <select class="form-select" id="inputGroupSelect01" th:field="*{laboratoire}" data-parsley-required="true">
+                                        <select class="form-select" id="inputGroupSelect01" th:field="*{laboratoire.id}" data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="laboratoire : ${laboratoires}"
                                                     th:value="${laboratoire.getId()}"
@@ -72,7 +83,7 @@
                                     <!-- Catégorie -->
                                     <div class="col-12 mb-3">
                                         <label for="inputGroupSelect02" class="form-label">Catégorie</label>
-                                        <select class="form-select" id="inputGroupSelect02" th:field="*{categorie}" data-parsley-required="true">
+                                        <select class="form-select" id="inputGroupSelect02" th:field="*{categorie.id}" data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="categorie : ${categories}"
                                                     th:value="${categorie.getId()}"

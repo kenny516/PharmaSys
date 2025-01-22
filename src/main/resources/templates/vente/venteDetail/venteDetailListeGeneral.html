@@ -70,8 +70,7 @@
                             <th class="text-center">Quantite</th>
                             <th class="text-center">Prix_unitaire</th>
                             <th class="text-center">Medicament</th>
-                            <th class="text-center">Edit</th>
-                            <th class="text-center">Delete</th>
+                            <th class="text-center">Date</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -80,16 +79,7 @@
                             <td class="text-center" th:text="${venteDetail.getQuantite()}"></td>
                             <td class="text-center" th:text="${venteDetail.getPrixUnitaire()}"></td>
                             <td class="text-center" th:text="${venteDetail.getProduit().getNom()}"></td>
-                            <td class="text-center">
-                                <a th:href="@{/venteDetail/edit(idVenteDetail=${venteDetail.getId()},idVente=${venteDetail.getVente().getId()})}" class="btn icon btn-outline-primary">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a th:href="@{/venteDetail/delete(idVenteDetail=${venteDetail.getId()})}" class="btn icon btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
+                            <td class="text-center" th:text="${venteDetail.getVente().getDateVente()}"></td>
                         </tr>
                         </tbody>
                     </table>

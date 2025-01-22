@@ -1,15 +1,13 @@
 package com.mg.app.PharmaSys.service.vente;
 
+import com.mg.app.PharmaSys.DTO.CommissionDTO;
 import com.mg.app.PharmaSys.model.vente.Vente;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
-import com.mg.app.PharmaSys.repository.vente.VenteDetailRepository;
 import com.mg.app.PharmaSys.repository.vente.VenteRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -54,8 +52,24 @@ public class VenteService {
     public List<Vente> rechercheMulticritere() {
         return venteRepository.rechercheMulticritere();
     }
+
     public List<Vente> rechercheClient(LocalDate date) {
         return venteRepository.rechercheClient(date);
+    }
+
+    public List<CommissionDTO> getCommissionsByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<Object[]> results = venteRepository.findCommissionsByVendeurAndDateRange(startDate, endDate);
+
+        // Mapper les résultats manuellement
+        return results.stream()
+                .map(row -> new CommissionDTO(
+                        ((Number) row[0]).longValue(),   // vendeurId
+                        (String) row[1],                // vendeurNom
+                        (String) row[2],                // vendeurPrenom
+                        ((Number) row[3]).doubleValue(), // totalVentes
+                        ((Number) row[4]).doubleValue()  // commission
+                ))
+                .toList();
     }
 
 }

@@ -17,9 +17,11 @@ CREATE TABLE Maladie
     PRIMARY KEY (id)
 );
 
-CREATE TABLE client(
-    id SERIAL PRIMARY KEY ,
-    nom VARCHAR(50)
+CREATE TABLE client
+(
+    id     SERIAL PRIMARY KEY,
+    nom    VARCHAR(50),
+    prenom VARCHAR(50)
 );
 
 CREATE TABLE Vente
@@ -187,3 +189,14 @@ CREATE TABLE Produit_conseil
     PRIMARY KEY (id),
     FOREIGN KEY (id_produit) REFERENCES Produit (id)
 );
+
+
+
+CREATE TABLE Vendeur
+(
+    id     SERIAL PRIMARY KEY,
+    nom    VARCHAR(50),
+    prenom VARCHAR(50),
+    email  VARCHAR(255) UNIQUE
+);
+

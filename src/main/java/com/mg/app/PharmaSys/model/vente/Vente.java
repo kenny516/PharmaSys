@@ -31,6 +31,10 @@ public class Vente {
     @JoinColumn(name = "id_client", nullable = false)
     private Client client;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_vendeur", nullable = false)
+    private Vendeur vendeur;
+
     @OneToMany(mappedBy = "vente")
     private Set<VenteDetail> ventedetails = new LinkedHashSet<>();
 }
