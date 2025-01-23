@@ -67,6 +67,7 @@
                             <th class="text-center">Id vendeur</th>
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prenom</th>
+                            <th class="text-center">Total montant vente</th>
                             <th class="text-center">commission</th>
                             <th class="text-center">sexe</th>
 
@@ -77,6 +78,7 @@
                             <td class="text-center" th:text="${commission.getIdVendeur()}"></td>
                             <td class="text-center" th:text="${commission.getNom()}"></td>
                             <td class="text-center" th:text="${commission.getPrenom()}"></td>
+                            <td class="text-center" th:text="${commission.getTotalVentes()}"></td>
                             <td class="text-center" th:text="${commission.getCommission()}"></td>
                             <td class="text-center" th:text="${commission.getSexe()}"></td>
 

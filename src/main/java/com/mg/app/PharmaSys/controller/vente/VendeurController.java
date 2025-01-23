@@ -30,6 +30,7 @@ public class VendeurController {
         List<CommissionDTO> commissions;
         if(id_sexe != null)
         {
+            //commissions = venteService.getCommissionsByDateRange2Min(startDate, endDate, id_sexe);
             commissions = venteService.getCommissionsByDateRange2(startDate, endDate, id_sexe);
         }
         else {
