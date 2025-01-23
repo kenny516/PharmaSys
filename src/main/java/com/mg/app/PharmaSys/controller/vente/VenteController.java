@@ -38,7 +38,7 @@ public class VenteController {
     public String editVente(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Vente vente = new Vente();
         List<Client> listeClient = clientService.findAll();
-        List<Vendeur> vendeurList = vendeurService.vendeurList();
+        List<Vendeur> vendeurList = vendeurService.readVendeurs();
         model.addAttribute("listeClient",listeClient);
         model.addAttribute("vendeurList",vendeurList);
         if (id == null) {

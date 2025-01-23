@@ -31,6 +31,8 @@ public class VendeurController {
         return "vente/vendeur/vendeurCommission";
     }
 
+    
+
 
 
 
