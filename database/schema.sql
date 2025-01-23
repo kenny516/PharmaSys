@@ -83,13 +83,22 @@ CREATE TABLE Client
     PRIMARY KEY (id)
 );
 
+CREATE TABLE Sexe
+(
+    id     SERIAL PRIMARY KEY ,
+    nom    VARCHAR(50),
+    description varchar(255)
+);
+
 CREATE TABLE Vendeur
 (
     id     SERIAL,
     nom    VARCHAR(50),
     prenom VARCHAR(50),
     email varchar(255),
-    PRIMARY KEY (id)
+    id_sexe INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_sexe) REFERENCES Sexe(id)
 );
 
 CREATE TABLE Produit

@@ -22,6 +22,18 @@
                                 >
                             </div>
                         </div>
+
+                        <div class="col-12 mb-3">
+                            <label for="inputGroupSelect01" class="form-label">Sexe</label>
+                            <select class="form-select" id="inputGroupSelect01"  name="sexe">
+                                <option value="" selected disabled>Choisir...</option>
+                                <option th:each="sexe : ${listeSexe}"
+                                        th:value="${sexe.getId()}"
+                                        th:text="${sexe.getNom()}">
+                                </option>
+                            </select>
+                        </div>
+
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="endDate">Date fin</label>
@@ -56,6 +68,8 @@
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prenom</th>
                             <th class="text-center">commission</th>
+                            <th class="text-center">sexe</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -64,6 +78,8 @@
                             <td class="text-center" th:text="${commission.getNom()}"></td>
                             <td class="text-center" th:text="${commission.getPrenom()}"></td>
                             <td class="text-center" th:text="${commission.getCommission()}"></td>
+                            <td class="text-center" th:text="${commission.getSexe()}"></td>
+
                         </tr>
                         </tbody>
                     </table>
