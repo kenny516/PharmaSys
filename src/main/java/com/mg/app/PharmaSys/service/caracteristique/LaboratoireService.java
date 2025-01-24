@@ -15,7 +15,7 @@ public class LaboratoireService {
     public Laboratoire createLaboratoire(Laboratoire laboratoire){
         return laboratoireRepository.save(laboratoire);
     }
-    public List<Laboratoire> readLaboratoire(){
+    public List<Laboratoire> getAllLaboratoire(){
         return laboratoireRepository.findAll();
     }
     public Laboratoire updateLaboratoire(Laboratoire laboratoire){

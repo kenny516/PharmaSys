@@ -1,4 +1,5 @@
-CREATE DATABASE pharma_sys;
+CREATE
+DATABASE pharma_sys;
 \c pharma_sys;
 CREATE TABLE Laboratoire
 (
@@ -15,23 +16,6 @@ CREATE TABLE Maladie
     nom         VARCHAR(50),
     description TEXT,
     PRIMARY KEY (id)
-);
-
-CREATE TABLE client
-(
-    id     SERIAL PRIMARY KEY,
-    nom    VARCHAR(50),
-    prenom VARCHAR(50)
-);
-
-CREATE TABLE Vente
-(
-    id            SERIAL,
-    id_client     INTEGER,
-    date_vente    TIMESTAMP,
-    montant_total DOUBLE PRECISION,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_client) REFERENCES client (id)
 );
 
 CREATE TABLE Public_cible
@@ -91,6 +75,32 @@ CREATE TABLE Administration
     PRIMARY KEY (id)
 );
 
+CREATE TABLE Client
+(
+    id     SERIAL,
+    nom    VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Sexe
+(
+    id     SERIAL PRIMARY KEY ,
+    nom    VARCHAR(50),
+    description varchar(255)
+);
+
+CREATE TABLE Vendeur
+(
+    id     SERIAL,
+    nom    VARCHAR(50),
+    prenom VARCHAR(50),
+    email varchar(255),
+    id_sexe INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_sexe) REFERENCES Sexe(id)
+);
+
 CREATE TABLE Produit
 (
     id                SERIAL,
@@ -107,6 +117,18 @@ CREATE TABLE Produit
     FOREIGN KEY (id_unite) REFERENCES Unite (id),
     FOREIGN KEY (id_categorie) REFERENCES Categorie (id),
     FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
+);
+
+CREATE TABLE Vente
+(
+    id            SERIAL,
+    date_vente    TIMESTAMP,
+    montant_total DOUBLE PRECISION,
+    id_vendeur    INTEGER NOT NULL,
+    id_client     INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_vendeur) REFERENCES Vendeur (id),
+    FOREIGN KEY (id_client) REFERENCES Client (id)
 );
 
 CREATE TABLE Vente_detail
@@ -161,6 +183,17 @@ CREATE TABLE Entree_fournisseur
     FOREIGN KEY (id_fournisseur) REFERENCES Fournisseur (id)
 );
 
+CREATE TABLE Produit_conseil
+(
+    id          SERIAL,
+    description VARCHAR(50),
+    date_debut  DATE,
+    date_fin    DATE,
+    id_produit  INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id)
+);
+
 CREATE TABLE Produit_maladie
 (
     id_produit INTEGER,
@@ -179,24 +212,5 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
 
-CREATE TABLE Produit_conseil
-(
-    id          SERIAL,
-    id_produit  INTEGER NOT NULL,
-    date_debut  date,
-    date_fin    date,
-    description TEXT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_produit) REFERENCES Produit (id)
-);
 
-
-
-CREATE TABLE Vendeur
-(
-    id     SERIAL PRIMARY KEY,
-    nom    VARCHAR(50),
-    prenom VARCHAR(50),
-    email  VARCHAR(255) UNIQUE
-);
 

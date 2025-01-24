@@ -22,6 +22,18 @@
                                 >
                             </div>
                         </div>
+
+                        <div class="col-12 mb-3">
+                            <label for="inputGroupSelect01" class="form-label">Sexe</label>
+                            <select class="form-select" id="inputGroupSelect01"  name="sexe">
+                                <option value="" selected disabled>Choisir...</option>
+                                <option th:each="sexe : ${listeSexe}"
+                                        th:value="${sexe.getId()}"
+                                        th:text="${sexe.getNom()}">
+                                </option>
+                            </select>
+                        </div>
+
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label for="endDate">Date fin</label>
@@ -55,7 +67,9 @@
                             <th class="text-center">Id vendeur</th>
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prenom</th>
-                            <th class="text-center">commission</th>
+                            <th class="text-center">Total montant vente</th>
+                            <th class="text-center">Commission</th>
+                            <th class="text-center">Sexe</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,7 +77,17 @@
                             <td class="text-center" th:text="${commission.getIdVendeur()}"></td>
                             <td class="text-center" th:text="${commission.getNom()}"></td>
                             <td class="text-center" th:text="${commission.getPrenom()}"></td>
-                            <td class="text-center" th:text="${commission.getCommission()}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(commission.getTotalVentes(), 0, 2, 'POINT')}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(commission.getCommission(), 0, 2, 'POINT')}"></td>
+                            <td class="text-center" th:text="${commission.getSexe()}"></td>
+                        </tr>
+                        <tr class="table-primary fw-bold">
+                            <td class="text-center">Total</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(totalVentes, 0, 2, 'POINT')}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(totalCommissions, 0, 2, 'POINT')}"></td>
+                            <td class="text-center"></td>
                         </tr>
                         </tbody>
                     </table>

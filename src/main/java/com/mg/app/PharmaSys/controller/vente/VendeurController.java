@@ -1,6 +1,8 @@
 package com.mg.app.PharmaSys.controller.vente;
 
 import com.mg.app.PharmaSys.DTO.CommissionDTO;
+import com.mg.app.PharmaSys.model.caracteristique.Sexe;
+import com.mg.app.PharmaSys.service.caracteristique.SexeService;
 import com.mg.app.PharmaSys.service.vente.VenteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,19 +19,47 @@ import java.util.List;
 @RequestMapping("/vendeur")
 public class VendeurController {
     private final VenteService venteService;
+    private final SexeService sexeService;
 
     @GetMapping("/commissions")
-    public String getCommissions(@RequestParam(name = "startDate",required = false) LocalDate startDate, @RequestParam(name = "endDate",required = false) LocalDate endDate, Model model) {
+    public String getCommissions(@RequestParam(name = "startDate",required = false) LocalDate startDate, @RequestParam(name = "endDate",required = false) LocalDate endDate, Model model,@RequestParam(name = "sexe",required = false)Integer id_sexe) {
         if (startDate == null || endDate == null) {
             startDate = LocalDate.now().minusMonths(1);
             endDate = LocalDate.now();
         }
+        List<CommissionDTO> commissions;
+        if(id_sexe != null)
+        {
+            //commissions = venteService.getCommissionsByDateRange2Min(startDate, endDate, id_sexe);
+            commissions = venteService.getCommissionsByDateRange2(startDate, endDate, id_sexe);
+        }
+        else {
+            commissions = venteService.getCommissionsByDateRange(startDate, endDate);
+        }
+
+        double totalVentes = commissions.stream()
+                .mapToDouble(CommissionDTO::getTotalVentes)
+                .sum();
+
+        double totalCommissions = commissions.stream()
+                .mapToDouble(CommissionDTO::getCommission)
+                .sum();
+
+        model.addAttribute("totalVentes", totalVentes);
+        model.addAttribute("totalCommissions", totalCommissions);
+
+
+        List<Sexe> listeSexe = sexeService.getAllSexe();
+
         model.addAttribute("startDate",startDate);
         model.addAttribute("endDate",endDate);
-        List<CommissionDTO> commissions = venteService.getCommissionsByDateRange(startDate, endDate);
         model.addAttribute("commissions",commissions);
+        model.addAttribute("listeSexe",listeSexe);
         return "vente/vendeur/vendeurCommission";
     }
+
+
+
 
 
 

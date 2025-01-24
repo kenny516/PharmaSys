@@ -15,7 +15,7 @@ public class PublicCibleService {
     public PublicCible createPublicCible(PublicCible publicCible){
         return publicCibleRepository.save(publicCible);
     }
-    public List<PublicCible> readPublicCible(){
+    public List<PublicCible> getAllPublicCible(){
         return publicCibleRepository.findAll();
     }
     public PublicCible updatePublicCible(PublicCible publicCible){

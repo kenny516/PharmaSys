@@ -23,18 +23,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="produitsPublicCible : ${produitPublicCible}">
-                            <td class="text-center" th:text="${produitsPublicCible.produit.getId()}"></td>
-                            <td class="text-center" th:text="${produitsPublicCible.produit.getNom()}"></td>
-                            <td class="text-center" th:text="${produitsPublicCible.publicCible.getCategorie()}"></td>
+                        <tr th:each="produitPublicCible : ${produitPublicCible}">
+                            <td class="text-center" th:text="${produitPublicCible.produit.getId()}"></td>
+                            <td class="text-center" th:text="${produitPublicCible.produit.getNom()}"></td>
+                            <td class="text-center" th:text="${produitPublicCible.publicCible.getCategorie()}"></td>
                             <td class="text-center">
-                                <a th:href="@{/produit-public-cible/edit(idProduit=${produitsPublicCible.produit.id},idPublicCible=${produitsPublicCible.publicCible.id})}"
+                                <a th:href="@{/produit-public-cible/edit(idProduit=${produitPublicCible.produit.id},idPublicCible=${produitPublicCible.publicCible.id})}"
                                    class="btn btn-outline-primary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a th:href="@{/produit-public-cible/delete(idProduit=${produitsPublicCible.produit.id},idPublicCible=${produitsPublicCible.publicCible.id})}"
+                                <a th:href="@{/produit-public-cible/delete(idProduit=${produitPublicCible.produit.id},idPublicCible=${produitPublicCible.publicCible.id})}"
                                    class="btn btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>

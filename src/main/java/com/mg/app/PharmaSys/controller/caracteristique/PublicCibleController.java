@@ -20,7 +20,7 @@ public class PublicCibleController {
 
     @GetMapping
     public String listPublicCible(Model model) {
-        List<PublicCible> publicCibles = publicCibleService.readPublicCible();
+        List<PublicCible> publicCibles = publicCibleService.getAllPublicCible();
         model.addAttribute("publicCibles", publicCibles);
         return "caracteristique/publicCIble/publicCibleListe";
     }

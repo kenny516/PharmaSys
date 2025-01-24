@@ -1,7 +1,6 @@
 package com.mg.app.PharmaSys.service.stock;
 
 
-import com.mg.app.PharmaSys.model.fournisseur.EntreeFournisseur;
 import com.mg.app.PharmaSys.model.stock.MvtStock;
 import com.mg.app.PharmaSys.model.stock.Stock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
@@ -21,20 +20,8 @@ public class StockService {
     private final MvtStockService mvtStockService;
     private final VenteDetailService venteDetailService;
 
-    public Stock createStock(Stock stock) {
-        return stockRepository.save(stock);
-    }
-
-    public List<Stock> readStock() {
+    public List<Stock> getAllStock() {
         return stockRepository.findAll();
-    }
-
-    public Stock updateStock(Stock stock) {
-        return stockRepository.save(stock);
-    }
-
-    public void deleteStock(Integer id) {
-        stockRepository.deleteById(id);
     }
 
     ///

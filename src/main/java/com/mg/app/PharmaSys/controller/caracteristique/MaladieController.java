@@ -17,7 +17,7 @@ public class MaladieController {
 
     @GetMapping
     public String listMaladie(Model model) {
-        List<Maladie> Maladies = maladieService.readMaladie();
+        List<Maladie> Maladies = maladieService.getAllMaladie();
         model.addAttribute("Maladies", Maladies);
         return "caracteristique/maladie/maladieListe";
     }

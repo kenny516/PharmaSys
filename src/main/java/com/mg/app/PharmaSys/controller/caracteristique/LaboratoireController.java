@@ -17,7 +17,7 @@ public class LaboratoireController {
 
     @GetMapping
     public String listLaboratoire(Model model) {
-        List<Laboratoire> laboratoires = laboratoireService.readLaboratoire();
+        List<Laboratoire> laboratoires = laboratoireService.getAllLaboratoire();
         model.addAttribute("laboratoires", laboratoires);
         return "caracteristique/laboratoire/laboratoireListe";
     }

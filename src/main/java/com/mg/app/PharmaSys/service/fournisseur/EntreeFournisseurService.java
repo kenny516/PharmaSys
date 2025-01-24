@@ -22,7 +22,7 @@ public class EntreeFournisseurService {
     public EntreeFournisseur createEntreeFournisseur(EntreeFournisseur entreeFournisseur) {
         return entreeFournisseurRepository.save(entreeFournisseur);
     }
-    public List<EntreeFournisseur> readEntreeFournisseurs() {
+    public List<EntreeFournisseur> getAllEntreeFournisseur() {
         return entreeFournisseurRepository.findAll();
     }
     public EntreeFournisseur updateEntreeFournisseur(EntreeFournisseur entreeFournisseur) {
