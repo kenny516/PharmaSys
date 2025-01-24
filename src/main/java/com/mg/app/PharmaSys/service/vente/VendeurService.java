@@ -12,7 +12,7 @@ import java.util.List;
 public class VendeurService {
     VendeurRepository vendeurRepository;
 
-    public List<Vendeur> readVendeurs(){
+    public List<Vendeur> getAllVendeurs(){
         return vendeurRepository.findAll();
     }
 

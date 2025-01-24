@@ -12,7 +12,11 @@ import java.util.List;
 public class SexeService {
     private final SexeRepository sexeRepository;
 
-    public List<Sexe> getSexe(){
+    public Sexe createSexe(Sexe sexe){
+        return sexeRepository.save(sexe);
+    }
+
+    public List<Sexe> getAllSexe(){
         return sexeRepository.findAll();
     }
     public Sexe updateSexe(Sexe sexe){

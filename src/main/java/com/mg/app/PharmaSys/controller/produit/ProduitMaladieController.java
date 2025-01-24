@@ -1,8 +1,8 @@
 package com.mg.app.PharmaSys.controller.produit;
 
 import com.mg.app.PharmaSys.model.caracteristique.Maladie;
-import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladieId;
-import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladie;
+import com.mg.app.PharmaSys.model.produit.Maladie.ProduitMaladie;
+import com.mg.app.PharmaSys.model.produit.Maladie.ProduitMaladieId;
 import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.service.maladie.MaladieService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
@@ -30,34 +30,34 @@ public class ProduitMaladieController {
     public String listProduitMaladie(@RequestParam(name = "idProduit")Integer idProduit, Model model) {
         Produit produit = new Produit();
         produit.setId(idProduit);
-        List<ProduitsMaladie> produitsMaladies = produitMaladieService.findByProduit(produit);
-        model.addAttribute("produitsMaladies", produitsMaladies);
+        List<ProduitMaladie> produitMaladies = produitMaladieService.getProduitMaladieByProduit(produit);
+        model.addAttribute("produitsMaladies", produitMaladies);
         model.addAttribute("idProduit", idProduit);
         return "produit/maladie/produitMaladieListe";
     }
 
     @GetMapping("/edit")
     public String editProduitMaladie(@RequestParam(value = "idProduit") Integer idProduit, @RequestParam(value = "idMaladie",required = false) Integer idMaladie, Model model) {
-        ProduitsMaladie produitsMaladie;
-        List<Maladie> maladies = maladieService.readMaladie();
+        ProduitMaladie produitMaladie;
+        List<Maladie> maladies = maladieService.getAllMaladie();
         model.addAttribute("maladies", maladies);
         if (idMaladie == null) {
             Produit produit = produitService.getProduitById(idProduit);
-            produitsMaladie = new ProduitsMaladie();
-            produitsMaladie.setProduit(produit);
+            produitMaladie = new ProduitMaladie();
+            produitMaladie.setProduit(produit);
 
-            model.addAttribute("produitMaladie", produitsMaladie);
+            model.addAttribute("produitMaladie", produitMaladie);
             return "produit/maladie/produitMaladieForm";
         }
-        ProduitsMaladieId id = new ProduitsMaladieId(idProduit, idMaladie);
-        produitsMaladie = produitMaladieService.findById(id);
-        model.addAttribute("produitMaladie", produitsMaladie);
+        ProduitMaladieId id = new ProduitMaladieId(idProduit, idMaladie);
+        produitMaladie = produitMaladieService.getProduitMaladieById(id);
+        model.addAttribute("produitMaladie", produitMaladie);
         return "produit/maladie/produitMaladieForm";
     }
 
     @PostMapping("/save")
-    public String saveProduitMaladie(ProduitsMaladie ProduitMaladie) {
-        ProduitsMaladieId id = new ProduitsMaladieId(ProduitMaladie.getProduit().getId(), ProduitMaladie.getMaladie().getId());
+    public String saveProduitMaladie(ProduitMaladie ProduitMaladie) {
+        ProduitMaladieId id = new ProduitMaladieId(ProduitMaladie.getProduit().getId(), ProduitMaladie.getMaladie().getId());
         ProduitMaladie.setId(id);
         produitMaladieService.createProduitMaladie(ProduitMaladie);
         return "redirect:/produit-maladie?idProduit=" + ProduitMaladie.getProduit().getId();
@@ -65,8 +65,8 @@ public class ProduitMaladieController {
 
     @GetMapping("/delete")
     public String deleteProduitMaladie(@RequestParam(value = "idProduit") Integer idProduit, @RequestParam(value = "idMaladie") Integer idMaladie) {
-        ProduitsMaladieId id = new ProduitsMaladieId(idProduit, idMaladie);
-        produitMaladieService.deleteById(id);
+        ProduitMaladieId id = new ProduitMaladieId(idProduit, idMaladie);
+        produitMaladieService.deleteProduitMaladieById(id);
         return "redirect:/produit-maladie?idProduit=" + idProduit;
     }
 

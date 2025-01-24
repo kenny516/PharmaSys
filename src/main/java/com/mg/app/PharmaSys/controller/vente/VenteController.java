@@ -29,7 +29,7 @@ public class VenteController {
 
     @GetMapping
     public String listVente(Model model) {
-        List<Vente> ventes = venteService.readVente();
+        List<Vente> ventes = venteService.getAllVente();
         model.addAttribute("ventes", ventes);
         return "vente/venteListe";
     }
@@ -37,8 +37,8 @@ public class VenteController {
     @GetMapping("/edit")
     public String editVente(@RequestParam(value = "id", required = false) Integer id, Model model) {
         Vente vente = new Vente();
-        List<Client> listeClient = clientService.findAll();
-        List<Vendeur> vendeurList = vendeurService.readVendeurs();
+        List<Client> listeClient = clientService.getAllClient();
+        List<Vendeur> vendeurList = vendeurService.getAllVendeurs();
         model.addAttribute("listeClient",listeClient);
         model.addAttribute("vendeurList",vendeurList);
         if (id == null) {

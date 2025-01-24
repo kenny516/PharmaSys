@@ -68,9 +68,8 @@
                             <th class="text-center">Nom</th>
                             <th class="text-center">Prenom</th>
                             <th class="text-center">Total montant vente</th>
-                            <th class="text-center">commission</th>
-                            <th class="text-center">sexe</th>
-
+                            <th class="text-center">Commission</th>
+                            <th class="text-center">Sexe</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,10 +77,17 @@
                             <td class="text-center" th:text="${commission.getIdVendeur()}"></td>
                             <td class="text-center" th:text="${commission.getNom()}"></td>
                             <td class="text-center" th:text="${commission.getPrenom()}"></td>
-                            <td class="text-center" th:text="${commission.getTotalVentes()}"></td>
-                            <td class="text-center" th:text="${commission.getCommission()}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(commission.getTotalVentes(), 0, 2, 'POINT')}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(commission.getCommission(), 0, 2, 'POINT')}"></td>
                             <td class="text-center" th:text="${commission.getSexe()}"></td>
-
+                        </tr>
+                        <tr class="table-primary fw-bold">
+                            <td class="text-center">Total</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(totalVentes, 0, 2, 'POINT')}"></td>
+                            <td class="text-center" th:text="${#numbers.formatDecimal(totalCommissions, 0, 2, 'POINT')}"></td>
+                            <td class="text-center"></td>
                         </tr>
                         </tbody>
                     </table>

@@ -5,14 +5,12 @@ import com.mg.app.PharmaSys.model.produit.ProduitConseil;
 import com.mg.app.PharmaSys.service.produit.ProduitConseilService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -25,8 +23,9 @@ public class ProduitConseilController {
 
     @GetMapping
     public String getAllProduitConseils(Model model) {
-        List<ProduitConseil> produitConseils = produitConseilService.rechercheF22();
-        model.addAttribute("date",LocalDate.now());
+        LocalDate cuurentDate = LocalDate.now();
+        List<ProduitConseil> produitConseils = produitConseilService.rechercheByMonthAndYear(cuurentDate);
+        model.addAttribute("date",cuurentDate);
         model.addAttribute("produitConseils", produitConseils);
         return "produit/produitConseil/produitConseilListe";
     }
@@ -42,7 +41,7 @@ public class ProduitConseilController {
         if (id!=null){
             produitConseils = produitConseilService.getProduitConseilById(id);
         }
-        List<Produit> produits = produitService.readProduits();
+        List<Produit> produits = produitService.getAllProduits();
         model.addAttribute("produits",produits);
         model.addAttribute("produitConseils",produitConseils);
         return "produit/produitConseil/produitConseilForm";
@@ -54,7 +53,7 @@ public class ProduitConseilController {
 
         model.addAttribute("date",date);
 
-        List<ProduitConseil> produitConseils = produitConseilService.rechercheF(date);
+        List<ProduitConseil> produitConseils = produitConseilService.rechercheByMonthAndYear(date);
         model.addAttribute("produitConseils", produitConseils);
         return "produit/produitConseil/produitConseilListe";
     }

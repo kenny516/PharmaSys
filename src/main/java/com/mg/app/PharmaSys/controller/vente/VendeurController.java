@@ -37,7 +37,20 @@ public class VendeurController {
             commissions = venteService.getCommissionsByDateRange(startDate, endDate);
         }
 
-        List<Sexe> listeSexe = sexeService.getSexe();
+        double totalVentes = commissions.stream()
+                .mapToDouble(CommissionDTO::getTotalVentes)
+                .sum();
+
+        double totalCommissions = commissions.stream()
+                .mapToDouble(CommissionDTO::getCommission)
+                .sum();
+
+        model.addAttribute("totalVentes", totalVentes);
+        model.addAttribute("totalCommissions", totalCommissions);
+
+
+        List<Sexe> listeSexe = sexeService.getAllSexe();
+
         model.addAttribute("startDate",startDate);
         model.addAttribute("endDate",endDate);
         model.addAttribute("commissions",commissions);

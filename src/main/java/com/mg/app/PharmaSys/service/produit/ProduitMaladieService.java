@@ -1,7 +1,7 @@
 package com.mg.app.PharmaSys.service.produit;
 
-import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladieId;
-import com.mg.app.PharmaSys.model.produit.Maladie.ProduitsMaladie;
+import com.mg.app.PharmaSys.model.produit.Maladie.ProduitMaladieId;
+import com.mg.app.PharmaSys.model.produit.Maladie.ProduitMaladie;
 import com.mg.app.PharmaSys.model.produit.Produit;
 import com.mg.app.PharmaSys.repository.produit.ProduitMaladieRepository;
 import lombok.AllArgsConstructor;
@@ -14,23 +14,27 @@ import java.util.List;
 public class ProduitMaladieService {
     private final ProduitMaladieRepository produitMaladieRepository;
 
-    public ProduitsMaladie createProduitMaladie(ProduitsMaladie ProduitMaladie) {
+    public ProduitMaladie createProduitMaladie(ProduitMaladie ProduitMaladie) {
         return produitMaladieRepository.save(ProduitMaladie);
     }
 
-    public ProduitsMaladie findById(ProduitsMaladieId id) {
+    public List<ProduitMaladie> getAllProduitMaladie(){
+        return produitMaladieRepository.findAll();
+    }
+
+    public ProduitMaladie getProduitMaladieById(ProduitMaladieId id) {
         return produitMaladieRepository.findById(id).orElse(null);
     }
 
-    public List<ProduitsMaladie> findByProduit(Produit produit) {
+    public List<ProduitMaladie> getProduitMaladieByProduit(Produit produit) {
         return produitMaladieRepository.findByIdIdProduit(produit.getId());
     }
 
-    public void delete(ProduitsMaladie ProduitMaladie) {
+    public void deleteProduitMaladie(ProduitMaladie ProduitMaladie) {
         produitMaladieRepository.delete(ProduitMaladie);
     }
 
-    public void deleteById(ProduitsMaladieId id) {
+    public void deleteProduitMaladieById(ProduitMaladieId id) {
         produitMaladieRepository.deleteById(id);
     }
 

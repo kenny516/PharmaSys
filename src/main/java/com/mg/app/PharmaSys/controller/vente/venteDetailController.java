@@ -35,13 +35,13 @@ public class venteDetailController {
 
     @GetMapping("/general")
     public String listVenteDetail(Model model) {
-        List<VenteDetail> venteDetails = venteDetailService.readVenteDetail();
+        List<VenteDetail> venteDetails = venteDetailService.getAllVenteDetail();
         model.addAttribute("venteDetails", venteDetails);
-        List<Categorie> categorie = categorieService.readCategorie();
+        List<Categorie> categorie = categorieService.getAllCategorie();
         model.addAttribute("categories", categorie);
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        List<PublicCible> public_cible = publicCibleService.getAllPublicCible();
         model.addAttribute("public_cibles", public_cible);
-        List<Administration> administration = administrationService.getAllAdministrations();
+        List<Administration> administration = administrationService.getAllAdministration();
         model.addAttribute("administrations", administration);
 
         model.addAttribute("categorieId",null);
@@ -55,13 +55,13 @@ public class venteDetailController {
         List<VenteDetail> venteDetails = venteDetailService.rechercheMulticritere(id_Categorie, id_administration, id_PublicCible);
         model.addAttribute("venteDetails", venteDetails);
 
-        List<Categorie> categorie = categorieService.readCategorie();
+        List<Categorie> categorie = categorieService.getAllCategorie();
         model.addAttribute("categories", categorie);
 
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        List<PublicCible> public_cible = publicCibleService.getAllPublicCible();
         model.addAttribute("public_cibles", public_cible);
 
-        List<Administration> administration = administrationService.getAllAdministrations();
+        List<Administration> administration = administrationService.getAllAdministration();
         model.addAttribute("administrations", administration);
 
         model.addAttribute("categorieId",id_Categorie);
@@ -82,7 +82,7 @@ public class venteDetailController {
 
     @GetMapping("/edit")
     public String editVenteDetail(@RequestParam(value = "idVenteDetail", required = false) Integer idVenteDetail, @RequestParam(value = "idVente", required = false) Integer idVente, Model model) {
-        List<Produit> produits = produitService.readProduits();
+        List<Produit> produits = produitService.getAllProduits();
         model.addAttribute("produits", produits);
         VenteDetail venteDetail = new VenteDetail();
         Vente vente = venteService.getVenteById(idVente);

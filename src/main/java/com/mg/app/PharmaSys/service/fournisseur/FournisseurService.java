@@ -15,7 +15,7 @@ public class FournisseurService {
     public Fournisseur createFournisseur(Fournisseur fournisseur) {
         return fournisseurRepository.save(fournisseur);
     }
-    public List<Fournisseur> readFournisseurs() {
+    public List<Fournisseur> getAllFournisseurs() {
         return fournisseurRepository.findAll();
     }
     public Fournisseur updateFournisseur(Fournisseur fournisseur) {

@@ -1,12 +1,11 @@
 package com.mg.app.PharmaSys.service.maladie;
 
-import java.util.List;
-
+import com.mg.app.PharmaSys.model.caracteristique.Maladie;
+import com.mg.app.PharmaSys.repository.caracteristique.MaladieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mg.app.PharmaSys.model.caracteristique.Maladie;
-import com.mg.app.PharmaSys.repository.caracteristique.MaladieRepository;
+import java.util.List;
 
 
 @Service
@@ -20,7 +19,7 @@ public class MaladieService {
     public Maladie createMaladie(Maladie Maladie){
         return MaladieRepository.save(Maladie);
     }
-    public List<Maladie> readMaladie(){
+    public List<Maladie> getAllMaladie(){
         return MaladieRepository.findAll();
     }
     public Maladie updateMaladie(Maladie Maladie){

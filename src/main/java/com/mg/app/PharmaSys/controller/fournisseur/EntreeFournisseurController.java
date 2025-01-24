@@ -3,7 +3,6 @@ package com.mg.app.PharmaSys.controller.fournisseur;
 import com.mg.app.PharmaSys.model.fournisseur.EntreeFournisseur;
 import com.mg.app.PharmaSys.model.fournisseur.Fournisseur;
 import com.mg.app.PharmaSys.model.produit.Produit;
-import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.fournisseur.EntreeFournisseurService;
 import com.mg.app.PharmaSys.service.fournisseur.FournisseurService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
@@ -27,7 +26,7 @@ public class EntreeFournisseurController {
 
     @GetMapping
     public String listEntreeFourisseur(Model model) {
-        List<EntreeFournisseur> entreeFournisseurs = entreeFournisseurService.readEntreeFournisseurs();
+        List<EntreeFournisseur> entreeFournisseurs = entreeFournisseurService.getAllEntreeFournisseur();
         model.addAttribute("entreeFournisseurs", entreeFournisseurs);
         return "fournisseur/entreeFournisseurListe";
     }
@@ -35,8 +34,8 @@ public class EntreeFournisseurController {
     @GetMapping("/edit")
     public String editEntreeFournisseur(@RequestParam(value = "idEntreeFournisseur" ,required = false) Integer idEntreeFournisseur, Model model) {
         EntreeFournisseur entreeFournisseur = (idEntreeFournisseur == null) ? new EntreeFournisseur() : entreeFournisseurService.getEntreeFournisseurById(idEntreeFournisseur);
-        List<Produit> produits = produitService.readProduits();
-        List<Fournisseur> fournisseurs = fournisseurService.readFournisseurs();
+        List<Produit> produits = produitService.getAllProduits();
+        List<Fournisseur> fournisseurs = fournisseurService.getAllFournisseurs();
         model.addAttribute("entreeFournisseur", entreeFournisseur);
         model.addAttribute("produits", produits);
         model.addAttribute("fournisseurs", fournisseurs);

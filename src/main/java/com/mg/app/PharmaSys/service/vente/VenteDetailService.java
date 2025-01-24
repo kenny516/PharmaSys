@@ -19,7 +19,7 @@ public class VenteDetailService {
         return venteDetailRepository.save(venteDetail);
     }
 
-    public List<VenteDetail> readVenteDetail() {
+    public List<VenteDetail> getAllVenteDetail() {
         return venteDetailRepository.findAll();
     }
 

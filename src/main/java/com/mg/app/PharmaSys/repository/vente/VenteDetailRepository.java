@@ -16,7 +16,7 @@ public interface VenteDetailRepository extends JpaRepository<VenteDetail, Intege
             "FROM VenteDetail vd " +
             "JOIN Produit p ON vd.produit.id = p.id " +
             "JOIN Administration ad ON p.administration.id = ad.id " +
-            "JOIN ProduitsPublicCible ppc ON p.id = ppc.produit.id " +
+            "JOIN ProduitPublicCible ppc ON p.id = ppc.produit.id " +
             "WHERE (:idCategorie IS NULL OR p.categorie.id = :idCategorie) " +
             "AND (:idAdministration IS NULL OR ad.id = :idAdministration) " +
             "AND (:idPublicCible IS NULL OR ppc.publicCible.id = :idPublicCible)")
