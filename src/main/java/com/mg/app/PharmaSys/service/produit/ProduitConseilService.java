@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -23,7 +22,7 @@ public class ProduitConseilService {
         return produitConseilRepository.findById(id).orElse(null);
     }
 
-    public List<ProduitConseil> getAllProduitConseils() {
+    public List<ProduitConseil> getAllProduitConseil() {
         return produitConseilRepository.findAll();
     }
 
@@ -34,13 +33,10 @@ public class ProduitConseilService {
     public List<ProduitConseil> recherche(LocalDate date) {
         LocalDate debutMois = date.withDayOfMonth(1);
         LocalDate finMois = date.withDayOfMonth(date.lengthOfMonth());
-        return produitConseilRepository.getProduitConseil(debutMois, finMois);
+        return produitConseilRepository.getProduitConseilBetweenDateDebutAndDateFin(debutMois, finMois);
     }
-    public List<ProduitConseil> rechercheF(LocalDate date) {
-        return produitConseilRepository.getProduitConseil(date);
-    }
-    public List<ProduitConseil> rechercheF22() {
-        return produitConseilRepository.getProduitConseil2024();
+    public List<ProduitConseil> rechercheByMonthAndYear(LocalDate date) {
+        return produitConseilRepository.getProduitConseilByMonthYear(date);
     }
 
 

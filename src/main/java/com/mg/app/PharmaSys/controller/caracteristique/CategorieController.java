@@ -21,7 +21,7 @@ public class CategorieController {
 
     @GetMapping
     public String listCategories(Model model) {
-        List<Categorie> categories = categorieService.readCategorie();
+        List<Categorie> categories = categorieService.getAllCategorie();
         model.addAttribute("categories", categories);
         return "caracteristique/categorie/categorieListe";
     }

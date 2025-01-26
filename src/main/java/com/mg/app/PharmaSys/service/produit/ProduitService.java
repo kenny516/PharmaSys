@@ -16,13 +16,13 @@ public class ProduitService {
     public Produit createProduit(Produit produit){
         return produitRepository.save(produit);
     }
-    public List<Produit> readProduits(){
+    public List<Produit> getAllProduits(){
         return produitRepository.findAll();
     }
     public Produit updateProduit(Produit produit){
         return produitRepository.save(produit);
     }
-    public void deleteProduit(Integer id){
+    public void deleteProduitById(Integer id){
         produitRepository.deleteById(id);
     }
 

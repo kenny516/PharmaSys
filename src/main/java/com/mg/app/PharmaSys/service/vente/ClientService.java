@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ClientService {
     private final ClientRepository clientRepository;
 
-    public List<Client> findAll() {
+    public List<Client> getAllClient() {
         return clientRepository.findAll();
     }
 
@@ -26,11 +26,11 @@ public class ClientService {
         }
     }
 
-    public Client save(Client client) {
+    public Client createClient(Client client) {
         return clientRepository.save(client);
     }
 
-    public void deleteById(Integer id) {
+    public void deleteClientById(Integer id) {
         if (clientRepository.existsById(id)) {
             clientRepository.deleteById(id);
         } else {

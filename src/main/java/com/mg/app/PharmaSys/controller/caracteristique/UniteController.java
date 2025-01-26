@@ -20,7 +20,7 @@ public class UniteController {
 
     @GetMapping
     public String listUnite(Model model) {
-        List<Unite> unites = uniteService.readUnite();
+        List<Unite> unites = uniteService.getAllUnite();
         model.addAttribute("unites", unites);
         return "caracteristique/unite/uniteListe";
     }

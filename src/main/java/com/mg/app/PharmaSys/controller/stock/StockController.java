@@ -18,7 +18,7 @@ public class StockController {
 
     @GetMapping
     public String listStock(Model model) {
-        List<Stock> stocks = stockService.readStock();
+        List<Stock> stocks = stockService.getAllStock();
         model.addAttribute("stocks", stocks);
         return "stock/stockListe";
     }

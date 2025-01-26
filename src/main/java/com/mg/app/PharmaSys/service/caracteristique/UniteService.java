@@ -16,7 +16,7 @@ public class UniteService {
         return uniteRepository.save(unite);
     }
 
-    public List<Unite> readUnite(){
+    public List<Unite> getAllUnite(){
         return uniteRepository.findAll();
     }
 

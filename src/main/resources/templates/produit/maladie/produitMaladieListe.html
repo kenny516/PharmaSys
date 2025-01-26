@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="produitMaladie : ${produitsMaladies}">
+                        <tr th:each="produitMaladie : ${produitMaladies}">
                             <td class="text-center" th:text="${produitMaladie.produit.getId()}"></td>
                             <td class="text-center" th:text="${produitMaladie.produit.getNom()}"></td>
                             <td class="text-center" th:text="${produitMaladie.maladie.getNom()}"></td>

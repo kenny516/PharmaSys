@@ -11,5 +11,6 @@ public class CommissionDTO {
     private String prenom;
     private Double totalVentes;
     private Double commission;
+    private String sexe;
 }
 
