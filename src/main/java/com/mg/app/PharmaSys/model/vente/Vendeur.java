@@ -1,5 +1,6 @@
 package com.mg.app.PharmaSys.model.vente;
 
+import com.mg.app.PharmaSys.model.caracteristique.Sexe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,11 @@ public class Vendeur {
 
     @Column(unique = true)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sexe")
+    private Sexe sexe;
+
 
     // Getters et setters
 }

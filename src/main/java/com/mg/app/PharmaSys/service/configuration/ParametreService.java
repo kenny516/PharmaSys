@@ -5,13 +5,15 @@ import com.mg.app.PharmaSys.repository.configuration.ParametreRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @AllArgsConstructor
 @Service
 public class ParametreService {
     private final ParametreRepository parametreRepository;
 
-    public String getParametreByCle(String cle) {
-        return parametreRepository.findById(cle).orElse(null).getValeur();
+    public Double getParametreByCle(String cle) {
+        return Objects.requireNonNull(parametreRepository.findById(cle).orElse(null)).getValeur();
     }
     // il faut que tous les parametre soit attribue
     public void saveParametre(Parametre parametre) {

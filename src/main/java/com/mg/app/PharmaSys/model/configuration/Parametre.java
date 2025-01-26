@@ -20,7 +20,7 @@ public class Parametre {
     private String cle;
 
     @Column(name = "valeur")
-    private String valeur;
+    private Double valeur;
 
     @Column(name = "description")
     private String description;
