@@ -46,6 +46,7 @@
                             <th class="text-center">Montant_total</th>
                             <th class="text-center">Commission</th>
                             <th class="text-center">Nom client</th>
+                            <th class="text-center">Nom vendeur</th>
                             <th class="text-center">Vente details</th>
                             <th class="text-center">Edit</th>
                             <th class="text-center">Delete</th>
@@ -58,6 +59,7 @@
                             <td class="text-center" th:text="${vente.getMontantTotal()}"></td>
                             <td class="text-center" th:text="${vente.getCommission()}"></td>
                             <td class="text-center" th:text="${vente.client.getNom()}"></td>
+                            <td class="text-center" th:text="${vente.vendeur.getNom()}"></td>
                             <td class="text-center">
                                 <a th:href="@{/venteDetail(idVente=${vente.getId()})}"
                                    class="btn btn-outline-primary btn-sm">

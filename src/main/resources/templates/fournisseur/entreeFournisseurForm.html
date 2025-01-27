@@ -3,8 +3,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Formulaire Détail de Vente</h3>
-                <p class="text-subtitle text-muted">Ajoutez ou modifiez les détails d'une vente</p>
+                <h3>Formulaire Entree fournisseur</h3>
+                <p class="text-subtitle text-muted">Ajoutez ou modifiez une entree fournisseur</p>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Détails du Produit</h4>
+                        <h4 class="card-title">Entree fournisseur</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -28,13 +28,13 @@
                                         <!-- Champ Quantité -->
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="qu-icon" class="form-label">Quantité</label>
+                                                <label for="quantite" class="form-label">Quantité</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">
-                                                        <i class="bi bi-box"></i>
+                                                        <i class="bi bi-box-seam"></i> <!-- Icône corrigée -->
                                                     </span>
                                                     <input type="number" class="form-control" th:field="*{quantite}"
-                                                           id="qu-icon" placeholder="Saisissez la quantité"
+                                                           id="quantite" placeholder="Saisissez la quantité"
                                                            data-parsley-required="true">
                                                 </div>
                                             </div>
@@ -43,8 +43,8 @@
                                         <!-- Sélection Produit -->
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="inputGroupSelect01" class="form-label">Produit</label>
-                                                <select class="form-select" th:field="*{produit.id}" id="inputGroupSelect01" data-parsley-required="true">
+                                                <label for="produit" class="form-label">Produit</label>
+                                                <select class="form-select" th:field="*{produit.id}" id="produit" data-parsley-required="true">
                                                     <option value="" selected disabled>Choisir un produit...</option>
                                                     <option th:each="produit : ${produits}"
                                                             th:value="${produit.getId()}"
@@ -55,16 +55,17 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <!-- Sélection Fournisseur -->
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="fournisseur" class="form-label">Fournisseur</label>
                                                 <select class="form-select" th:field="*{fournisseur.id}" id="fournisseur" data-parsley-required="true">
-                                                    <option value="" selected disabled>Choisir un produit...</option>
+                                                    <option value="" selected disabled>Choisir un fournisseur...</option>
                                                     <option th:each="fournisseur : ${fournisseurs}"
                                                             th:value="${fournisseur.getId()}"
                                                             th:text="${fournisseur.getNom()}"
-                                                            th:selected="|${fournisseur.getId()} == ${entreeFournisseur.produit?.getId()}|">
+                                                            th:selected="|${fournisseur.getId()} == ${entreeFournisseur.fournisseur?.getId()}|">
                                                         Fournisseur
                                                     </option>
                                                 </select>
@@ -74,13 +75,16 @@
                                         <!-- Boutons d'action -->
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">
-                                                <i class="bi bi-check-circle"></i> Enregistrer
+                                                <i class="bi bi-check-circle-fill"></i> <!-- Icône corrigée -->
+                                                Enregistrer
                                             </button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">
-                                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                                <i class="bi bi-arrow-clockwise"></i>
+                                                Réinitialiser
                                             </button>
                                             <a th:href="@{/vente}" class="btn btn-danger me-1 mb-1">
-                                                <i class="bi bi-x-circle"></i> Annuler
+                                                <i class="bi bi-x-circle-fill"></i> <!-- Icône corrigée -->
+                                                Annuler
                                             </a>
                                         </div>
                                     </div>
