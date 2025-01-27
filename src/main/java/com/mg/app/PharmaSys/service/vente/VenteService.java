@@ -57,52 +57,7 @@ public class VenteService {
         return venteRepository.rechercheClient(date);
     }
 
-    public List<CommissionDTO> getCommissionsByDateRange(LocalDate startDate, LocalDate endDate) {
-        List<Object[]> results = venteRepository.findCommissionsByVendeurAndDateRange(startDate, endDate);
-
-        // Mapper les résultats manuellement
-        return results.stream()
-                .map(row -> new CommissionDTO(
-                        ((Number) row[0]).longValue(),   // vendeurId
-                        (String) row[1],                // vendeurNom
-                        (String) row[2],                // vendeurPrenom
-                        ((Number) row[3]).doubleValue(), // totalVentes
-                        ((Number) row[4]).doubleValue(),
-                        ((String) row[5])
-                ))
-                .toList();
-    }
-
-
-    public List<CommissionDTO> getCommissionsByDateRange2(LocalDate startDate, LocalDate endDate,Integer id_sexe) {
-        List<Object[]> results = venteRepository.findCommissionsByVendeurAndDateRange(startDate, endDate,id_sexe);
-
-        // Mapper les résultats manuellement
-        return results.stream()
-                .map(row -> new CommissionDTO(
-                        ((Number) row[0]).longValue(),   // vendeurId
-                        (String) row[1],                // vendeurNom
-                        (String) row[2],                // vendeurPrenom
-                        ((Number) row[3]).doubleValue(), // totalVentes
-                        ((Number) row[4]).doubleValue(),
-                        ((String) row[5])
-                ))
-                .toList();
-    }
-    public List<CommissionDTO> getCommissionsByDateRange2Min(LocalDate startDate, LocalDate endDate,Integer id_sexe) {
-        Double minVente = 200000.0;
-        List<Object[]> results = venteRepository.findCommissionsByVendeurAndDateRangeMinVente(minVente,startDate, endDate,id_sexe);
-
-        // Mapper les résultats manuellement
-        return results.stream()
-                .map(row -> new CommissionDTO(
-                        ((Number) row[0]).longValue(),   // vendeurId
-                        (String) row[1],                // vendeurNom
-                        (String) row[2],                // vendeurPrenom
-                        ((Number) row[3]).doubleValue(), // totalVentes
-                        ((Number) row[4]).doubleValue(),
-                        ((String) row[5])
-                ))
-                .toList();
+    public List<CommissionDTO> getCommissionVendeurByIntervalleDateAndSexe(LocalDate startDate, LocalDate endDate, Integer id_sexe) {
+        return venteRepository.filtreCommissionVendeurByIntervalleDateAndSexe(startDate, endDate, id_sexe);
     }
 }

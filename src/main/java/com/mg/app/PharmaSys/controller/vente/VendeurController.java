@@ -22,25 +22,19 @@ public class VendeurController {
     private final SexeService sexeService;
 
     @GetMapping("/commissions")
-    public String getCommissions(@RequestParam(name = "startDate",required = false) LocalDate startDate, @RequestParam(name = "endDate",required = false) LocalDate endDate, Model model,@RequestParam(name = "sexe",required = false)Integer id_sexe) {
+    public String getCommissions(@RequestParam(name = "startDate", required = false) LocalDate startDate, @RequestParam(name = "endDate", required = false) LocalDate endDate, Model model, @RequestParam(name = "sexe", required = false) Integer id_sexe) {
         if (startDate == null || endDate == null) {
             startDate = LocalDate.now().minusMonths(1);
             endDate = LocalDate.now();
         }
-        List<CommissionDTO> commissions;
-        if(id_sexe != null)
-        {
-            //commissions = venteService.getCommissionsByDateRange2Min(startDate, endDate, id_sexe);
-            commissions = venteService.getCommissionsByDateRange2(startDate, endDate, id_sexe);
-        }
-        else {
-            commissions = venteService.getCommissionsByDateRange(startDate, endDate);
-        }
+        List<CommissionDTO> commissions = venteService.getCommissionVendeurByIntervalleDateAndSexe(startDate, endDate, id_sexe);
 
+        // pour calculer le total de montant de vente
         double totalVentes = commissions.stream()
                 .mapToDouble(CommissionDTO::getTotalVentes)
                 .sum();
 
+        // pour calculer le total de commission
         double totalCommissions = commissions.stream()
                 .mapToDouble(CommissionDTO::getCommission)
                 .sum();
@@ -51,17 +45,12 @@ public class VendeurController {
 
         List<Sexe> listeSexe = sexeService.getAllSexe();
 
-        model.addAttribute("startDate",startDate);
-        model.addAttribute("endDate",endDate);
-        model.addAttribute("commissions",commissions);
-        model.addAttribute("listeSexe",listeSexe);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("commissions", commissions);
+        model.addAttribute("listeSexe", listeSexe);
         return "vente/vendeur/vendeurCommission";
     }
-
-
-
-
-
 
 
 }

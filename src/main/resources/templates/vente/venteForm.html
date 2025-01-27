@@ -8,7 +8,8 @@
             </div>
         </div>
     </div>
-    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center"
+             style="min-height: 80vh;">
         <div class="row w-100 justify-content-center">
             <div class="col-md-6 col-12">
                 <div class="card">
@@ -17,8 +18,11 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" th:action="@{/vente/save}" th:object="${vente}" method="post" data-parsley-validate>
+                            <form class="form form-vertical" th:action="@{/vente/save}" th:object="${vente}"
+                                  method="post" data-parsley-validate>
                                 <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="*{montantTotal}" th:value="0">
+                                <input type="hidden" th:field="*{commission}" th:value="0">
                                 <div class="form-body">
                                     <div class="row">
                                         <!-- Champ Date -->
@@ -31,29 +35,16 @@
                                                     </span>
                                                     <input type="datetime-local" class="form-control"
                                                            th:field="*{dateVente}" id="date-icon"
-                                                           data-parsley-required="true" placeholder="Sélectionnez la date">
+                                                           data-parsley-required="true"
+                                                           placeholder="Sélectionnez la date">
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <!-- Champ Montant -->
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="montant-icon" class="form-label">Montant Total (€)</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">
-                                                        <i class="bi bi-cash"></i>
-                                                    </span>
-                                                    <input type="number" class="form-control" th:field="*{montantTotal}"
-                                                           id="montant-icon" placeholder="Saisissez le montant total"
-                                                           data-parsley-required="true" data-parsley-type="number">
-                                                </div>
-                                                <small class="form-text text-muted">Le montant ne doit être modifié qu'en cas de correction nécessaire.</small>
                                             </div>
                                         </div>
 
                                         <div class="col-12 mb-3">
                                             <label for="inputGroupSelect01" class="form-label">Client</label>
-                                            <select class="form-select" id="inputGroupSelect01" th:field="*{client.id}" data-parsley-required="true">
+                                            <select class="form-select" id="inputGroupSelect01" th:field="*{client.id}"
+                                                    data-parsley-required="true">
                                                 <option value="" selected disabled>Choisir...</option>
                                                 <option th:each="client : ${listeClient}"
                                                         th:value="${client.getId()}"
@@ -64,7 +55,8 @@
                                         </div>
                                         <div class="col-12 mb-3">
                                             <label for="vendeur" class="form-label">Vendeur</label>
-                                            <select class="form-select" id="vendeur" th:field="*{vendeur.id}" data-parsley-required="true">
+                                            <select class="form-select" id="vendeur" th:field="*{vendeur.id}"
+                                                    data-parsley-required="true">
                                                 <option value="" selected disabled>Choisir...</option>
                                                 <option th:each="vendeur : ${vendeurList}"
                                                         th:value="${vendeur.getId()}"
