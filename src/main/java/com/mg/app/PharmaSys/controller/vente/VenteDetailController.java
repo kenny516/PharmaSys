@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/venteDetail")
-public class venteDetailController {
+public class VenteDetailController {
     private final VenteService venteService;
     private final VenteDetailService venteDetailService;
     private final ProduitService produitService;

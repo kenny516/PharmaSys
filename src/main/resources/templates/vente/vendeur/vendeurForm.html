@@ -1,0 +1,99 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Formulaire Vendeur</h3>
+                <p class="text-subtitle text-muted">Enregistrez ou modifiez les informations d'un Vendeur</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Vendeur</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/vendeur/save}" th:object="${vendeur}" method="post" data-parsley-validate>
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="nom" class="form-label">Nom</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" th:field="*{nom}"
+                                                           id="nom" placeholder="nom"
+                                                           data-parsley-required="true" data-parsley-type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="prenom" class="form-label">Prenom</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-cash"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" th:field="*{prenom}"
+                                                           id="prenom" placeholder="nom"
+                                                           data-parsley-required="true" data-parsley-type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="email" class="form-label">Email</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-cash"></i>
+                                                    </span>
+                                                    <input type="email" class="form-control" th:field="*{email}"
+                                                           id="email" placeholder="nom"
+                                                           data-parsley-required="true" data-parsley-type="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Sélection sexe -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="sexe" class="form-label">Sexe</label>
+                                                <select class="form-select" th:field="*{sexe.id}" id="sexe" data-parsley-required="true">
+                                                    <option value="" selected disabled>Choisir un produit...</option>
+                                                    <option th:each="sexe : ${sexes}"
+                                                            th:value="${sexe.getId()}"
+                                                            th:text="${sexe.getNom()}"
+                                                            th:selected="|${sexe.getId()} == ${vendeur.sexe?.getId()}|">
+                                                        Sexe
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <i class="bi bi-check-circle"></i> Enregistrer
+                                            </button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                                <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                            </button>
+                                            <a th:href="@{/templates/vente/client}" class="btn btn-danger me-1 mb-1">
+                                                <i class="bi bi-x-circle"></i> Annuler
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>
