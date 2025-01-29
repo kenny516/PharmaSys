@@ -1,6 +1,6 @@
 package com.mg.app.PharmaSys.repository.produit;
 
-import com.mg.app.PharmaSys.model.produit.HistoriquePrix;
+import com.mg.app.PharmaSys.model.produit.HistoriquePrixProduit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface HistoriquePrixRepository extends JpaRepository<HistoriquePrix, Integer> {
+public interface HistoriquePrixProduitRepository extends JpaRepository<HistoriquePrixProduit, Integer> {
 
     @Query(value = """
             SELECT
@@ -20,7 +20,7 @@ public interface HistoriquePrixRepository extends JpaRepository<HistoriquePrix, 
             ORDER BY
                 hp.date_changement DESC
             """, nativeQuery = true)
-    List<HistoriquePrix> findPricesBetweenDates(
+    List<HistoriquePrixProduit> findPricesBetweenDates(
             @Param("idProduit") Integer idProduit
     );
 

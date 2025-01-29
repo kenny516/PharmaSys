@@ -15,7 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/produi-conseils")
+@RequestMapping("/produit-conseils")
 public class ProduitConseilController {
 
     private final ProduitConseilService produitConseilService;
@@ -61,13 +61,13 @@ public class ProduitConseilController {
     @PostMapping("/save")
     public String saveConseil(ProduitConseil produitConseil){
         produitConseilService.saveProduitConseil(produitConseil);
-        return "redirect:/produi-conseils";
+        return "redirect:/produit-conseils";
     }
 
     @GetMapping("delete")
     public String delete(@RequestParam("id") Integer id) {
         produitConseilService.deleteProduitConseilById(id);
-        return "redirect:/produi-conseils";
+        return "redirect:/produit-conseils";
     }
 
 }

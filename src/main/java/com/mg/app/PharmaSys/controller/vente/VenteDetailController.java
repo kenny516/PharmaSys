@@ -9,7 +9,7 @@ import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
 import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
 import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
-import com.mg.app.PharmaSys.service.produit.HistoriquePrixService;
+import com.mg.app.PharmaSys.service.produit.HistoriquePrixProduitService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
@@ -33,7 +33,7 @@ public class VenteDetailController {
     private final CategorieService categorieService;
     private final PublicCibleService publicCibleService;
     private final AdministrationService administrationService;
-    private final HistoriquePrixService historiquePrixService;
+    private final HistoriquePrixProduitService historiquePrixProduitService;
 
 
     @GetMapping("/general")
@@ -113,7 +113,7 @@ public class VenteDetailController {
         }
         try {
             List<VenteDetail> venteDetailsGenere = stockService.processVenteDetails(venteDetail, quantiteInitial);
-            Double prixUnitaire = historiquePrixService.getPrixCurrent(venteDetail.getProduit().getId(),date);
+            Double prixUnitaire = historiquePrixProduitService.getPrixCurrent(venteDetail.getProduit().getId(),date);
             for (VenteDetail detail : venteDetailsGenere) {
                 detail.setPrixUnitaire(prixUnitaire);
             }
