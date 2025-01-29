@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "historiqueprix")
-public class HistoriquePrix {
+public class HistoriquePrixProduit {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

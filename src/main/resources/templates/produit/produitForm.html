@@ -16,7 +16,8 @@
                         <h4 class="card-title">Détails du Produit</h4>
                     </div>
                     <div class="card-body">
-                        <form class="form form-vertical" th:action="@{/produit/save}" th:object="${produit}" method="post" data-parsley-validate>
+                        <form class="form form-vertical" th:action="@{/produit/save}" th:object="${produit}"
+                              method="post" data-parsley-validate>
                             <input type="hidden" th:field="*{id}">
                             <div class="form-body">
                                 <div class="row">
@@ -27,7 +28,8 @@
                                             <span class="input-group-text">
                                                 <i class="bi bi-capsule"></i>
                                             </span>
-                                            <input type="text" class="form-control" id="first-name-icon" placeholder="Nom"
+                                            <input type="text" class="form-control" id="first-name-icon"
+                                                   placeholder="Nom"
                                                    th:field="*{nom}" data-parsley-required="true">
                                         </div>
                                     </div>
@@ -39,7 +41,8 @@
                                             <span class="input-group-text">
                                                 <i class="bi bi-file-earmark-text"></i>
                                             </span>
-                                            <input type="text" class="form-control" id="description-icon" placeholder="Description"
+                                            <input type="text" class="form-control" id="description-icon"
+                                                   placeholder="Description"
                                                    th:field="*{description}" data-parsley-required="true">
                                         </div>
                                     </div>
@@ -51,14 +54,16 @@
                                             <span class="input-group-text">
                                                 <i class="bi bi-currency-dollar"></i>
                                             </span>
-                                            <input type="number" class="form-control" id="mobile-id-icon" placeholder="Prix"
+                                            <input type="number" class="form-control" id="mobile-id-icon"
+                                                   placeholder="Prix"
                                                    th:field="*{prix}" data-parsley-required="true">
                                         </div>
                                     </div>
                                     <!-- Administration -->
                                     <div class="col-12 mb-3">
                                         <label for="administration" class="form-label">Administration</label>
-                                        <select class="form-select" id="administration" th:field="*{administration.id}" data-parsley-required="true">
+                                        <select class="form-select" id="administration" th:field="*{administration.id}"
+                                                data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="administration : ${administrations}"
                                                     th:value="${administration.getId()}"
@@ -70,7 +75,8 @@
                                     <!-- Laboratoire -->
                                     <div class="col-12 mb-3">
                                         <label for="inputGroupSelect01" class="form-label">Laboratoire</label>
-                                        <select class="form-select" id="inputGroupSelect01" th:field="*{laboratoire.id}" data-parsley-required="true">
+                                        <select class="form-select" id="inputGroupSelect01" th:field="*{laboratoire.id}"
+                                                data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="laboratoire : ${laboratoires}"
                                                     th:value="${laboratoire.getId()}"
@@ -83,7 +89,8 @@
                                     <!-- Catégorie -->
                                     <div class="col-12 mb-3">
                                         <label for="inputGroupSelect02" class="form-label">Catégorie</label>
-                                        <select class="form-select" id="inputGroupSelect02" th:field="*{categorie.id}" data-parsley-required="true">
+                                        <select class="form-select" id="inputGroupSelect02" th:field="*{categorie.id}"
+                                                data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="categorie : ${categories}"
                                                     th:value="${categorie.getId()}"
@@ -96,7 +103,8 @@
                                     <!-- Unité -->
                                     <div class="col-12 mb-3">
                                         <label for="inputGroupSelect03" class="form-label">Unité</label>
-                                        <select class="form-select" id="inputGroupSelect03" th:field="*{unite}" data-parsley-required="true">
+                                        <select class="form-select" id="inputGroupSelect03" th:field="*{unite}"
+                                                data-parsley-required="true">
                                             <option value="" selected disabled>Choisir...</option>
                                             <option th:each="unite : ${unites}"
                                                     th:value="${unite.getId()}"
@@ -109,15 +117,23 @@
                                     <!-- Péremption -->
                                     <div class="col-12 mb-3">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="checkbox1" th:field="*{perissable}">
+                                            <input class="form-check-input" type="checkbox" id="checkbox1"
+                                                   th:field="*{perissable}">
                                             <label class="form-check-label" for="checkbox1">Périssable ?</label>
                                         </div>
                                     </div>
 
                                     <!-- Boutons -->
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
-                                        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">
+                                            <i class="bi bi-check-circle"></i> Enregistrer
+                                        </button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                            <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                        </button>
+                                        <a th:href="@{/produit}" class="btn btn-danger me-1 mb-1">
+                                            <i class="bi bi-x-circle"></i> Annuler
+                                        </a>
                                     </div>
                                 </div>
                             </div>

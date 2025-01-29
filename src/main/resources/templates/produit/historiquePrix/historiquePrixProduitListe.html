@@ -11,13 +11,13 @@
     </div>
     <div class="card mb-4 shadow-sm border-0">
         <div class="card-body">
-            <form class="form form-vertical" th:action="@{/historiquePrix/recherche}" method="get" data-parsley-validate>
+            <form class="form form-vertical" th:action="@{/historiquePrixProduits/}" method="get" data-parsley-validate>
                 <div class="row">
                     <!-- Catégorie -->
                     <div class="col-md-4 mb-3">
                         <div class="form-group">
-                            <label for="historiquePrix">Historique prix</label>
-                            <select class="form-select" id="historiquePrix" name="idProduit">
+                            <label for="historiquePrixProduits">Historique prix</label>
+                            <select class="form-select" id="historiquePrixProduits" name="idProduit">
                                 <option value="" selected disabled>Choisir...</option>
                                 <option th:each="Produit : ${produits}"
                                         th:value="${Produit.id}"
@@ -48,18 +48,33 @@
                                     <th class="text-center">Description</th>
                                     <th class="text-center">Prix</th>
                                     <th class="text-center">Date</th>
+                                    <th class="text-center">Edit</th>
+                                    <th class="text-center">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="historiquePrix : ${historiques}">
-                                    <td class="text-center" th:text="${historiquePrix.produit.nom}"></td>
-                                    <td class="text-center" th:text="${historiquePrix.produit.description}"></td>
-                                    <td class="text-center" th:text="${historiquePrix.prix}"></td>
-                                    <td class="text-center" th:text="${historiquePrix.date_changement}"></td>
+                                <tr th:each="historiquePrixProduits : ${historiques}">
+                                    <td class="text-center" th:text="${historiquePrixProduits.produit.nom}"></td>
+                                    <td class="text-center" th:text="${historiquePrixProduits.produit.description}"></td>
+                                    <td class="text-center" th:text="${historiquePrixProduits.prix}"></td>
+                                    <td class="text-center" th:text="${historiquePrixProduits.date_changement}"></td>
+<!--                                    action -->
+                                    <td class="text-center">
+                                        <a th:href="@{/historiquePrixProduits/edit(idHistoriquePrixProduit=${historiquePrixProduits.getId()})}"
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a th:href="@{/historiquePrixProduits/delete(idHistoriquePrixProduit=${historiquePrixProduits.getId()})}"
+                                           class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a th:href="@{/historiquePrix/new}" class="btn btn-success mt-3">
+                            <a th:href="@{/historiquePrixProduits/new}" class="btn btn-success mt-3">
                                 <i class="bi bi-plus-circle"></i> Ajouter un mouvement de stock
                             </a>
                         </div>

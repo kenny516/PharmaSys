@@ -6,7 +6,7 @@ import com.mg.app.PharmaSys.model.stock.Stock;
 import com.mg.app.PharmaSys.model.stock.TypeMvtStock;
 import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.repository.stock.StockRepository;
-import com.mg.app.PharmaSys.service.produit.HistoriquePrixService;
+import com.mg.app.PharmaSys.service.produit.HistoriquePrixProduitService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class StockService {
     private final StockRepository stockRepository;
     private final MvtStockService mvtStockService;
     private final VenteDetailService venteDetailService;
-    private final HistoriquePrixService historiquePrixService;
+    private final HistoriquePrixProduitService historiquePrixProduitService;
 
     public List<Stock> getAllStock() {
         return stockRepository.findAll();
