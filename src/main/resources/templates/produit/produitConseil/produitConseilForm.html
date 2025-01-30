@@ -3,8 +3,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Produit Formulaire</h3>
-                <p class="text-subtitle text-muted">Créer ou modifier un produit</p>
+                <h3>Produit conseil Formulaire</h3>
+                <p class="text-subtitle text-muted">Créer ou modifier un produit conseil</p>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
             <div class="col-md-8 col-lg-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h4 class="card-title">Détails du Produit</h4>
+                        <h4 class="card-title">Produit conseil</h4>
                     </div>
                     <div class="card-body">
                         <form class="form form-vertical" th:action="@{/produi-conseils/save}" th:object="${produitConseils}" method="post" data-parsley-validate>
@@ -78,6 +78,9 @@
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
                                         <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                                        <a th:href="@{/produi-conseils}" class="btn btn-danger me-1 mb-1">
+                                            <i class="bi bi-x-circle"></i> Annuler
+                                        </a>
                                     </div>
                                 </div>
                             </div>

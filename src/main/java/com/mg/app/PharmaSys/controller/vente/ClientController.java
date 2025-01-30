@@ -16,7 +16,7 @@ public class ClientController {
 
     @GetMapping
     public String liste(Model model) {
-        model.addAttribute("listeClient", clientService.findAll());
+        model.addAttribute("listeClient", clientService.getAllClient());
         return "vente/client/clientListe";
     }
 
@@ -34,13 +34,13 @@ public class ClientController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Client client) {
-        clientService.save(client);
+        clientService.createClient(client);
         return "redirect:/client";
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam(value = "id")  Integer id) {
-        clientService.deleteById(id);
+        clientService.deleteClientById(id);
         return "redirect:/client";
     }
 }

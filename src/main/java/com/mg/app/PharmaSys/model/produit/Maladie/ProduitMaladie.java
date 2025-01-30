@@ -1,8 +1,8 @@
-package com.mg.app.PharmaSys.model.produit.publicCible;
+package com.mg.app.PharmaSys.model.produit.Maladie;
 
 
+import com.mg.app.PharmaSys.model.caracteristique.Maladie;
 import com.mg.app.PharmaSys.model.produit.Produit;
-import com.mg.app.PharmaSys.model.caracteristique.PublicCible;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,17 +14,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "produit_public_cible")
-public class ProduitsPublicCible {
-
+@Table(name = "produit_maladie")
+public class ProduitMaladie {
     @EmbeddedId
-    private ProduitsPublicCibleId id;
+    ProduitMaladieId id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produit", insertable = false, updatable = false)
     private Produit produit;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_public", insertable = false, updatable = false)
-    private PublicCible publicCible;
+    @JoinColumn(name = "id_maladie", insertable = false, updatable = false)
+    private Maladie maladie;
+
+
 }

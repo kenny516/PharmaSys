@@ -29,10 +29,10 @@ public class ProduitController {
 
     @GetMapping
     public String listMedicament(Model model) {
-        List<Produit> produits = ProduitService.readProduits();
-        List<PublicCible> publicCibles = publicCibleService.readPublicCible();
-        List<Maladie> maladies = maladieService.readMaladie();
-        List<Categorie> categories = categorieService.readCategorie();
+        List<Produit> produits = ProduitService.getAllProduits();
+        List<PublicCible> publicCibles = publicCibleService.getAllPublicCible();
+        List<Maladie> maladies = maladieService.getAllMaladie();
+        List<Categorie> categories = categorieService.getAllCategorie();
         model.addAttribute("produits", produits);
 
         model.addAttribute("publicCibles", publicCibles);
@@ -49,10 +49,10 @@ public class ProduitController {
     @GetMapping("/edit")
     public String editMedicament(@RequestParam(value = "id",required = false) Integer id, Model model) {
         Produit produit = (id == null) ? new Produit() : ProduitService.getProduitById(id);
-        List<Laboratoire> laboratoires = laboratoireService.readLaboratoire();
-        List<Unite> unites = uniteService.readUnite();
-        List<Categorie> categories = categorieService.readCategorie();
-        List<Administration> administrations = administrationService.getAllAdministrations();
+        List<Laboratoire> laboratoires = laboratoireService.getAllLaboratoire();
+        List<Unite> unites = uniteService.getAllUnite();
+        List<Categorie> categories = categorieService.getAllCategorie();
+        List<Administration> administrations = administrationService.getAllAdministration();
         model.addAttribute("produit", produit);
         model.addAttribute("laboratoires", laboratoires);
         model.addAttribute("unites",unites);
@@ -70,16 +70,16 @@ public class ProduitController {
 
     @GetMapping("/delete")
     public String deleteMedicament(@RequestParam("id") Integer id) {
-        ProduitService.deleteProduit(id);
+        ProduitService.deleteProduitById(id);
         return "redirect:/produit";
     }
 
     @PostMapping("/recherche")
     public String RechercheMedicament(@RequestParam(value = "maladie",required = false) Integer idMaladie,@RequestParam(value = "publicCible",required = false) Integer idPublicCible,@RequestParam(value = "categorie",required = false) Integer idCategorie,Model model) {
         List<Produit> list = ProduitService.rechercheMultiCritere(idMaladie,idPublicCible,idCategorie);
-        List<PublicCible> publicCibles = publicCibleService.readPublicCible();
-        List<Maladie> maladies = maladieService.readMaladie();
-        List<Categorie> categories = categorieService.readCategorie();
+        List<PublicCible> publicCibles = publicCibleService.getAllPublicCible();
+        List<Maladie> maladies = maladieService.getAllMaladie();
+        List<Categorie> categories = categorieService.getAllCategorie();
         model.addAttribute("produits",list);
         model.addAttribute("publicCibles", publicCibles);
         model.addAttribute("maladies", maladies);

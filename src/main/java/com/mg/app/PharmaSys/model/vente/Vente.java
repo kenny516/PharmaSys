@@ -26,6 +26,9 @@ public class Vente {
     @Column(name = "montant_total")
     private Double montantTotal;
 
+    @Column(name = "commission")
+    private Double commission;
+
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_client", nullable = false)

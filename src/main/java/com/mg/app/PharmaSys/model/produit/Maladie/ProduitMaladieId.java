@@ -14,7 +14,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Embeddable
-public class ProduitsMaladieId {
+public class ProduitMaladieId {
 
     @Column(name = "id_produit")
     private Integer idProduit;
@@ -26,7 +26,7 @@ public class ProduitsMaladieId {
     public boolean equals(Object o) {
         if (this == o) return true; // Vérifie si c'est le même objet en mémoire
         if (o == null || getClass() != o.getClass()) return false; // Vérifie si l'objet est du même type
-        ProduitsMaladieId that = (ProduitsMaladieId) o; // Cast de l'objet comparé
+        ProduitMaladieId that = (ProduitMaladieId) o; // Cast de l'objet comparé
         return idProduit.equals(that.idProduit) && idMaladie.equals(that.idMaladie); // Comparaison des valeurs
     }
 

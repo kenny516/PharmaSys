@@ -3,7 +3,6 @@ package com.mg.app.PharmaSys.service.utilisateur;
 import com.mg.app.PharmaSys.model.utilisateur.Role;
 import com.mg.app.PharmaSys.repository.utilisateur.RoleRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class RoleService {
         return roleRepository.save(role);
     }
 
-    public List<Role> readRole() {
+    public List<Role> getAllRole() {
         return roleRepository.findAll();
     }
 

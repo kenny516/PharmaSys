@@ -9,6 +9,7 @@ import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
 import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
 import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
+import com.mg.app.PharmaSys.service.produit.HistoriquePrixProduitService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
@@ -18,12 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 @Controller
 @RequestMapping("/venteDetail")
-public class venteDetailController {
+public class VenteDetailController {
     private final VenteService venteService;
     private final VenteDetailService venteDetailService;
     private final ProduitService produitService;
@@ -31,17 +33,18 @@ public class venteDetailController {
     private final CategorieService categorieService;
     private final PublicCibleService publicCibleService;
     private final AdministrationService administrationService;
+    private final HistoriquePrixProduitService historiquePrixProduitService;
 
 
     @GetMapping("/general")
     public String listVenteDetail(Model model) {
-        List<VenteDetail> venteDetails = venteDetailService.readVenteDetail();
+        List<VenteDetail> venteDetails = venteDetailService.getAllVenteDetail();
         model.addAttribute("venteDetails", venteDetails);
-        List<Categorie> categorie = categorieService.readCategorie();
+        List<Categorie> categorie = categorieService.getAllCategorie();
         model.addAttribute("categories", categorie);
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        List<PublicCible> public_cible = publicCibleService.getAllPublicCible();
         model.addAttribute("public_cibles", public_cible);
-        List<Administration> administration = administrationService.getAllAdministrations();
+        List<Administration> administration = administrationService.getAllAdministration();
         model.addAttribute("administrations", administration);
 
         model.addAttribute("categorieId",null);
@@ -55,13 +58,13 @@ public class venteDetailController {
         List<VenteDetail> venteDetails = venteDetailService.rechercheMulticritere(id_Categorie, id_administration, id_PublicCible);
         model.addAttribute("venteDetails", venteDetails);
 
-        List<Categorie> categorie = categorieService.readCategorie();
+        List<Categorie> categorie = categorieService.getAllCategorie();
         model.addAttribute("categories", categorie);
 
-        List<PublicCible> public_cible = publicCibleService.readPublicCible();
+        List<PublicCible> public_cible = publicCibleService.getAllPublicCible();
         model.addAttribute("public_cibles", public_cible);
 
-        List<Administration> administration = administrationService.getAllAdministrations();
+        List<Administration> administration = administrationService.getAllAdministration();
         model.addAttribute("administrations", administration);
 
         model.addAttribute("categorieId",id_Categorie);
@@ -82,7 +85,7 @@ public class venteDetailController {
 
     @GetMapping("/edit")
     public String editVenteDetail(@RequestParam(value = "idVenteDetail", required = false) Integer idVenteDetail, @RequestParam(value = "idVente", required = false) Integer idVente, Model model) {
-        List<Produit> produits = produitService.readProduits();
+        List<Produit> produits = produitService.getAllProduits();
         model.addAttribute("produits", produits);
         VenteDetail venteDetail = new VenteDetail();
         Vente vente = venteService.getVenteById(idVente);
@@ -99,6 +102,8 @@ public class venteDetailController {
     @PostMapping("/save")
     public String saveVenteDetail(VenteDetail venteDetail, Model model) {
         Double quantiteInitial = 0.0;
+        Vente currentVente = venteService.getVenteById(venteDetail.getVente().getId());
+        LocalDate date = LocalDate.from(currentVente.getDateVente());
         if (venteDetail.getId() == null) {
             Produit produit = produitService.getProduitById(venteDetail.getProduit().getId());
             venteDetail.setPrixUnitaire(produit.getPrix());
@@ -108,6 +113,10 @@ public class venteDetailController {
         }
         try {
             List<VenteDetail> venteDetailsGenere = stockService.processVenteDetails(venteDetail, quantiteInitial);
+            Double prixUnitaire = historiquePrixProduitService.getPrixCurrent(venteDetail.getProduit().getId(),date);
+            for (VenteDetail detail : venteDetailsGenere) {
+                detail.setPrixUnitaire(prixUnitaire);
+            }
             venteDetailService.createMultipleVenteDetail(venteDetailsGenere);
             venteService.updateVenteData(venteDetail.getVente().getId());
         } catch (IllegalArgumentException e) {

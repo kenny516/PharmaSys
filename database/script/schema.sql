@@ -17,23 +17,6 @@ CREATE TABLE Maladie
     PRIMARY KEY (id)
 );
 
-CREATE TABLE client
-(
-    id     SERIAL PRIMARY KEY,
-    nom    VARCHAR(50),
-    prenom VARCHAR(50)
-);
-
-CREATE TABLE Vente
-(
-    id            SERIAL,
-    id_client     INTEGER,
-    date_vente    TIMESTAMP,
-    montant_total DOUBLE PRECISION,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_client) REFERENCES client (id)
-);
-
 CREATE TABLE Public_cible
 (
     id        SERIAL,
@@ -91,6 +74,30 @@ CREATE TABLE Administration
     PRIMARY KEY (id)
 );
 
+CREATE TABLE Client
+(
+    id     SERIAL,
+    nom    VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Sexe
+(
+    id          SERIAL,
+    nom         VARCHAR(50),
+    description VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Parametre
+(
+    cle         VARCHAR(50),
+    valeur      DOUBLE PRECISION,
+    description TEXT,
+    PRIMARY KEY (cle)
+);
+
 CREATE TABLE Produit
 (
     id                SERIAL,
@@ -107,19 +114,6 @@ CREATE TABLE Produit
     FOREIGN KEY (id_unite) REFERENCES Unite (id),
     FOREIGN KEY (id_categorie) REFERENCES Categorie (id),
     FOREIGN KEY (id_laboratoire) REFERENCES Laboratoire (id)
-);
-
-CREATE TABLE Vente_detail
-(
-    id              SERIAL,
-    quantite        DOUBLE PRECISION,
-    date_peremption DATE,
-    prix_unitaire   DOUBLE PRECISION,
-    id_produit      INTEGER NOT NULL,
-    id_vente        INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_produit) REFERENCES Produit (id),
-    FOREIGN KEY (id_vente) REFERENCES Vente (id)
 );
 
 CREATE TABLE Mvt_stock
@@ -161,6 +155,54 @@ CREATE TABLE Entree_fournisseur
     FOREIGN KEY (id_fournisseur) REFERENCES Fournisseur (id)
 );
 
+CREATE TABLE Produit_conseil
+(
+    id          SERIAL,
+    description VARCHAR(50),
+    date_debut  DATE,
+    date_fin    DATE,
+    id_produit  INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id)
+);
+
+CREATE TABLE Vendeur
+(
+    id      SERIAL,
+    nom     VARCHAR(50),
+    prenom  VARCHAR(50),
+    email   VARCHAR(255),
+    id_sexe INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_sexe) REFERENCES Sexe (id)
+);
+
+CREATE TABLE Vente
+(
+    id            SERIAL,
+    date_vente    TIMESTAMP,
+    montant_total DOUBLE PRECISION,
+    commission    DOUBLE PRECISION default 0,
+    id_vendeur    INTEGER NOT NULL,
+    id_client     INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_vendeur) REFERENCES Vendeur (id),
+    FOREIGN KEY (id_client) REFERENCES Client (id)
+);
+
+CREATE TABLE Vente_detail
+(
+    id              SERIAL,
+    quantite        DOUBLE PRECISION,
+    date_peremption DATE,
+    prix_unitaire   DOUBLE PRECISION,
+    id_produit      INTEGER NOT NULL,
+    id_vente        INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id),
+    FOREIGN KEY (id_vente) REFERENCES Vente (id)
+);
+
 CREATE TABLE Produit_maladie
 (
     id_produit INTEGER,
@@ -179,24 +221,14 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
 
-CREATE TABLE Produit_conseil
+
+CREATE TABLE HistoriquePrix
 (
-    id          SERIAL,
-    id_produit  INTEGER NOT NULL,
-    date_debut  date,
-    date_fin    date,
-    description TEXT,
+    id SERIAL,
+    id_produit INTEGER,
+    date_changement DATE,
+    prix DOUBLE PRECISION,
     PRIMARY KEY (id),
     FOREIGN KEY (id_produit) REFERENCES Produit (id)
+
 );
-
-
-
-CREATE TABLE Vendeur
-(
-    id     SERIAL PRIMARY KEY,
-    nom    VARCHAR(50),
-    prenom VARCHAR(50),
-    email  VARCHAR(255) UNIQUE
-);
-

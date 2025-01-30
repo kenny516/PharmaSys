@@ -24,7 +24,7 @@ public class MvtStockController {
 
     @GetMapping
     public String listMvtStock(Model model) {
-        List<MvtStock> mvtStocks = mvtStockService.readMvtStock();
+        List<MvtStock> mvtStocks = mvtStockService.getAllMvtStock();
         model.addAttribute("mvtStocks", mvtStocks);
         return "stock/mvtStock/mvtStockListe";
     }
@@ -32,8 +32,8 @@ public class MvtStockController {
     @GetMapping("/edit")
     public String editMvtStock(@RequestParam(value = "id", required = false) Integer id, Model model) {
         MvtStock mvtStock;
-        List<Produit> produits = produitService.readProduits();
-        List<TypeMvtStock> typesMvt = typeMvtStockService.readTypeMvtStock();
+        List<Produit> produits = produitService.getAllProduits();
+        List<TypeMvtStock> typesMvt = typeMvtStockService.getAllTypeMvtStock();
 
         if (id == null) {
             mvtStock = new MvtStock();

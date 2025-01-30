@@ -21,7 +21,7 @@ public class FournisseurController {
 
     @GetMapping
     public String listFournisseur(Model model) {
-        List<Fournisseur> fournisseurs = fournisseurService.readFournisseurs();
+        List<Fournisseur> fournisseurs = fournisseurService.getAllFournisseurs();
         model.addAttribute("fournisseurs", fournisseurs);
         return "fournisseur/fournisseurListe";
     }

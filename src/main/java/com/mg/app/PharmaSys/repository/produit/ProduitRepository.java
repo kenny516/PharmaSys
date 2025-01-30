@@ -11,8 +11,8 @@ public interface ProduitRepository extends JpaRepository<Produit, Integer> {
 
     @Query(value = "SELECT DISTINCT m " +
             "FROM Produit m " +
-            "         JOIN ProduitsMaladie mm ON m.id = mm.produit.id " +
-            "         JOIN ProduitsPublicCible mp ON m.id = mp.produit.id " +
+            "         JOIN ProduitMaladie mm ON m.id = mm.produit.id " +
+            "         JOIN ProduitPublicCible mp ON m.id = mp.produit.id " +
             "WHERE (:idMaladie is null or mm.maladie.id = :idMaladie) " +
             "  AND (:idPublic is null or mp.publicCible.id = :idPublic) " +
             "  AND (:idCategorie is null or m.categorie.id = :idCategorie)")

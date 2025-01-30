@@ -20,7 +20,7 @@ public class VenteService {
         return venteRepository.save(vente);
     }
 
-    public List<Vente> readVente() {
+    public List<Vente> getAllVente() {
         return venteRepository.findAll();
     }
 
@@ -57,19 +57,7 @@ public class VenteService {
         return venteRepository.rechercheClient(date);
     }
 
-    public List<CommissionDTO> getCommissionsByDateRange(LocalDate startDate, LocalDate endDate) {
-        List<Object[]> results = venteRepository.findCommissionsByVendeurAndDateRange(startDate, endDate);
-
-        // Mapper les résultats manuellement
-        return results.stream()
-                .map(row -> new CommissionDTO(
-                        ((Number) row[0]).longValue(),   // vendeurId
-                        (String) row[1],                // vendeurNom
-                        (String) row[2],                // vendeurPrenom
-                        ((Number) row[3]).doubleValue(), // totalVentes
-                        ((Number) row[4]).doubleValue()  // commission
-                ))
-                .toList();
+    public List<CommissionDTO> getCommissionVendeurByIntervalleDateAndSexe(LocalDate startDate, LocalDate endDate, Integer id_sexe) {
+        return venteRepository.filtreCommissionVendeurByIntervalleDateAndSexe(startDate, endDate, id_sexe);
     }
-
 }
