@@ -1,0 +1,95 @@
+<div th:replace="fragments/sidebar.html"></div>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Formulaire Détail de Vente</h3>
+                <p class="text-subtitle text-muted">Ajoutez ou modifiez les détails d'une vente</p>
+            </div>
+        </div>
+    </div>
+    <section id="basic-vertical-layouts" class="d-flex align-items-center justify-content-center"
+             style="min-height: 80vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Détails du Produit</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical" th:action="@{/historiquePrixProduits/save}"
+                                  th:object="${historique}"
+                                  method="post" data-parsley-validate>
+                                <!-- Champs cachés -->
+                                <input type="hidden" th:field="*{id}">
+
+                                <!-- Sélection Produit -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="inputGroupSelect01" class="form-label">Produit</label>
+                                        <select class="form-select" th:field="*{produit.id}" id="inputGroupSelect01"
+                                                data-parsley-required="true">
+                                            <option value="" selected disabled>Choisir un produit...</option>
+                                            <option th:each="produit : ${produits}"
+                                                    th:value="${produit.getId()}"
+                                                    th:text="${produit.getNom()}"
+                                                    th:selected="|${produit.getId()} == ${historique.produit?.getId()}|">
+                                                Produit
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Champ Quantité -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="qu-icon" class="form-label">prix</label>
+                                        <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-box"></i>
+                                                    </span>
+                                            <input type="number" class="form-control" th:field="*{prix}"
+                                                   id="qu-icon" placeholder="Saisissez la quantité"
+                                                   data-parsley-required="true">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Champ Date -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="date-icon" class="form-label">Date du changement</label>
+                                        <div class="input-group">
+                                                    <span class="input-group-text">
+                                                        <i class="bi bi-calendar-date"></i>
+                                                    </span>
+                                            <input type="date" class="form-control"
+                                                   th:field="*{date_changement}" id="date-icon"
+                                                   data-parsley-required="true"
+                                                   placeholder="Sélectionnez la date">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Boutons d'action -->
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">
+                                        <i class="bi bi-check-circle"></i> Enregistrer
+                                    </button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                        <i class="bi bi-arrow-clockwise"></i> Réinitialiser
+                                    </button>
+                                    <a th:href="@{/historiquePrixProduits}" class="btn btn-danger me-1 mb-1">
+                                        <i class="bi bi-x-circle"></i> Annuler
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments/footer.html"></div>

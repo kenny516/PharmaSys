@@ -9,6 +9,7 @@ import com.mg.app.PharmaSys.model.vente.VenteDetail;
 import com.mg.app.PharmaSys.service.caracteristique.AdministrationService;
 import com.mg.app.PharmaSys.service.caracteristique.CategorieService;
 import com.mg.app.PharmaSys.service.caracteristique.PublicCibleService;
+import com.mg.app.PharmaSys.service.produit.HistoriquePrixProduitService;
 import com.mg.app.PharmaSys.service.produit.ProduitService;
 import com.mg.app.PharmaSys.service.stock.StockService;
 import com.mg.app.PharmaSys.service.vente.VenteDetailService;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,6 +33,7 @@ public class VenteDetailController {
     private final CategorieService categorieService;
     private final PublicCibleService publicCibleService;
     private final AdministrationService administrationService;
+    private final HistoriquePrixProduitService historiquePrixProduitService;
 
 
     @GetMapping("/general")
@@ -99,6 +102,8 @@ public class VenteDetailController {
     @PostMapping("/save")
     public String saveVenteDetail(VenteDetail venteDetail, Model model) {
         Double quantiteInitial = 0.0;
+        Vente currentVente = venteService.getVenteById(venteDetail.getVente().getId());
+        LocalDate date = LocalDate.from(currentVente.getDateVente());
         if (venteDetail.getId() == null) {
             Produit produit = produitService.getProduitById(venteDetail.getProduit().getId());
             venteDetail.setPrixUnitaire(produit.getPrix());
@@ -108,6 +113,10 @@ public class VenteDetailController {
         }
         try {
             List<VenteDetail> venteDetailsGenere = stockService.processVenteDetails(venteDetail, quantiteInitial);
+            Double prixUnitaire = historiquePrixProduitService.getPrixCurrent(venteDetail.getProduit().getId(),date);
+            for (VenteDetail detail : venteDetailsGenere) {
+                detail.setPrixUnitaire(prixUnitaire);
+            }
             venteDetailService.createMultipleVenteDetail(venteDetailsGenere);
             venteService.updateVenteData(venteDetail.getVente().getId());
         } catch (IllegalArgumentException e) {

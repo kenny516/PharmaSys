@@ -12,7 +12,7 @@
         <!-- Formulaire de recherche -->
         <div class="card mb-4 shadow-sm border-0">
             <div class="card-body">
-                <form class="form form-vertical" th:action="@{/produi-conseils/recherche}" method="post"
+                <form class="form form-vertical" th:action="@{/produit-conseils/recherche}" method="post"
                       data-parsley-validate>
                     <div class="row">
                         <div class="form-group">
@@ -65,6 +65,15 @@
                             <select class="form-select" id="inputGroupSelect02" data-parsley-required="true"
                                     name="annee">
                                 <option value="" selected disabled>Choisir un anne...</option>
+                                <option value="2021">
+                                    2021
+                                </option>
+                                <option value="2022">
+                                    2022
+                                </option>
+                                <option value="2023">
+                                    2023
+                                </option>
                                 <option value="2024">
                                     2024
                                 </option>

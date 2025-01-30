@@ -220,3 +220,15 @@ CREATE TABLE Produit_public_cible
     FOREIGN KEY (id_produit) REFERENCES Produit (id),
     FOREIGN KEY (id_public) REFERENCES Public_cible (id)
 );
+
+
+CREATE TABLE HistoriquePrix
+(
+    id SERIAL,
+    id_produit INTEGER,
+    date_changement DATE,
+    prix DOUBLE PRECISION,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produit) REFERENCES Produit (id)
+
+);
